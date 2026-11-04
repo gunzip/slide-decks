@@ -568,7 +568,42 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 06 · PARITY ============ -->
+      <!-- ============ 06 · STATO ATTUALE ALLINEAMENTO ============ -->
+      <section class="slide" data-title="La realtà oggi" data-section="Allineamento automatico" data-slug="sync-oggi-domani">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Il ciclo di sync: oggi e domani</h2>
+            <p class="lead">Una <strong>GitHub Action deterministica</strong> apre la PR con il drift. Oggi la lavoriamo da Copilot App, domani con Cloud Agent.</p>
+          </div>
+          <div class="scontent">
+            <div class="cols">
+              <div>
+                <div class="c-head"><svg class="icon" style="margin-right:7px" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Oggi: GitHub Copilot App<span>Presa in carico guidata da sviluppatore</span></div>
+                <div class="c-row"><span class="c-name">1. Action deterministica</span><span class="c-sub">Un cron ricorrente in CI scansiona Figma senza AI e apre una PR portando con sé i dati del drift.</span></div>
+                <div class="c-row"><span class="c-name">2. Presa in carico in Copilot App</span><span class="c-sub">Uno sviluppatore con licenza Copilot avvia l'allineamento con <span class="code">/start-figma-to-code #97</span>.</span></div>
+                <div class="c-row"><span class="c-name">3. Preview Storybook &amp; merge</span><span class="c-sub">L'agente allinea i componenti sulla PR. Si genera una preview Storybook per i designer prima del merge.</span></div>
+              </div>
+              <div>
+                <div class="c-head"><svg class="icon" style="margin-right:7px" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>Domani: Cloud Coding Agent<span>Automazione continua gestita a livello org</span></div>
+                <div class="c-row"><span class="c-name">1. Stessa Action deterministica</span><span class="c-sub">Il rilevamento del drift e l'apertura della PR restano identici e tracciati.</span></div>
+                <div class="c-row"><span class="c-name">2. Presa in carico automatica</span><span class="c-sub">Appena abilitati nell'organizzazione, il Cloud Agent prende in carico la PR direttamente su GitHub.</span></div>
+                <div class="c-row"><span class="c-name">3. Review e merge</span><span class="c-sub">La PR arriva già compilata con modifiche, Storybook preview e test di parity pronti per la review.</span></div>
+              </div>
+            </div>
+            <div class="noteline">
+              <p class="small">L'architettura del flusso è identica: <strong>cambia solo chi digita il comando di avvio</strong>.</p>
+              <span class="anno">Workflow trasparente</span>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Come funziona il ciclo nella realtà.</strong> Alla base c'è una GitHub Action ricorrente, totalmente deterministica e senza intelligenza artificiale, che interroga Figma e apre una Pull Request contenente le informazioni sul disallineamento (il drift).</p>
+          <p>Oggi il passaggio successivo richiede una persona: uno sviluppatore apre la GitHub Copilot App e scrive <span class="code">/start-figma-to-code #97</span>. L'agente entra in azione sulla stessa PR, allinea i componenti e aggiorna i test.</p>
+          <p>In futuro, non appena l'organizzazione abiliterà i Copilot Cloud Agents, questo passaggio avverrà in automatico nel cloud. In entrambi i casi, la PR pubblica una preview Storybook interattiva che permette ai designer di testare le modifiche e commentare prima del merge.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 07 · PARITY ============ -->
       <section class="slide" data-title="La parity visiva" data-section="Allineamento automatico" data-slug="prove-parity">
         <div class="sbody">
           <div class="shead">
@@ -595,40 +630,77 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 07 · DRIFT ============ -->
+      <!-- ============ 08 · DRIFT ============ -->
       <section class="slide" data-title="Gestione modifiche" data-section="Allineamento automatico" data-slug="drift-coda">
         <div class="sbody">
           <div class="shead">
             <h2>Gestire le modifiche senza attrito</h2>
-            <p class="lead">Quando il design su Figma evolve, il disallineamento <strong>diventa una Pull Request trasparente</strong>.</p>
+            <p class="lead">Quando il design su Figma evolve, il disallineamento <strong>diventa una Pull Request con preview Storybook</strong>.</p>
           </div>
           <div class="scontent">
             <div class="panel" style="max-width:1000px">
               <div class="p-bar">
-                <span class="p-title icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M6 9v12"/></svg>Sincronizzazione periodica</span>
-                <span class="stat acc">Automatica</span>
+                <span class="p-title icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M6 9v12"/></svg>Ciclo di sincronizzazione e review</span>
+                <span class="stat acc">Figma → Code → Storybook</span>
               </div>
               <div class="p-body">
-                <div class="frow2"><span class="f-k">Rilevazione</span><span class="f-v">Il job pianificato interroga le API di Figma e individua i nodi e i token modificati.</span></div>
-                <div class="frow2"><span class="f-k">Pull Request</span><span class="f-v">Viene generata una PR con i token aggiornati, il codice allineato e i delta visivi evidenziati.</span></div>
-                <div class="frow2"><span class="f-k">Revisione</span><span class="f-v">Designer e sviluppatori esaminano le differenze in anteprima prima di fare merge.</span></div>
-                <div class="frow2"><span class="f-k">Storico trasparente</span><span class="f-v">Tutte le modifiche al design system restano tracciate nei commit: <span class="code">git log</span> del registro.</span></div>
+                <div class="frow2"><span class="f-k">1. Rilevazione drift</span><span class="f-v">Una GitHub Action ricorrente (deterministica, no agent) scansiona Figma e apre la PR con i dettagli del drift.</span></div>
+                <div class="frow2"><span class="f-k">2. Allineamento agentico</span><span class="f-v">Con <span class="code">/start-figma-to-code #97</span> (oggi da Copilot App, domani da Cloud Agent) l'agente allinea i componenti sulla PR.</span></div>
+                <div class="frow2"><span class="f-k">3. Preview Storybook</span><span class="f-v">La PR genera e condivide un'anteprima Storybook navigabile per permettere ai designer di testare e commentare.</span></div>
+                <div class="frow2"><span class="f-k">4. CI Gate &amp; Merge</span><span class="f-v">I test visivi Playwright e i check di accessibilità validano il codice: se la CI è verde, la PR viene unita.</span></div>
               </div>
             </div>
             <div class="noteline">
-              <p class="small">Nessun cambio silenzioso: <strong>ogni evoluzione di stile è condivisa, revisionata e documentata</strong>.</p>
-              <span class="anno">Revisione su PR</span>
+              <p class="small">I designer non devono guardare il codice: <strong>interagiscono con la preview Storybook e commentano su GitHub</strong>.</p>
+              <span class="anno">Storybook preview condivisa</span>
             </div>
           </div>
         </div>
         <aside class="notes">
-          <p><strong>Come gestiamo il disallineamento.</strong> In qualsiasi prodotto vivo, il design continua a evolversi. Il problema tipico è che i designer modificano Figma e gli sviluppatori non lo sanno finché un utente non nota una discordanza in produzione.</p>
-          <p>Con questo flusso, il sync periodico legge Figma, trova i delta e apre una Pull Request. In quella PR si vede subito cosa è cambiato: un token di colore, una spaziatura, una nuova variante.</p>
-          <p>La revisione avviene dove gli sviluppatori lavorano abitualmente, su GitHub, con anteprime visive chiare. Si approva e si rilascia senza sorprese.</p>
+          <p><strong>La gestione del drift passo per passo.</strong> In un prodotto reale, il design continua a cambiare. Il nostro ciclo gestisce l'evoluzione senza attrito.</p>
+          <p>Primo step: una GitHub Action gira periodicamente in modo deterministico, trova le differenze tra Figma e repository e apre una PR indicando esattamente cosa è cambiato.</p>
+          <p>Secondo step: la PR viene presa in carico scrivendo <span class="code">/start-figma-to-code #97</span> nella GitHub Copilot App (o in futuro in automatico dal Cloud Agent), e l'agente aggiorna codice e token.</p>
+          <p>Terzo step: la PR effettua il deploy di una preview Storybook temporanea. I designer possono cliccarla, testare i componenti nel browser e lasciare commenti direttamente sulla PR prima che venga fatto il merge.</p>
         </aside>
       </section>
 
-      <!-- ============ 08 · SUPERFICIE AGENTICA ============ -->
+      <!-- ============ 09 · DIALOGO DESIGNER ISSUE ============ -->
+      <section class="slide" data-title="Domande ai designer" data-section="Allineamento automatico" data-slug="dialogo-designer-issue">
+        <div class="sbody">
+          <div class="shead">
+            <h2>L'agente fa domande: chiarimenti con i designer</h2>
+            <p class="lead">Se il design presenta ambiguità, <strong>l'agente apre una Issue su GitHub</strong> per chiarire i dubbi prima di procedere.</p>
+          </div>
+          <div class="scontent">
+            <div class="cols">
+              <div>
+                <div class="c-head"><svg class="icon" style="margin-right:7px" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Come interroga l'agente<span>Apertura Issue e isolamento dello stato</span></div>
+                <div class="c-row"><span class="c-name">Apertura Issue mirata</span><span class="c-sub">Se mancano stati, varianti o token su Figma, l'agente non inventa: apre una GitHub Issue con la domanda puntuale.</span></div>
+                <div class="c-row"><span class="c-name">Stato «pending» isolato</span><span class="c-sub">I componenti che richiedono risposte restano marcati come <span class="code">pending</span>: non bloccano il rilascio di quelli già pronti.</span></div>
+                <div class="c-row"><span class="c-name">Nessuna allucinazione</span><span class="c-sub">L'agente si astiene dal prendere decisioni di design arbitrarie, delegando la scelta a chi governa il sistema.</span></div>
+              </div>
+              <div>
+                <div class="c-head"><svg class="icon" style="margin-right:7px" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h6"/></svg>Come rispondono i designer<span>Canali asincroni su misura</span></div>
+                <div class="c-row"><span class="c-name">Commenti diretti su GitHub</span><span class="c-sub">I designer possono rispondere semplicemente commentando la GitHub Issue dal browser, indicando la regola voluta.</span></div>
+                <div class="c-row"><span class="c-name">GitHub Copilot App (sessione batch)</span><span class="c-sub">Possono usare la Copilot App per consultare il contesto visivo e chiarire più dubbi aperti in una sola sessione.</span></div>
+                <div class="c-row"><span class="c-name">Sblocco automatico</span><span class="c-sub">Non appena il designer risponde, l'agente riprende il componente dal pending e completa l'allineamento.</span></div>
+              </div>
+            </div>
+            <div class="noteline">
+              <p class="small">L'AI non improvvisa scelte di design: <strong>crea un ponte tracciato e asincrono tra codice e designer</strong>.</p>
+              <span class="anno">Feedback loop continuo</span>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>L'agente che sa fare domande invece di inventare.</strong> Un rischio tipico con l'AI generativa è che, di fronte a un'ambiguità in Figma (ad esempio uno stato hover mancante o una spaziatura non specificata per il mobile), provi a indovinare.</p>
+          <p>Noi abbiamo inserito una regola rigorosa: l'agente non improvvisa. Se trova una lacuna o un'incongruenza, apre una GitHub Issue rivolta ai designer spiegando esattamente quale informazione manca.</p>
+          <p>Il componente in questione viene marcato in stato `pending`, così da non bloccare la Pull Request e il rilascio di tutti gli altri componenti allineati.</p>
+          <p>I designer possono interagire in due modi: commentando direttamente la GitHub Issue, oppure aprendo la GitHub Copilot App. In quest'ultimo caso, possono visionare il contesto visivo e rispondere in modalità batch a tutte le domande aperte. Ricevuta la risposta, l'agente riprende il componente ed esegue l'allineamento.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 10 · SUPERFICIE AGENTICA ============ -->
       <section class="slide" data-title="Sviluppo assistito" data-section="Delivery assistita" data-slug="superficie-agentica">
         <div class="sbody">
           <div class="shead">
@@ -655,7 +727,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 09 · DUE SKILL ============ -->
+      <!-- ============ 11 · DUE SKILL ============ -->
       <section class="slide" data-title="Le due skill" data-section="Delivery assistita" data-slug="due-skill">
         <div class="sbody">
           <div class="shead">
@@ -693,7 +765,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 10 · WORKFLOW ============ -->
+      <!-- ============ 12 · WORKFLOW ============ -->
       <section class="slide" data-title="Il flusso di lavoro" data-section="Delivery assistita" data-slug="flusso-agentico">
         <div class="sbody">
           <div class="shead">
@@ -720,7 +792,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 11 · IL GIRO DI APERTURA ============ -->
+      <!-- ============ 13 · IL GIRO DI APERTURA ============ -->
       <section class="slide" data-title="Un esempio pratico" data-section="Delivery assistita" data-slug="giro-di-apertura">
         <div class="sbody">
           <div class="shead">
@@ -734,9 +806,9 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 <span class="stat acc">Prompt &amp; Risultato</span>
               </div>
               <div class="p-body">
-                <div class="frow2"><span class="f-k">Cosa chiedi</span><span class="f-v">«Allinea il componente Card al nodo Figma corrispondente, aggiungi la variante compatta e verifica il render mobile a 320px.»</span></div>
+                <div class="frow2"><span class="f-k">Cosa chiedi</span><span class="f-v"><span class="code">/start-figma-to-code #97</span> <em>(numero della PR aperta fornito come contesto)</em></span></div>
                 <div class="frow2"><span class="f-k">Cosa fa il tooling</span><span class="f-v">Interroga l'API di Figma, recupera token e spaziature, e aggiorna le varianti CVA con classi CSS compilate.</span></div>
-                <div class="frow2"><span class="f-k">Cosa produce</span><span class="f-v">Componente Server-first senza runtime CSS, story per Storybook e test visivo di parity a 320px.</span></div>
+                <div class="frow2"><span class="f-k">Cosa produce</span><span class="f-v">Componente Server-first senza runtime CSS, story per Storybook e test visivo di parity.</span></div>
                 <div class="frow2"><span class="f-k">Cosa controlli tu</span><span class="f-v">Esamini il risultato visivo, verifichi l'accessibilità da tastiera e approvi la Pull Request.</span></div>
               </div>
             </div>
@@ -747,13 +819,13 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
         </div>
         <aside class="notes">
-          <p><strong>Come si lavora ogni giorno.</strong> Lo sviluppatore non deve imparare comandi astrusi: lavora con Copilot o Claude Code direttamente nel terminale.</p>
-          <p>Formula la richiesta in italiano: "Allinea il componente Card al nodo Figma corrispondente, aggiungi la variante compatta e verifica il render a 320px".</p>
-          <p>Il sistema trova il nodo, legge le proprietà, applica i token CSS statici e produce il codice pronto con test di parity. Lo sviluppatore verifica visivamente e approva. Il risparmio di tempo sui dettagli ripetitivi è enorme.</p>
+          <p><strong>Come si lavora ogni giorno.</strong> Lo sviluppatore non deve scrivere prompt lunghi o complessi: lancia il comando rapido <span class="code">/start-figma-to-code #97</span>, fornendo come contesto il numero della Pull Request aperta.</p>
+          <p>Il tooling ricava i riferimenti della issue e del componente, interroga l'API di Figma, estrae le proprietà, applica i token CSS statici e genera il codice pronto con i test di parity.</p>
+          <p>Lo sviluppatore verifica visivamente il render, testa l'accessibilità e approva la PR. Tutto il lavoro noioso e ripetitivo è automatizzato.</p>
         </aside>
       </section>
 
-      <!-- ============ 12 · VALORE ============ -->
+      <!-- ============ 14 · VALORE ============ -->
       <section class="slide" data-title="I vantaggi concreti" data-section="Delivery assistita" data-slug="valore-atteso">
         <div class="sbody">
           <div class="shead">
@@ -788,7 +860,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 13 · LIMITI ============ -->
+      <!-- ============ 15 · LIMITI ============ -->
       <section class="slide" data-title="I punti aperti" data-section="Punti aperti" data-slug="limiti">
         <div class="sbody">
           <div class="shead">
@@ -815,7 +887,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 14 · DUE PILOT ============ -->
+      <!-- ============ 16 · DUE PILOT ============ -->
       <section class="slide" data-title="Proposte di pilot" data-section="Proposta di pilot" data-slug="due-pilot">
         <div class="sbody">
           <div class="shead">
@@ -851,7 +923,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 15 · CHIUSURA ============ -->
+      <!-- ============ 17 · CHIUSURA ============ -->
       <section class="slide" data-title="Conclusioni" data-section="Proposta di pilot" data-slug="chiusura">
         <div class="sbody">
           <div class="divider-main">
