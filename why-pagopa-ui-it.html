@@ -233,6 +233,74 @@ a:hover{color:var(--accent)}
 .figcap::before{content:"";width:22px;height:1px;background:var(--fig-dim);flex:none;transform:translateY(-4px)}
 .figcap .anno{text-transform:none;letter-spacing:.02em;font-size:12px;color:var(--muted)}
 
+/* ---------- screenshots & visual artifacts ---------- */
+.split-view{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:24px;
+  align-items:start;
+}
+.split-view.equal{
+  grid-template-columns:1fr 1fr;
+}
+.split-view .panel, .split-view .wtable{
+  margin-top:0;
+  max-width:none;
+}
+.split-view .frow2{
+  grid-template-columns:135px minmax(0,1fr);
+  gap:14px;
+  padding:10px 0;
+}
+.split-view .frow2 .f-v{
+  font-size:15px;
+}
+.shot-card{
+  border:1px solid var(--hair-2);
+  border-radius:10px;
+  background:#fff;
+  overflow:hidden;
+  box-shadow:0 8px 20px -8px rgba(20,22,26,.14);
+  display:flex;
+  flex-direction:column;
+}
+.shot-card .sc-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:8px 14px;
+  background:var(--tint);
+  border-bottom:1px solid var(--hair);
+  font-size:12px;
+  font-weight:600;
+  color:var(--ink);
+}
+.shot-card .sc-tag{
+  font-family:"Titillio","Helvetica Neue",Arial,sans-serif;
+  font-size:10px;
+  letter-spacing:.06em;
+  color:var(--muted);
+  text-transform:uppercase;
+  font-weight:600;
+}
+.shot-card .sc-img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:285px;
+  object-fit:cover;
+  object-position:top left;
+  background:#0d1117;
+}
+.shot-card .sc-cap{
+  padding:8px 14px;
+  font-size:11.5px;
+  color:var(--muted);
+  background:#fff;
+  border-top:1px solid var(--hair);
+  line-height:1.4;
+}
+
 /* ---------- cover ---------- */
 .cover-top{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:16px;border-bottom:1px solid var(--hair-2)}
 .cover-main{flex:1;display:flex;flex-direction:column;justify-content:center;gap:26px}
@@ -611,11 +679,21 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
             <p class="lead">Un componente è allineato solo se <strong>il render del codice e il disegno Figma coincidono al pixel</strong>.</p>
           </div>
           <div class="scontent">
-            <div class="wtable" style="max-width:1020px">
-              <div class="wrow"><span class="w-name">Mappatura stabile del nodo<span class="w-sub">Ogni componente React è associato al rispettivo <span class="code">nodeId</span> Figma, con varianti e stati documentati.</span></span><span class="w-right stat ok">Tracciato</span></div>
-              <div class="wrow"><span class="w-name">Regola dei breakpoint<span class="w-sub">Test visivi su larghezze canoniche: mobile a 320px, tablet e desktop standard.</span></span><span class="w-right mono">mobile: 320</span></div>
-              <div class="wrow"><span class="w-name">300 test visivi in CI<span class="w-sub">Confronto automatico tra screenshot del render reale e immagine esportata da Figma.</span></span><span class="w-right stat ok">Gate in CI</span></div>
-              <div class="wrow"><span class="w-name">Contratti di accessibilità<span class="w-sub">Verifica del contrasto WCAG, navigazione da tastiera e annunci per screen reader.</span></span><span class="w-right stat">Validato</span></div>
+            <div class="split-view">
+              <div class="wtable tight">
+                <div class="wrow"><span class="w-name">Mappatura del nodo<span class="w-sub">Ogni componente React è associato al rispettivo <span class="code">nodeId</span> Figma.</span></span><span class="w-right stat ok">Tracciato</span></div>
+                <div class="wrow"><span class="w-name">Regola breakpoint<span class="w-sub">Test visivi su larghezze canoniche: mobile a 320px, tablet e desktop.</span></span><span class="w-right mono">mobile: 320</span></div>
+                <div class="wrow"><span class="w-name">300 test visivi in CI<span class="w-sub">Confronto automatico render reale vs disegno Figma in Playwright.</span></span><span class="w-right stat ok">Gate in CI</span></div>
+                <div class="wrow"><span class="w-name">Contratti accessibilità<span class="w-sub">Verifica contrasto WCAG, focus da tastiera e annunci screen reader.</span></span><span class="w-right stat">Validato</span></div>
+              </div>
+              <div class="shot-card">
+                <div class="sc-bar">
+                  <span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Preview Storybook live (Autocomplete)</span>
+                  <span class="sc-tag">Playground</span>
+                </div>
+                <img class="sc-img" src="img/storybook-autocomplete.png" alt="Storybook preview Autocomplete">
+                <div class="sc-cap">Test e playground interattivo distribuito in automatico su Azure per ogni componente.</div>
+              </div>
             </div>
             <div class="noteline">
               <p class="small">Se un componente diverge visivamente o perde accessibilità, <strong>la CI blocca il rilascio</strong>.</p>
@@ -638,16 +716,26 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
             <p class="lead">Quando il design su Figma evolve, il disallineamento <strong>diventa una Pull Request con preview Storybook</strong>.</p>
           </div>
           <div class="scontent">
-            <div class="panel" style="max-width:1000px">
-              <div class="p-bar">
-                <span class="p-title icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M6 9v12"/></svg>Ciclo di sincronizzazione e review</span>
-                <span class="stat acc">Figma → Code → Storybook</span>
+            <div class="split-view">
+              <div class="panel">
+                <div class="p-bar">
+                  <span class="p-title icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M6 9v12"/></svg>Ciclo di sincronizzazione</span>
+                  <span class="stat acc">Figma → Code</span>
+                </div>
+                <div class="p-body">
+                  <div class="frow2"><span class="f-k">1. Drift detection</span><span class="f-v">Action ricorrente scansiona Figma (deterministica, no AI) e apre la PR.</span></div>
+                  <div class="frow2"><span class="f-k">2. Allineamento</span><span class="f-v">Con <span class="code">/start-figma-to-code #97</span> l'agente allinea i componenti.</span></div>
+                  <div class="frow2"><span class="f-k">3. Preview</span><span class="f-v">Deploy Storybook navigabile per il review e i commenti dei designer.</span></div>
+                  <div class="frow2"><span class="f-k">4. CI &amp; Merge</span><span class="f-v">I test Playwright validano: se la CI è verde, la PR viene unita.</span></div>
+                </div>
               </div>
-              <div class="p-body">
-                <div class="frow2"><span class="f-k">1. Rilevazione drift</span><span class="f-v">Una GitHub Action ricorrente (deterministica, no agent) scansiona Figma e apre la PR con i dettagli del drift.</span></div>
-                <div class="frow2"><span class="f-k">2. Allineamento agentico</span><span class="f-v">Con <span class="code">/start-figma-to-code #97</span> (oggi da Copilot App, domani da Cloud Agent) l'agente allinea i componenti sulla PR.</span></div>
-                <div class="frow2"><span class="f-k">3. Preview Storybook</span><span class="f-v">La PR genera e condivide un'anteprima Storybook navigabile per permettere ai designer di testare e commentare.</span></div>
-                <div class="frow2"><span class="f-k">4. CI Gate &amp; Merge</span><span class="f-v">I test visivi Playwright e i check di accessibilità validano il codice: se la CI è verde, la PR viene unita.</span></div>
+              <div class="shot-card">
+                <div class="sc-bar">
+                  <span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M6 9v12"/></svg>Pull Request da GitHub Action (pagopa/ui #93)</span>
+                  <span class="sc-tag">Auto PR</span>
+                </div>
+                <img class="sc-img" src="img/pr-figma-drift.png" alt="PR Figma drift da GitHub Action">
+                <div class="sc-cap">La PR creata automaticamente dalla GitHub Action con il riepilogo del drift rilevato.</div>
               </div>
             </div>
             <div class="noteline">
@@ -672,18 +760,26 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
             <p class="lead">Se il design presenta ambiguità, <strong>l'agente apre una Issue su GitHub</strong> per chiarire i dubbi prima di procedere.</p>
           </div>
           <div class="scontent">
-            <div class="cols">
-              <div>
-                <div class="c-head"><svg class="icon" style="margin-right:7px" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Come interroga l'agente<span>Apertura Issue e isolamento dello stato</span></div>
-                <div class="c-row"><span class="c-name">Apertura Issue mirata</span><span class="c-sub">Se mancano stati, varianti o token su Figma, l'agente non inventa: apre una GitHub Issue con la domanda puntuale.</span></div>
-                <div class="c-row"><span class="c-name">Stato «pending» isolato</span><span class="c-sub">I componenti che richiedono risposte restano marcati come <span class="code">pending</span>: non bloccano il rilascio di quelli già pronti.</span></div>
-                <div class="c-row"><span class="c-name">Nessuna allucinazione</span><span class="c-sub">L'agente si astiene dal prendere decisioni di design arbitrarie, delegando la scelta a chi governa il sistema.</span></div>
+            <div class="split-view">
+              <div class="panel">
+                <div class="p-bar">
+                  <span class="p-title icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Protocollo asincrono di chiarimento</span>
+                  <span class="stat warn">pending</span>
+                </div>
+                <div class="p-body">
+                  <div class="frow2"><span class="f-k">Apertura Issue</span><span class="f-v">Se mancano stati o token su Figma, l'agente apre una GitHub Issue con domande mirate.</span></div>
+                  <div class="frow2"><span class="f-k">Stato pending</span><span class="f-v">I componenti con dubbi restano <span class="code">pending</span>: non bloccano il rilascio degli altri.</span></div>
+                  <div class="frow2"><span class="f-k">Commenti GitHub</span><span class="f-v">I designer possono rispondere direttamente dal browser nei commenti della issue.</span></div>
+                  <div class="frow2"><span class="f-k">Sessione Copilot</span><span class="f-v">Possono anche usare la Copilot App per chiarire più dubbi in modalità batch.</span></div>
+                </div>
               </div>
-              <div>
-                <div class="c-head"><svg class="icon" style="margin-right:7px" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h6"/></svg>Come rispondono i designer<span>Canali asincroni su misura</span></div>
-                <div class="c-row"><span class="c-name">Commenti diretti su GitHub</span><span class="c-sub">I designer possono rispondere semplicemente commentando la GitHub Issue dal browser, indicando la regola voluta.</span></div>
-                <div class="c-row"><span class="c-name">GitHub Copilot App (sessione batch)</span><span class="c-sub">Possono usare la Copilot App per consultare il contesto visivo e chiarire più dubbi aperti in una sola sessione.</span></div>
-                <div class="c-row"><span class="c-name">Sblocco automatico</span><span class="c-sub">Non appena il designer risponde, l'agente riprende il componente dal pending e completa l'allineamento.</span></div>
+              <div class="shot-card">
+                <div class="sc-bar">
+                  <span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>GitHub Issue reale (pagopa/ui #76)</span>
+                  <span class="sc-tag">status/needs-answer</span>
+                </div>
+                <img class="sc-img" src="img/issue-designer-questions.png" alt="GitHub Issue domande designer">
+                <div class="sc-cap">L'agente formula opzioni precise (A, B, C) per i designer, evitando allucinazioni arbitrarie.</div>
               </div>
             </div>
             <div class="noteline">
@@ -796,20 +892,30 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       <section class="slide" data-title="Un esempio pratico" data-section="Delivery assistita" data-slug="giro-di-apertura">
         <div class="sbody">
           <div class="shead">
-            <h2>Un esempio concreto nel terminale</h2>
+            <h2>Un esempio concreto in Copilot App</h2>
             <p class="lead">Basta una richiesta chiara nel proprio editor: <strong>il tooling gestisce le complessità e produce codice pulito</strong>.</p>
           </div>
           <div class="scontent">
-            <div class="panel" style="max-width:1000px">
-              <div class="p-bar">
-                <span class="p-title icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Scenario reale di sviluppo</span>
-                <span class="stat acc">Prompt &amp; Risultato</span>
+            <div class="split-view">
+              <div class="panel">
+                <div class="p-bar">
+                  <span class="p-title icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Scenario reale di sviluppo</span>
+                  <span class="stat acc">Prompt &amp; Risultato</span>
+                </div>
+                <div class="p-body">
+                  <div class="frow2"><span class="f-k">Cosa chiedi</span><span class="f-v"><span class="code">/start-figma-to-code #97</span> <em>(contesto della PR aperta)</em></span></div>
+                  <div class="frow2"><span class="f-k">Tooling</span><span class="f-v">Interroga Figma, estrae i token ed esegue l'allineamento dei componenti.</span></div>
+                  <div class="frow2"><span class="f-k">Output</span><span class="f-v">Componente Server-first senza runtime CSS, story e test visivo di parity.</span></div>
+                  <div class="frow2"><span class="f-k">Controllo umano</span><span class="f-v">Esamini il render, verifichi l'accessibilità e approvi la Pull Request.</span></div>
+                </div>
               </div>
-              <div class="p-body">
-                <div class="frow2"><span class="f-k">Cosa chiedi</span><span class="f-v"><span class="code">/start-figma-to-code #97</span> <em>(numero della PR aperta fornito come contesto)</em></span></div>
-                <div class="frow2"><span class="f-k">Cosa fa il tooling</span><span class="f-v">Interroga l'API di Figma, recupera token e spaziature, e aggiorna le varianti CVA con classi CSS compilate.</span></div>
-                <div class="frow2"><span class="f-k">Cosa produce</span><span class="f-v">Componente Server-first senza runtime CSS, story per Storybook e test visivo di parity.</span></div>
-                <div class="frow2"><span class="f-k">Cosa controlli tu</span><span class="f-v">Esamini il risultato visivo, verifichi l'accessibilità da tastiera e approvi la Pull Request.</span></div>
+              <div class="shot-card">
+                <div class="sc-bar">
+                  <span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>GitHub Copilot App: Allineamento PR #97</span>
+                  <span class="sc-tag">Copilot App</span>
+                </div>
+                <img class="sc-img" src="img/copilot-app-session.png" alt="Sessione GitHub Copilot App">
+                <div class="sc-cap">Esecuzione guidata: analisi nodi Figma, aggiornamento codice e build Storybook sulla PR.</div>
               </div>
             </div>
             <div class="noteline">
