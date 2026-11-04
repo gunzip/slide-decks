@@ -458,7 +458,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
           <div class="cover-main">
             <h1 class="claim">Da Figma al codice,<br>senza attrito.</h1>
-            <p class="lead" style="max-width:74ch">Un POC per rinnovare il design system di PagoPA: <strong>allineamento automatico da Figma</strong>, architettura moderna con <strong>React 19 / RSC</strong> e <strong>zero CSS-in-JS</strong> a runtime.</p>
+            <p class="lead" style="max-width:74ch">per rinnovare il design system web di PagoPA.</p>
             <span class="anno" style="margin-top:-12px;text-transform:none;letter-spacing:.03em">Il contesto · Lo stack moderno · Allineamento continuo · Flusso assistito · Proposta di pilot</span>
           </div>
           <div class="cover-foot" style="justify-content:flex-end">
@@ -473,17 +473,16 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       </section>
 
       <!-- ============ 02 · LE MOTIVAZIONI ============ -->
-      <section class="slide" data-title="Tre problemi reali" data-section="Il contesto" data-slug="tre-ipotesi">
+      <section class="slide" data-title="Due problemi reali" data-section="Il contesto" data-slug="due-problemi">
         <div class="sbody">
           <div class="shead">
-            <h2>Tre problemi che affrontiamo ogni giorno</h2>
+            <h2>Due problemi che affrontiamo ogni giorno</h2>
             <p class="lead">Perché oggi è difficile mantenere allineati design e codice, e cosa serve per <strong>garantire qualità e velocità nel tempo</strong>.</p>
           </div>
           <div class="scontent">
             <div class="plan">
               <div class="p-row"><span class="p-n">01</span><span class="p-t">Figma e codice divergono nel silenzio<em>L'allineamento oggi è manuale: mancano collegamenti stabili tra i nodi Figma e i componenti React, con continue discrepanze visive.</em></span></div>
               <div class="p-row"><span class="p-n">02</span><span class="p-t">Lo stack è fermo a ieri<em>mui-italia è legato a React 18 e al client rendering classico: non supporta i React Server Components (RSC) né le novità di React 19.</em></span></div>
-              <div class="p-row"><span class="p-n">03</span><span class="p-t">Il costo del runtime CSS-in-JS<em>Emotion inietta stili nel browser a runtime: aumenta il peso del bundle, rallenta il rendering ed è incompatibile con lo streaming server.</em></span></div>
             </div>
             <div class="noteline">
               <p class="small">L'obiettivo del POC: dimostrare che <strong>possiamo automatizzare il flusso</strong> con uno stack leggero e contemporaneo.</p>
@@ -492,9 +491,9 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
         </div>
         <aside class="notes">
-          <p><strong>I tre nodi da sciogliere.</strong> Il primo problema è il disallineamento continuo: chi sviluppa riceve un link a Figma e cerca di riprodurlo a occhio. Nel giro di pochi mesi, design e codice prendono strade diverse.</p>
+          <p><strong>I due nodi da sciogliere.</strong> Il primo problema è il disallineamento continuo: chi sviluppa riceve un link a Figma e cerca di riprodurlo a occhio. Nel giro di pochi mesi, design e codice prendono strade diverse.</p>
           <p>Il secondo è architetturale: mui-italia è nato cinque anni fa. È vincolato a React 18 e non può sfruttare i React Server Components per abbattere il JavaScript inviato al browser.</p>
-          <p>Il terzo è la performance: Emotion e MUI portano un runtime pesante di CSS-in-JS. Ogni componente paga un costo in millisecondi di parsing e iniezione stili nel client. Questo POC nasce per risolvere esattamente questi tre punti.</p>
+          <p>Questo POC nasce per risolvere alla radice queste due frizioni, automatizzando il passaggio da Figma al codice e modernizzando le fondamenta tecnologiche.</p>
         </aside>
       </section>
 
@@ -752,7 +751,50 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 09 · DIALOGO DESIGNER ISSUE ============ -->
+      <!-- ============ 09 · IL GIRO DI APERTURA ============ -->
+      <section class="slide" data-title="Un esempio pratico" data-section="Allineamento automatico" data-slug="giro-di-apertura">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Un esempio concreto in Copilot App</h2>
+            <p class="lead">Basta una richiesta chiara nel proprio editor: <strong>il tooling gestisce le complessità e produce codice pulito</strong>.</p>
+          </div>
+          <div class="scontent">
+            <div class="split-view">
+              <div class="panel">
+                <div class="p-bar">
+                  <span class="p-title icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Scenario reale di sviluppo</span>
+                  <span class="stat acc">Prompt &amp; Risultato</span>
+                </div>
+                <div class="p-body">
+                  <div class="frow2"><span class="f-k">Cosa chiedi</span><span class="f-v"><span class="code">/start-figma-to-code #97</span> <em>(contesto della PR aperta)</em></span></div>
+                  <div class="frow2"><span class="f-k">Tooling</span><span class="f-v">Interroga Figma, estrae i token ed esegue l'allineamento dei componenti.</span></div>
+                  <div class="frow2"><span class="f-k">Output</span><span class="f-v">Componente Server-first senza runtime CSS, story e test visivo di parity.</span></div>
+                  <div class="frow2"><span class="f-k">Controllo umano</span><span class="f-v">Esamini il render, verifichi l'accessibilità e approvi la Pull Request.</span></div>
+                </div>
+              </div>
+              <div class="shot-card">
+                <div class="sc-bar">
+                  <span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>GitHub Copilot App: Allineamento PR #97</span>
+                  <span class="sc-tag">Copilot App</span>
+                </div>
+                <img class="sc-img" src="img/copilot-app-session.png" alt="Sessione GitHub Copilot App">
+                <div class="sc-cap">Esecuzione guidata: analisi nodi Figma, aggiornamento codice e build Storybook sulla PR.</div>
+              </div>
+            </div>
+            <div class="noteline">
+              <p class="small">Il tempo non si spreca a ricopiare valori da Figma: <strong>ci si concentra sulla qualità dell'esperienza utente</strong>.</p>
+              <span class="anno">Esperienza di sviluppo</span>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Come si lavora ogni giorno.</strong> Lo sviluppatore non deve scrivere prompt lunghi o complessi: lancia il comando rapido <span class="code">/start-figma-to-code #97</span>, fornendo come contesto il numero della Pull Request aperta.</p>
+          <p>Il tooling ricava i riferimenti della issue e del componente, interroga l'API di Figma, estrae le proprietà, applica i token CSS statici e genera il codice pronto con i test di parity.</p>
+          <p>Lo sviluppatore verifica visivamente il render, testa l'accessibilità e approva la PR. Tutto il lavoro noioso e ripetitivo è automatizzato.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 10 · DIALOGO DESIGNER ISSUE ============ -->
       <section class="slide" data-title="Domande ai designer" data-section="Allineamento automatico" data-slug="dialogo-designer-issue">
         <div class="sbody">
           <div class="shead">
@@ -796,33 +838,6 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 10 · SUPERFICIE AGENTICA ============ -->
-      <section class="slide" data-title="Sviluppo assistito" data-section="Delivery assistita" data-slug="superficie-agentica">
-        <div class="sbody">
-          <div class="shead">
-            <h2>Perché l'AI può accelerare lo sviluppo</h2>
-            <p class="lead">Gli strumenti AI (Copilot, Claude) producono codice affidabile <strong>solo se le fondamenta e i contratti sono solidi</strong>.</p>
-          </div>
-          <div class="scontent">
-            <div class="wtable" style="max-width:1020px">
-              <div class="wrow"><span class="w-name">Identità univoche dei nodi<span class="w-sub">Grazie al <span class="code">nodeId</span> stabile in Figma, l'assistente sa esattamente quale elemento implementare o aggiornare.</span></span><span class="w-right mono">nodeId</span></div>
-              <div class="wrow"><span class="w-name">Design token tipizzati<span class="w-sub">Niente pixel hardcodati o valori casuali: l'assistente utilizza solo i token CSS ufficiali di PagoPA.</span></span><span class="w-right mono">tokens</span></div>
-              <div class="wrow"><span class="w-name">Verifica immediata in locale<span class="w-sub">L'agente convalida il codice appena scritto eseguendo test unitari, test di parity visiva e linting.</span></span><span class="w-right mono">checks</span></div>
-              <div class="wrow"><span class="w-name">Supervisione umana continua<span class="w-sub">Figma resta in sola lettura e nessun commit viene creato senza la revisione esplicita dello sviluppatore.</span></span><span class="w-right mono">controllo</span></div>
-            </div>
-            <div class="noteline">
-              <p class="small">L'AI non improvvisa lo stile: <strong>lavora all'interno delle regole e dei vincoli stabiliti dal team</strong>.</p>
-              <span class="anno">Sviluppo assistito</span>
-            </div>
-          </div>
-        </div>
-        <aside class="notes">
-          <p><strong>Perché l'AI funziona qui.</strong> Quando chiediamo a un modello AI di creare un componente da zero in un repo disordinato, spesso inventa colori, margini e classi a caso. Perché? Perché non ha vincoli chiari.</p>
-          <p>In questa architettura, invece, l'agente ha parametri rigorosi: legge il nodeId da Figma, conosce i token tipizzati in TypeScript e sa quali classi CSS precompilate usare.</p>
-          <p>E soprattutto, ha un feedback loop immediato: scrive il componente, lancia i test di parity, vede se diverge e corregge il tiro prima di presentare il lavoro allo sviluppatore.</p>
-        </aside>
-      </section>
-
       <!-- ============ 11 · DUE SKILL ============ -->
       <section class="slide" data-title="Le due skill" data-section="Delivery assistita" data-slug="due-skill">
         <div class="sbody">
@@ -861,139 +876,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 12 · WORKFLOW ============ -->
-      <section class="slide" data-title="Il flusso di lavoro" data-section="Delivery assistita" data-slug="flusso-agentico">
-        <div class="sbody">
-          <div class="shead">
-            <h2>Come si sviluppa un nuovo componente</h2>
-            <p class="lead">Un processo in quattro passaggi: <strong>l'automazione accelera la stesura, lo sviluppatore valida le scelte</strong>.</p>
-          </div>
-          <div class="scontent">
-            <div class="plan">
-              <div class="p-row"><span class="p-n">01</span><span class="p-t">Ispezione automatica da Figma<em>L'assistente legge il nodo Figma via API, recupera varianti, stili, icone e vincoli responsive.</em></span></div>
-              <div class="p-row"><span class="p-n">02</span><span class="p-t">Proposta architetturale<em>Viene pianificata la struttura del componente: compatibilità RSC, props TypeScript e contratti di accessibilità.</em></span></div>
-              <div class="p-row"><span class="p-n">03</span><span class="p-t">Validazione dello sviluppatore<em>Lo sviluppatore esamina l'approccio e dà il via libera prima che vengano scritti i file.</em></span></div>
-              <div class="p-row"><span class="p-n">04</span><span class="p-t">Generazione e test di parity<em>Vengono creati il componente, le classi CSS statiche, le story e i test Playwright. Nessun commit senza review.</em></span></div>
-            </div>
-            <div class="noteline">
-              <p class="small">L'AI toglie il lavoro noioso di boilerplate: <strong>controllo, architettura e rilascio restano in mano al team</strong>.</p>
-              <span class="anno">Flusso di lavoro</span>
-            </div>
-          </div>
-        </div>
-        <aside class="notes">
-          <p><strong>Il flusso pratico.</strong> Quando dobbiamo aggiungere o aggiornare un componente, non partiamo da un file vuoto copiando CSS.</p>
-          <p>L'assistente ispeziona il nodo Figma in sola lettura, legge le proprietà e prepara una proposta strutturata. Lo sviluppatore verifica che le scelte di API abbiano senso.</p>
-          <p>A quel punto viene generato il codice con le relative story Storybook e i test di parity. Se i test passano, il componente è pronto per la review finale su Pull Request.</p>
-        </aside>
-      </section>
-
-      <!-- ============ 13 · IL GIRO DI APERTURA ============ -->
-      <section class="slide" data-title="Un esempio pratico" data-section="Delivery assistita" data-slug="giro-di-apertura">
-        <div class="sbody">
-          <div class="shead">
-            <h2>Un esempio concreto in Copilot App</h2>
-            <p class="lead">Basta una richiesta chiara nel proprio editor: <strong>il tooling gestisce le complessità e produce codice pulito</strong>.</p>
-          </div>
-          <div class="scontent">
-            <div class="split-view">
-              <div class="panel">
-                <div class="p-bar">
-                  <span class="p-title icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Scenario reale di sviluppo</span>
-                  <span class="stat acc">Prompt &amp; Risultato</span>
-                </div>
-                <div class="p-body">
-                  <div class="frow2"><span class="f-k">Cosa chiedi</span><span class="f-v"><span class="code">/start-figma-to-code #97</span> <em>(contesto della PR aperta)</em></span></div>
-                  <div class="frow2"><span class="f-k">Tooling</span><span class="f-v">Interroga Figma, estrae i token ed esegue l'allineamento dei componenti.</span></div>
-                  <div class="frow2"><span class="f-k">Output</span><span class="f-v">Componente Server-first senza runtime CSS, story e test visivo di parity.</span></div>
-                  <div class="frow2"><span class="f-k">Controllo umano</span><span class="f-v">Esamini il render, verifichi l'accessibilità e approvi la Pull Request.</span></div>
-                </div>
-              </div>
-              <div class="shot-card">
-                <div class="sc-bar">
-                  <span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>GitHub Copilot App: Allineamento PR #97</span>
-                  <span class="sc-tag">Copilot App</span>
-                </div>
-                <img class="sc-img" src="img/copilot-app-session.png" alt="Sessione GitHub Copilot App">
-                <div class="sc-cap">Esecuzione guidata: analisi nodi Figma, aggiornamento codice e build Storybook sulla PR.</div>
-              </div>
-            </div>
-            <div class="noteline">
-              <p class="small">Il tempo non si spreca a ricopiare valori da Figma: <strong>ci si concentra sulla qualità dell'esperienza utente</strong>.</p>
-              <span class="anno">Esperienza di sviluppo</span>
-            </div>
-          </div>
-        </div>
-        <aside class="notes">
-          <p><strong>Come si lavora ogni giorno.</strong> Lo sviluppatore non deve scrivere prompt lunghi o complessi: lancia il comando rapido <span class="code">/start-figma-to-code #97</span>, fornendo come contesto il numero della Pull Request aperta.</p>
-          <p>Il tooling ricava i riferimenti della issue e del componente, interroga l'API di Figma, estrae le proprietà, applica i token CSS statici e genera il codice pronto con i test di parity.</p>
-          <p>Lo sviluppatore verifica visivamente il render, testa l'accessibilità e approva la PR. Tutto il lavoro noioso e ripetitivo è automatizzato.</p>
-        </aside>
-      </section>
-
-      <!-- ============ 14 · VALORE ============ -->
-      <section class="slide" data-title="I vantaggi concreti" data-section="Delivery assistita" data-slug="valore-atteso">
-        <div class="sbody">
-          <div class="shead">
-            <h2>Cosa cambia concretamente per i team</h2>
-            <p class="lead">Meno attrito nei rilasci, <strong>applicazioni sensibilmente più veloci e un'esperienza coerente</strong>.</p>
-          </div>
-          <div class="scontent">
-            <div class="cols">
-              <div>
-                <div class="c-head">Prima con mui-italia<span>I colli di bottiglia storici.</span></div>
-                <div class="c-row"><span class="c-name">Handoff manuale e lento</span><span class="c-sub">Ore spese a misurare pixel su Figma e correggere differenze a posteriori.</span></div>
-                <div class="c-row"><span class="c-name">Bundle pesanti</span><span class="c-sub">Decine di kilobyte di runtime CSS-in-JS (Emotion) scaricati ed eseguiti in ogni browser.</span></div>
-                <div class="c-row"><span class="c-name">Aggiornamenti rischiosi</span><span class="c-sub">Modificare il tema globale richiedeva continui allineamenti e test manuali.</span></div>
-              </div>
-              <div>
-                <div class="c-head">Con @pagopa/ui<span>La nuova impostazione.</span></div>
-                <div class="c-row"><span class="c-name">Allineamento automatico</span><span class="c-sub">I componenti nascono sincronizzati con Figma e validati da test di parity.</span></div>
-                <div class="c-row"><span class="c-name">Performance native</span><span class="c-sub">Zero runtime di stile, React Server Components e caricamento delle pagine istantaneo.</span></div>
-                <div class="c-row"><span class="c-name">Evoluzione trasparente</span><span class="c-sub">I cambi di design arrivano come PR tracciate, con storico dettagliato delle decisioni.</span></div>
-              </div>
-            </div>
-            <div class="noteline">
-              <p class="small">L'obiettivo finale: <strong>applicazioni pubbliche più veloci per i cittadini</strong> e meno frustrazione per gli ingegneri.</p>
-              <span class="anno">Impatto sui prodotti</span>
-            </div>
-          </div>
-        </div>
-        <aside class="notes">
-          <p><strong>L'impatto reale.</strong> Non vi vendo percentuali inventate di produttività. Il valore si vede dove oggi perdiamo tempo ed efficienza.</p>
-          <p>Dal punto di vista del cittadino che usa i servizi di PagoPA, eliminare Emotion e sfruttare i React Server Components significa avere pagine più veloci, con First Contentful Paint molto più basso anche su reti mobili lente.</p>
-          <p>Dal punto di vista dei team frontend, niente più discussioni infinite su padding disallineati o problemi di idratazione con il CSS-in-JS. L'allineamento è continuo e governato.</p>
-        </aside>
-      </section>
-
-      <!-- ============ 15 · LIMITI ============ -->
-      <section class="slide" data-title="I punti aperti" data-section="Punti aperti" data-slug="limiti">
-        <div class="sbody">
-          <div class="shead">
-            <h2>Cosa dobbiamo ancora risolvere</h2>
-            <p class="lead">Un prototipo promettente, ma ci sono <strong>questioni pratiche da affrontare prima della produzione</strong>.</p>
-          </div>
-          <div class="scontent">
-            <div class="wtable" style="max-width:1020px">
-              <div class="wrow"><span class="w-name">Convivenza con React 18<span class="w-sub">Molti prodotti attuali sono su React 18: serve una strategia per la convivenza o una transizione graduale.</span></span><span class="w-right stat warn">Da definire</span></div>
-              <div class="wrow"><span class="w-name">Distribuzione e licenza<span class="w-sub">Configurazione del rilascio su registry npm (interno o pubblico) e policy formali di licenza.</span></span><span class="w-right stat bad">Prioritario</span></div>
-              <div class="wrow"><span class="w-name">Componenti complessi<span class="w-sub">Validare il flusso su casi avanzati (tabelle dati dinamiche, form ricchi, filtri articolati).</span></span><span class="w-right stat warn">In sviluppo</span></div>
-              <div class="wrow"><span class="w-name">Curva di adozione<span class="w-sub">Formazione dei team sulle logiche di React Server Components e primitive headless (Base UI).</span></span><span class="w-right stat">Formazione</span></div>
-            </div>
-            <div class="noteline">
-              <p class="small">Affrontare apertamente i limiti è la base per <strong>impostare una fase di pilot credibile e utile</strong>.</p>
-              <span class="anno">Analisi dei limiti</span>
-            </div>
-          </div>
-        </div>
-        <aside class="notes">
-          <p><strong>Cosa resta da fare.</strong> Non siamo pronti per fare un `npm install` domani su tutti i progetti, ed è importante dirlo con chiarezza.</p>
-          <p>La distribuzione è ancora su GitHub Packages privato e mancano le definizioni contrattuali di licenza. Inoltre, molti progetti PagoPA sono su React 18: dobbiamo chiarire se prevedere un build di compatibilità o se riservare il nuovo stack ai progetti che aggiornano o nascono oggi.</p>
-          <p>Infine, dobbiamo testare componenti più complessi di bottoni e card: penso a tabelle dati con filtri avanzati o form dinamici. Il pilot serve esattamente a rispondere a queste domande.</p>
-        </aside>
-      </section>
-
-      <!-- ============ 16 · DUE PILOT ============ -->
+      <!-- ============ 12 · DUE PILOT ============ -->
       <section class="slide" data-title="Proposte di pilot" data-section="Proposta di pilot" data-slug="due-pilot">
         <div class="sbody">
           <div class="shead">
@@ -1009,10 +892,10 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 <div class="c-row"><span class="c-name">Cosa lascia</span><span class="c-sub">La prima referenza architetturale e le linee guida consolidate per i prossimi progetti.</span></div>
               </div>
               <div>
-                <div class="c-head">Scenario B · Sezione non critica<span>Test di integrazione su un'app esistente.</span></div>
-                <div class="c-row"><span class="c-name">Cosa testa</span><span class="c-sub">Integrazione dei componenti su una sezione o un portale interno esistente.</span></div>
-                <div class="c-row"><span class="c-name">Cosa misura</span><span class="c-sub">Attriti di convivenza con MUI, facilità di adozione e impatto sul bundle reale.</span></div>
-                <div class="c-row"><span class="c-name">Cosa lascia</span><span class="c-sub">Una guida di migrazione chiara e collaudata per tutti gli altri team.</span></div>
+                <div class="c-head">Scenario B · Migrazione completa<span>Migrazione tout court di un'app esistente.</span></div>
+                <div class="c-row"><span class="c-name">Cosa testa</span><span class="c-sub">Sostituzione integrale di mui-italia su un'applicazione circoscritta o portale interno.</span></div>
+                <div class="c-row"><span class="c-name">Cosa misura</span><span class="c-sub">Fattibilità e tempi di refactoring completo, abbattimento reale del bundle e salto a React 19.</span></div>
+                <div class="c-row"><span class="c-name">Cosa lascia</span><span class="c-sub">La playbook di migrazione testata sul campo e la prima applicazione convertita.</span></div>
               </div>
             </div>
             <div class="noteline">
@@ -1023,13 +906,13 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </div>
         <aside class="notes">
           <p><strong>Come procedere.</strong> Vi propongo due percorsi possibili per il pilot.</p>
-          <p>Lo Scenario A è un progetto nuovo, greenfield: ad esempio un nuovo servizio o micro-frontend. Ci permette di testare la catena completa: da Figma a React 19 con RSC e CSS precompilato, senza il peso del codice pregresso.</p>
-          <p>Lo Scenario B è una sezione secondaria di un'app esistente: ci consente di misurare gli attriti di migrazione da mui-italia, la convivenza degli stili e l'impatto reale sul bundle.</p>
+          <p>Lo Scenario A è un progetto nuovo, greenfield: ad esempio un nuovo servizio. Ci permette di testare la catena completa da zero: da Figma a React 19 con RSC e CSS precompilato, senza codice pregresso.</p>
+          <p>Lo Scenario B è una migrazione tout court: non è sostenibile un'integrazione parziale a pezzi o a singole sezioni, quindi serve individuare un'intera applicazione circoscritta (un'app o portale interno) e convertirla integralmente. Questo ci permette di misurare l'effettiva fattibilità del refactoring da mui-italia, il crollo del peso del bundle e la transizione a React 19.</p>
           <p>In entrambi i casi serve un accordo semplice: 4-6 settimane, un owner tecnico identificato e metriche chiare da verificare insieme.</p>
         </aside>
       </section>
 
-      <!-- ============ 17 · CHIUSURA ============ -->
+      <!-- ============ 13 · CHIUSURA ============ -->
       <section class="slide" data-title="Conclusioni" data-section="Proposta di pilot" data-slug="chiusura">
         <div class="sbody">
           <div class="divider-main">
