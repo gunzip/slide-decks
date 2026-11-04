@@ -481,9 +481,9 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
           <div class="scontent">
             <div class="plan">
-              <div class="p-row"><span class="p-n">01</span><span class="p-t">Figma e codice divergono nel silenzio<em>L'allineamento oggi è manuale: mancano collegamenti stabili tra i nodi Figma e i componenti React, con continue discrepanze visive.</em></span></div>
-              <div class="p-row"><span class="p-n">02</span><span class="p-t">Stili imposti e lotta continua agli override<em>Con mui-italia dobbiamo adattarci a pattern esterni e i consumer combattono con override complessi. Il nuovo approccio è 100% nostro e personalizzabile a piacimento.</em></span></div>
-              <div class="p-row"><span class="p-n">03</span><span class="p-t">Lo stack è fermo a ieri<em>mui-italia è legato a React 18 e al client rendering classico: non supporta i React Server Components (RSC) né le novità di React 19.</em></span></div>
+              <div class="p-row"><span class="p-n">01</span><span class="p-t">Allineamento tra Figma e codice per lo più manuale<em>Senza collegamenti diretti e tracciati tra i nodi Figma e i componenti React, mantenere la parità visiva nel tempo richiede continue verifiche.</em></span></div>
+              <div class="p-row"><span class="p-n">02</span><span class="p-t">Frequenti override per adattare una base terza<em>mui-italia si basa su Material UI: personalizzare un design system esterno per renderlo aderente alle linee PagoPA richiede catene di override delicate da gestire.</em></span></div>
+              <div class="p-row"><span class="p-n">03</span><span class="p-t">Distanza dall'evoluzione recente di React<em>L'architettura attuale è basata su React 18 e sul client-rendering tradizionale: non è predisposta per i React Server Components (RSC) né per le novità di React 19.</em></span></div>
             </div>
             <div class="noteline">
               <p class="small">L'obiettivo del POC: dimostrare che <strong>possiamo automatizzare il flusso</strong> con uno stack leggero, contemporaneo e interamente su misura.</p>
@@ -492,10 +492,10 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
         </div>
         <aside class="notes">
-          <p><strong>I tre nodi da sciogliere.</strong> Il primo problema è il disallineamento continuo: chi sviluppa riceve un link a Figma e cerca di riprodurlo a occhio. Nel giro di pochi mesi, design e codice prendono strade diverse.</p>
-          <p>Il secondo è la rigidità stilistica: mui-italia ci vincola ai canoni e ai pattern di Material UI. I consumer dei nostri componenti si ritrovano a combattere contro gli stili predefiniti a colpi di override fragili e complessi. Con il nuovo approccio abbiamo invece un sistema 100% nostro, pensato per le esigenze di PagoPA e personalizzabile a piacimento senza doversi adattare a librerie terze.</p>
-          <p>Il terzo è architetturale: mui-italia è nato cinque anni fa. È vincolato a React 18 e non può sfruttare i React Server Components per abbattere il JavaScript inviato al browser.</p>
-          <p>Questo POC nasce per risolvere alla radice queste tre frizioni: automazione continua da Figma, libertà stilistica totale e fondamenta tecnologiche moderne.</p>
+          <p><strong>I tre punti di attenzione.</strong> Il primo riguarda l'allineamento: oggi chi sviluppa lavora a partire da riferimenti Figma ma implementa a mano. Con il passare del tempo e l'evoluzione naturale dei componenti, mantenere sincronizzati design e codice richiede un impegno costante.</p>
+          <p>Il secondo è legato all'adattamento: mui-italia poggia su Material UI, una libreria solida e ampiamente diffusa, ma con propri assunti visivi e funzionali. Adattarla fedelmente all'identità PagoPA richiede frequenti override e configurazioni del tema, che per i team consumer possono risultare complessi da manutenere.</p>
+          <p>Il terzo è l'evoluzione tecnica: mui-italia è stato impostato nell'era di React 18 con rendering client-side. Oggi l'ecosistema React si è orientato verso React 19 e i Server Components, che offrono grandi vantaggi per abbattere il JavaScript inviato al browser.</p>
+          <p>Questo POC nasce per esplorare un'alternativa su misura: automazione continua da Figma, styling nativo senza frizioni di override e fondamenta pronte per React 19.</p>
         </aside>
       </section>
 
@@ -517,8 +517,8 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 </div>
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
-                  <span class="c-name">Stili imposti &amp; override</span>
-                  <span class="c-sub">I consumer devono combattere contro lo stile MUI con continui override.</span>
+                  <span class="c-name">Personalizzazione via override</span>
+                  <span class="c-sub">Adattare le linee guida PagoPA sopra MUI richiede frequenti override.</span>
                 </div>
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
@@ -540,8 +540,8 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 </div>
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
-                  <span class="c-name">100% nostro e su misura</span>
-                  <span class="c-sub">Nessun vincolo da subire: componenti nostri e personalizzabili a piacimento.</span>
+                  <span class="c-name">100% nativo PagoPA</span>
+                  <span class="c-sub">Componenti disegnati direttamente sulle nostre linee guida, senza adattamenti forzati.</span>
                 </div>
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
@@ -562,8 +562,8 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
         </div>
         <aside class="notes">
-          <p><strong>Cosa cambia nella pratica.</strong> Con mui-italia, se un designer cambia un padding su Figma, lo sviluppatore deve accorgersene, modificare il tema TypeScript a mano e sperare che non rompa altri punti. Inoltre ci si ritrova vincolati alle scelte di Material UI: i consumer devono lottare contro gli stili predefiniti con complessi override CSS, mentre ogni pagina carica Emotion e ricalcola gli stili a runtime.</p>
-          <p>Con @pagopa/ui, i nodi Figma sono censiti via API: 353 nodi tra componenti, varianti e icone. I token vengono estratti automaticamente e compilati in CSS puro statico. E soprattutto il design system è totalmente nostro: niente opinioni esterne da subire o override forzati.</p>
+          <p><strong>Cosa cambia nella pratica.</strong> Con mui-italia, se un designer cambia un padding su Figma, lo sviluppatore deve accorgersene, modificare il tema TypeScript a mano e verificare che non impatti altri punti. Inoltre, basandosi su Material UI, i consumer si trovano spesso a gestire configurazioni di override complesse, mentre ogni pagina carica Emotion e calcola gli stili a runtime.</p>
+          <p>Con @pagopa/ui, i nodi Figma sono censiti via API: 353 nodi tra componenti, varianti e icone. I token vengono estratti automaticamente e compilati in CSS puro statico. E soprattutto il design system è nativo: componenti pensati fin dall'inizio per PagoPA, senza dover forzare override su pattern terzi.</p>
           <p>Chi sviluppa l'applicazione importa solo CSS già ottimizzato e componenti compatibili con React Server Components, con impatto zero sui tempi di risposta e sul bundle finale.</p>
         </aside>
       </section>
@@ -584,7 +584,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
               <div class="p-body">
                 <div class="frow2"><span class="f-k">React 19 &amp; RSC</span><span class="f-v">Supporto nativo a React Server Components. <em>Zero JS al client per componenti statici, confini 'use client' minimi.</em></span></div>
                 <div class="frow2"><span class="f-k">Zero CSS-in-JS</span><span class="f-v">Tailwind 4 compilato a monte, varianti con CVA. <em>Nessun runtime di styling o ThemeProvider per i consumer.</em></span></div>
-                <div class="frow2"><span class="f-k">Primitive Headless</span><span class="f-v">Base UI per logica e accessibilità, senza stili imposti. <em>Tastiera e WAI-ARIA a monte; markup e stile 100% nostri, zero override da combattere.</em></span></div>
+                <div class="frow2"><span class="f-k">Primitive Headless</span><span class="f-v">Base UI per logica e accessibilità, senza stili vincolanti. <em>Tastiera e WAI-ARIA a monte; markup e stile 100% nostri, senza catene di override.</em></span></div>
                 <div class="frow2"><span class="f-k">Build &amp; Packaging</span><span class="f-v">Vite 8, ESM puro e subpath exports. <em>Tree-shaking reale: l'app importa e scarica solo ciò che usa davvero.</em></span></div>
               </div>
             </div>
@@ -597,7 +597,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <aside class="notes">
           <p><strong>Le scelte tecnologiche.</strong> Primo: React 19 con Server Components nativi. I componenti di presentazione possono essere renderizzati interamente sul server senza spedire JavaScript al browser dell'utente cittadino.</p>
           <p>Secondo: zero CSS-in-JS. Diciamo addio a Emotion e al ricalcolo continuo di stili. Il CSS viene precompilato nel pacchetto: il principio è lo stesso documentato da GitHub Engineering nell'articolo "Improving site performance by shipping more CSS".</p>
-          <p>Terzo: primitive headless (Base UI). Non subiamo stili preimpostati contro cui dover combattere come avveniva con MUI: deleghiamo solo accessibilità, focus e gestione tastiera. Lo stile è al 100% nostro, modellato direttamente dai token di Figma.</p>
+          <p>Terzo: primitive headless (Base UI). Non dobbiamo sovrascrivere stili predefiniti di un framework esterno come con MUI: deleghiamo solo accessibilità, focus e gestione tastiera. Lo stile è al 100% nostro, modellato direttamente dai token di Figma.</p>
           <p>Quarto: packaging ESM moderno con subpath exports. Se importi Button, il bundler include solo il codice di Button, non l'intera libreria.</p>
         </aside>
       </section>
@@ -850,7 +850,122 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 11 · DUE SKILL ============ -->
+      <!-- ============ 11 · MODELLO DI COLLABORAZIONE ============ -->
+      <section class="slide" data-title="Modello operativo" data-section="Allineamento automatico" data-slug="modello-collaborazione">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Dalla catena sequenziale all'hub asincrono</h2>
+            <p class="lead">Non cambia solo la tecnologia: <strong>cambia il modo in cui designer, team core e sviluppatori collaborano</strong>.</p>
+          </div>
+          <div class="scontent">
+            <div class="split-view equal">
+              <div class="panel">
+                <div class="p-bar">
+                  <span class="p-title icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Prima · mui-italia</span>
+                  <span class="stat warn">Catena a cascata</span>
+                </div>
+                <div class="p-body" style="padding:16px 18px 12px">
+                  <svg viewBox="0 0 470 160" style="width:100%;height:auto;display:block" aria-label="Diagramma Before: Designer comunica con SWE mui-italia che fa da intermediario verso SWE Consumer">
+                    <defs>
+                      <marker id="arr-before" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--muted)"/>
+                      </marker>
+                    </defs>
+                    <!-- Node: Designer -->
+                    <rect x="12" y="34" width="112" height="54" rx="8" fill="#fff" stroke="var(--hair-2)" stroke-width="1.5"/>
+                    <text x="68" y="58" text-anchor="middle" font-family="'Titillio',sans-serif" font-size="13.5" font-weight="600" fill="var(--ink)">Designer</text>
+                    <text x="68" y="74" text-anchor="middle" font-size="10.5" fill="var(--muted)">Figma spec</text>
+
+                    <!-- Arrow 1 -->
+                    <line x1="124" y1="61" x2="166" y2="61" stroke="var(--muted)" stroke-width="1.8" marker-end="url(#arr-before)"/>
+                    <text x="145" y="52" text-anchor="middle" font-size="9" fill="var(--faint)" font-family="'Titillio',sans-serif">call &amp; chat</text>
+
+                    <!-- Node: SWE mui-italia -->
+                    <rect x="172" y="24" width="126" height="74" rx="8" fill="#fffaf5" stroke="var(--warn)" stroke-width="1.8"/>
+                    <text x="235" y="50" text-anchor="middle" font-family="'Titillio',sans-serif" font-size="13.5" font-weight="600" fill="var(--ink)">SWE mui-italia</text>
+                    <text x="235" y="66" text-anchor="middle" font-size="9.5" font-weight="600" fill="var(--warn)" letter-spacing="0.06em">INTERMEDIARIO</text>
+                    <text x="235" y="82" text-anchor="middle" font-size="10" fill="var(--muted)">traduce a mano</text>
+
+                    <!-- Arrow 2 -->
+                    <line x1="298" y1="61" x2="340" y2="61" stroke="var(--muted)" stroke-width="1.8" marker-end="url(#arr-before)"/>
+                    <text x="319" y="52" text-anchor="middle" font-size="9" fill="var(--faint)" font-family="'Titillio',sans-serif">supporto</text>
+
+                    <!-- Node: SWE Consumer -->
+                    <rect x="346" y="34" width="112" height="54" rx="8" fill="#fff" stroke="var(--hair-2)" stroke-width="1.5"/>
+                    <text x="402" y="58" text-anchor="middle" font-family="'Titillio',sans-serif" font-size="13.5" font-weight="600" fill="var(--ink)">SWE Consumer</text>
+                    <text x="402" y="74" text-anchor="middle" font-size="10.5" fill="var(--muted)">Team prodotto</text>
+
+                    <!-- Caption -->
+                    <text x="235" y="132" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="'Titillio',sans-serif">Catena a telefono senza fili: il team core fa da centralino umano</text>
+                  </svg>
+                  <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--hair);font-size:12.5px;color:var(--muted);line-height:1.45">
+                    <strong style="color:var(--ink)">Collo di bottiglia:</strong> ogni passaggio richiede allineamenti sincroni, call e chat informali che rallentano i rilasci.
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel">
+                <div class="p-bar">
+                  <span class="p-title icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg>Dopo · @pagopa/ui</span>
+                  <span class="stat ok">Hub asincrono</span>
+                </div>
+                <div class="p-body" style="padding:16px 18px 12px">
+                  <svg viewBox="0 0 470 160" style="width:100%;height:auto;display:block" aria-label="Diagramma After: Tutti comunicano direttamente con l'Agente tramite Issue, PR e Storybook">
+                    <defs>
+                      <marker id="arr-acc" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)"/>
+                      </marker>
+                    </defs>
+
+                    <!-- Left Top: Designer -->
+                    <rect x="12" y="12" width="112" height="44" rx="6" fill="#fff" stroke="var(--hair-2)" stroke-width="1.5"/>
+                    <text x="68" y="31" text-anchor="middle" font-family="'Titillio',sans-serif" font-size="12.5" font-weight="600" fill="var(--ink)">Designer</text>
+                    <text x="68" y="46" text-anchor="middle" font-size="9.5" fill="var(--muted)">Risponde a Issue</text>
+
+                    <!-- Left Bottom: SWE Core -->
+                    <rect x="12" y="70" width="112" height="44" rx="6" fill="#fff" stroke="var(--hair-2)" stroke-width="1.5"/>
+                    <text x="68" y="89" text-anchor="middle" font-family="'Titillio',sans-serif" font-size="12.5" font-weight="600" fill="var(--ink)">SWE @pagopa/ui</text>
+                    <text x="68" y="104" text-anchor="middle" font-size="9.5" fill="var(--muted)">Supervisiona PR</text>
+
+                    <!-- Center: Agent Hub -->
+                    <rect x="162" y="24" width="144" height="74" rx="8" fill="#eefafb" stroke="var(--accent)" stroke-width="2"/>
+                    <text x="234" y="50" text-anchor="middle" font-family="'Titillio',sans-serif" font-size="13.5" font-weight="700" fill="var(--accent-ink)">COPILOT AGENT</text>
+                    <text x="234" y="67" text-anchor="middle" font-size="10.5" font-weight="600" fill="var(--ink)">Hub su GitHub</text>
+                    <text x="234" y="83" text-anchor="middle" font-size="9.5" fill="var(--muted)">Issue · PR · Storybook</text>
+
+                    <!-- Right: SWE Consumer -->
+                    <rect x="342" y="38" width="116" height="46" rx="6" fill="#fff" stroke="var(--hair-2)" stroke-width="1.5"/>
+                    <text x="400" y="58" text-anchor="middle" font-family="'Titillio',sans-serif" font-size="12.5" font-weight="600" fill="var(--ink)">SWE Consumer</text>
+                    <text x="400" y="73" text-anchor="middle" font-size="9.5" fill="var(--muted)">Issue &amp; Preview PR</text>
+
+                    <!-- Connections -->
+                    <line x1="124" y1="34" x2="162" y2="48" stroke="var(--accent)" stroke-width="1.8" stroke-dasharray="3 3"/>
+                    <line x1="124" y1="92" x2="162" y2="76" stroke="var(--accent)" stroke-width="1.8" stroke-dasharray="3 3"/>
+                    <line x1="342" y1="61" x2="306" y2="61" stroke="var(--accent)" stroke-width="1.8" stroke-dasharray="3 3"/>
+
+                    <!-- Caption -->
+                    <text x="235" y="132" text-anchor="middle" font-size="11" fill="var(--accent-ink)" font-weight="600" font-family="'Titillio',sans-serif">Tutti comunicano solo con l'Agente: asincrono e tracciato</text>
+                  </svg>
+                  <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--hair);font-size:12.5px;color:var(--muted);line-height:1.45">
+                    <strong style="color:var(--ink)">Zero intermediari:</strong> richieste, dubbi e review avvengono su Issue e PR senza bloccare gli altri team.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="noteline">
+              <p class="small">L'AI non esclude le persone: <strong>elimina i passaggi a vuoto e concentra la collaborazione dove serve davvero</strong>.</p>
+              <span class="anno">Paradigma di collaborazione</span>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Il cambio di paradigma nella collaborazione.</strong> Questa slide mostra la trasformazione forse più significativa di tutto il progetto: come cambia il lavoro quotidiano tra i team.</p>
+          <p>Nel modello tradizionale con mui-italia, abbiamo una catena a telefono senza fili: il designer definisce i componenti su Figma, il team frontend del design system deve fare da intermediario manuale (interpretando le specifiche e gestendo il tema), e infine i team frontend di prodotto devono chiedere continuo supporto al team core per capire come usare i componenti o come aggirare gli override di MUI. Il team core diventa inevitabilmente il collo di bottiglia dell'intera organizzazione, sommerso da call e messaggi Slack.</p>
+          <p>Con @pagopa/ui e l'agente Copilot, tutti comunicano direttamente con l'agente attraverso gli strumenti standard di GitHub: i designer rispondono alle issue con dubbi puntuali aperti dall'agente; i team di prodotto aprono issue per richiedere varianti e commentano direttamente le PR testando le preview Storybook; il team core supervisiona e approva. Nessuno deve più fare da centralino umano.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 12 · DUE SKILL ============ -->
       <section class="slide" data-title="Le due skill" data-section="Delivery assistita" data-slug="due-skill">
         <div class="sbody">
           <div class="shead">
@@ -888,7 +1003,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 12 · DUE PILOT ============ -->
+      <!-- ============ 13 · DUE PILOT ============ -->
       <section class="slide" data-title="Proposte di pilot" data-section="Proposta di pilot" data-slug="due-pilot">
         <div class="sbody">
           <div class="shead">
@@ -924,17 +1039,17 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 13 · CHIUSURA ============ -->
+      <!-- ============ 14 · CHIUSURA ============ -->
       <section class="slide" data-title="Conclusioni" data-section="Proposta di pilot" data-slug="chiusura">
         <div class="sbody">
           <div class="divider-main">
             <h2 class="statement" style="max-width:none">Costruiamolo insieme</h2>
-            <p class="lead" style="font-size:21px;max-width:58ch">La PoC dimostra che possiamo avere <strong>allineamento automatico da Figma a React</strong>, architettura moderna con <strong>React 19 / RSC</strong>, <strong>zero runtime CSS</strong> e un <strong>design system 100% nostro</strong> (senza stili imposti né override).
+            <p class="lead" style="font-size:21px;max-width:58ch">La PoC dimostra che possiamo avere <strong>allineamento automatico da Figma a React</strong>, architettura moderna con <strong>React 19 / RSC</strong>, <strong>zero runtime CSS</strong> e un <strong>design system 100% nostro</strong> (senza frizioni di override su librerie terze).
               <br><br>Servono: conoscenza di dominio (design system, trade-off)<br>e delle best-practice frontend.<br><br>Progetto pilota da cui partire?</p>
           </div>
         </div>
         <aside class="notes">
-          <p><strong>Conclusioni.</strong> La tecnologia c'è e le fondamenta sono pronte: abbiamo dimostrato che il sync con Figma può essere automatico, che possiamo sfruttare React 19 e i Server Components, liberarci dal peso del runtime CSS-in-JS e abbandonare la lotta contro gli stili imposti di MUI grazie a una soluzione interamente nostra.</p>
+          <p><strong>Conclusioni.</strong> La tecnologia c'è e le fondamenta sono pronte: abbiamo dimostrato che il sync con Figma può essere automatico, che possiamo sfruttare React 19 e i Server Components, liberarci dal peso del runtime CSS-in-JS e superare i vincoli di personalizzazione delle librerie terze grazie a una soluzione nativamente nostra.</p>
           <p>Ora serve il passaggio più importante: portarlo a contatto con le esigenze reali dei team e dei prodotti di PagoPA.</p>
           <p>Grazie per l'attenzione, apriamo lo spazio per domande, dubbi e proposte su quale progetto pilota scegliere.</p>
         </aside>
