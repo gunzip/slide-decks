@@ -1,0 +1,1534 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Il mestiere si sposta. La verifica resta.</title>
+<meta name="description" content="Deck per un talk di 20 minuti: come cambia il lavoro dei software engineer quando gli agenti fanno il lavoro, e perché gli eval delle skill sono la competenza da costruire adesso.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Agent SKILL — deck 16:9 · versione convenzionale
+   Carta fredda, inchiostro, un solo accento — il teal della
+   palette pagoPA (#00818d) e i suoi neutri (#dfe3eb, #f5f6f8,
+   #8898a8). La gerarchia, il ritmo e le figure fanno il lavoro.
+   ============================================================ */
+
+:root{
+  --paper:#fbfbfa;
+  --ink:#14161a;
+  --body:#4a4f57;
+  --muted:#6b7079;
+  --faint:#8a909a;
+  --hair:#e8ebf1;
+  --hair-2:#dfe3eb;
+  --tint:#f5f6f8;
+  --accent:#00818d;
+  --accent-ink:#007986;
+  --accent-tint:#ebfdff;
+  --ok:#2f7d4f;
+  --warn:#a96a12;
+  --bad:#b42318;
+  --code:#2f3442;
+  --fig-dim:#8898a8;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:#e9eaec;
+  color:var(--ink);
+  font-family:"Titillium Web","Helvetica Neue",Arial,system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.55;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+::selection{background:#caf2f5;color:var(--ink)}
+
+/* ---------- stage & canvas ---------- */
+.stage{position:fixed;inset:0;overflow:hidden;background:#e9eaec}
+.canvas{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%) scale(1);
+  transform-origin:center center;
+  width:1280px;height:720px;flex:none;
+  background:var(--paper);
+  overflow:hidden;
+}
+.canvas::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(20,22,26,.05);
+}
+
+/* ---------- slides ---------- */
+.slide{
+  position:absolute;inset:0;
+  opacity:0;visibility:hidden;
+  transition:opacity .18s ease, visibility 0s linear .18s;
+  padding:60px 72px 92px;
+}
+.slide.active{opacity:1;visibility:visible;transition:opacity .22s ease}
+.sbody{position:relative;height:100%;display:flex;flex-direction:column}
+
+.shead{margin-bottom:34px;max-width:1060px}
+.shead p.lead{margin-top:16px}
+.scontent{flex:1;min-height:0;position:relative}
+
+/* ---------- typographic voice ---------- */
+h1,h2,h3{margin:0;font-weight:600;color:var(--ink)}
+h2{font-size:36px;line-height:1.14;letter-spacing:-.022em;max-width:1020px}
+h3{font-size:19px;line-height:1.3;letter-spacing:-.012em}
+.claim{font-size:58px;line-height:1.06;letter-spacing:-.028em;font-weight:600;margin:0}
+.statement{font-size:44px;line-height:1.16;letter-spacing:-.024em;font-weight:600;margin:0;max-width:22ch}
+.lead{font-size:20px;line-height:1.55;color:var(--body);max-width:74ch;margin:0}
+.lead strong{color:var(--ink);font-weight:600}
+.small{font-size:16px;line-height:1.55;color:var(--muted);max-width:80ch;margin:0}
+.small strong{color:var(--body);font-weight:600}
+.mono,.anno{
+  font-family:"Spline Sans Mono","SF Mono",ui-monospace,Menlo,monospace;
+  font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+}
+.anno{font-size:11px}
+.code{font-family:"Spline Sans Mono","SF Mono",ui-monospace,Menlo,monospace;font-size:.94em;color:var(--code)}
+.num{font-variant-numeric:tabular-nums}
+p{margin:0}
+
+/* ---------- status mark ---------- */
+.stat{display:inline-flex;align-items:center;gap:8px;font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.stat::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--faint);flex:none}
+.stat.ok{color:var(--body)}
+.stat.ok::before{background:var(--ok)}
+.stat.warn{color:var(--body)}
+.stat.warn::before{background:var(--warn)}
+.stat.bad{color:var(--body)}
+.stat.bad::before{background:var(--bad)}
+.stat.acc::before{background:var(--accent)}
+
+/* ---------- tables ---------- */
+.wtable{border-top:1px solid var(--hair-2)}
+.wrow{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center;
+  padding:14px 0;border-bottom:1px solid var(--hair);
+}
+.wtable.compact .wrow{padding:11px 0}
+.wrow .w-name{font-size:18px;font-weight:600;line-height:1.3;color:var(--ink)}
+.wrow .w-name .w-sub{display:block;font-size:15px;font-weight:400;color:var(--muted);margin-top:3px;line-height:1.45}
+.wrow .w-right{justify-self:end;text-align:right}
+
+/* ---------- ordered plan ---------- */
+.plan{border-top:1px solid var(--hair-2);max-width:1020px}
+.plan .p-row{
+  display:grid;grid-template-columns:56px minmax(0,1fr);gap:20px;align-items:baseline;
+  padding:15px 0;border-bottom:1px solid var(--hair);
+}
+.plan .p-n{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.plan .p-t{font-size:18.5px;font-weight:600;color:var(--ink)}
+.plan .p-t em{font-style:normal;color:var(--muted);font-weight:400;font-size:15.5px;display:block;margin-top:3px;line-height:1.45}
+
+/* ---------- two-column comparison ---------- */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.cols .c-head{font-size:17px;font-weight:600;color:var(--ink);padding-bottom:12px;border-bottom:1px solid var(--hair-2)}
+.cols .c-head span{display:block;font-size:14px;font-weight:400;color:var(--muted);margin-top:3px;letter-spacing:0}
+.cols .c-row{display:grid;gap:2px;padding:13px 0;border-bottom:1px solid var(--hair)}
+.cols .c-name{font-size:17px;font-weight:600;color:var(--ink)}
+.cols .c-sub{font-size:14.5px;color:var(--muted);line-height:1.45}
+
+/* ---------- panel (spec sheet, examples) ---------- */
+.panel{border:1px solid var(--hair-2);border-radius:10px;background:#fff;overflow:hidden}
+.panel .p-bar{
+  display:flex;justify-content:space-between;align-items:center;gap:18px;
+  padding:12px 20px;border-bottom:1px solid var(--hair);
+}
+.panel .p-title{font-size:14px;font-weight:600;color:var(--ink)}
+.panel .p-body{padding:6px 20px 12px}
+.frow2{
+  display:grid;grid-template-columns:212px minmax(0,1fr);gap:22px;align-items:baseline;
+  padding:13px 0;border-bottom:1px solid var(--hair);
+}
+.frow2:last-child{border-bottom:0}
+.frow2 .f-k{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.frow2 .f-v{font-size:17px;font-weight:600;color:var(--ink);line-height:1.4}
+.frow2 .f-v em{font-style:normal;font-weight:400;color:var(--muted);font-size:15px}
+
+/* ---------- note rows ---------- */
+.noteline{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-top:22px}
+.noteline .small{margin:0}
+.noteline .anno{text-transform:none;letter-spacing:.03em}
+
+/* ---------- signal markers (hint buono / cattivo) ---------- */
+.cols.signal .c-row{grid-template-columns:17px minmax(0,1fr);column-gap:12px}
+.cols.signal .c-mark{grid-row:1 / span 2;margin-top:3px;line-height:0}
+.cols.signal .c-mark svg{display:block;width:17px;height:17px}
+.cols.signal .c-sub{grid-column:2}
+
+/* ---------- quote card (citazioni) ---------- */
+.quotes{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.quote{border:1px solid var(--hair-2);border-radius:10px;background:#fff;padding:13px 16px 12px;margin:0}
+.quote .q-who{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.quote .q-av{width:24px;height:24px;border-radius:50%;background:var(--tint);border:1px solid var(--hair-2);display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;color:var(--muted);flex:none}
+.quote .q-name{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.2}
+.quote .q-handle{display:block;font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.02em;color:var(--muted);font-weight:400}
+.quote p{font-size:12px;line-height:1.45;color:var(--body)}
+.quote p + p{margin-top:5px}
+.quote .q-embed{border-left:2px solid var(--hair-2);padding-left:10px;margin-top:7px;font-size:11px;line-height:1.42;color:var(--muted)}
+.quote .q-embed b{color:var(--body);font-weight:600}
+.quote .q-meta{display:block;margin-top:9px;font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.02em;color:var(--faint)}
+.quote mark{background:rgba(0,178,194,.28);color:inherit;border-radius:3px;padding:0 3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ---------- tweet stack (una citazione per slide, in pila) ---------- */
+.tstack{position:relative;height:372px}
+.tstack .quote{position:absolute;width:900px;box-shadow:0 14px 30px -20px rgba(20,22,26,.32)}
+.tstack .quote p{font-size:18px;line-height:1.5}
+.tstack .quote .q-name{font-size:15px}
+.tstack .quote .q-handle{font-size:10.5px}
+.tstack .quote .q-av{width:30px;height:30px;font-size:12.5px}
+.tstack .quote .q-embed{font-size:13px;line-height:1.5}
+.tstack .quote .q-meta{font-size:11px}
+.tstack .quote:nth-child(1){left:85px;top:0;z-index:1}
+.tstack .quote:nth-child(2){left:107px;top:46px;z-index:2}
+.tstack .quote:nth-child(3){left:129px;top:92px;z-index:3}
+.tstack .quote:nth-child(4){left:151px;top:138px;z-index:4}
+.tstack .quote:nth-child(5){left:173px;top:184px;z-index:5}
+
+/* ---------- snippet (codice) ---------- */
+.wtable.tight .wrow{padding:9px 0}
+.snippet{border:1px solid var(--hair-2);border-radius:10px;background:#fff;overflow:hidden}
+.snippet .s-bar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:11px 20px;border-bottom:1px solid var(--hair)}
+.snippet .s-title{font-size:14px;font-weight:600;color:var(--ink)}
+.snippet pre{margin:0;padding:13px 20px 15px;font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:10.5px;line-height:1.44;color:var(--code);overflow:hidden}
+.snippet .k{color:var(--ink)}
+.snippet .v{color:var(--body)}
+.snippet .m{color:var(--faint)}
+.snippet.cmd pre{font-size:16px;line-height:1.5}
+
+/* ---------- figures ---------- */
+.fig{width:100%;display:block}
+.fig .st{stroke:var(--ink);stroke-width:2;fill:none}
+.fig .st-dim{stroke:var(--fig-dim);stroke-width:2;fill:none}
+.fig .st-thin{stroke:var(--fig-dim);stroke-width:1.5;fill:none}
+.fig .st-acc{stroke:var(--accent);stroke-width:2;fill:none}
+.fig .lbl{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.05em;fill:var(--muted)}
+.fig .lbl-ink{fill:var(--ink)}
+.fig .node{fill:var(--paper);stroke:var(--ink);stroke-width:2}
+.fig .node-acc{fill:var(--accent);stroke:var(--accent)}
+.fig .node-ok{fill:var(--ok);stroke:var(--ok)}
+.fig .node-dim{fill:var(--fig-dim);stroke:var(--fig-dim)}
+.fig .pop{opacity:0}
+.fig [data-draw]{stroke-dasharray:1;stroke-dashoffset:1}
+.slide.active .fig [data-draw]{animation:draw .85s cubic-bezier(.3,.7,.2,1) var(--dd,0ms) forwards}
+.slide.active .fig .pop{animation:pop .38s ease var(--dd,600ms) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{to{opacity:1}}
+.figcap{margin-top:14px;display:flex;gap:10px;align-items:baseline}
+.figcap::before{content:"";width:22px;height:1px;background:var(--fig-dim);flex:none;transform:translateY(-4px)}
+.figcap .anno{text-transform:none;letter-spacing:.02em;font-size:12px;color:var(--muted)}
+
+/* ---------- cover ---------- */
+.cover-top{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:16px;border-bottom:1px solid var(--hair-2)}
+.cover-main{flex:1;display:flex;flex-direction:column;justify-content:center;gap:26px}
+.cover-foot{display:flex;justify-content:space-between;align-items:baseline;gap:24px}
+
+/* ---------- divider ---------- */
+.divider-main{height:100%;display:flex;flex-direction:column;justify-content:center;gap:22px;max-width:900px}
+
+/* ---------- footer (board status strip) ---------- */
+.hud{
+  position:absolute;left:0;right:0;bottom:0;height:56px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;
+  padding:0 72px;border-top:1px solid var(--hair);
+  background:var(--paper);
+  font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  z-index:40;
+}
+.hud .l{display:flex;gap:14px;align-items:center;min-width:0;white-space:nowrap}
+.hud .r{display:flex;gap:16px;align-items:center;justify-content:flex-end;white-space:nowrap}
+.hud .brand{color:var(--ink);font-weight:600}
+.hud .num b{color:var(--ink);font-weight:600}
+.hud .keys{color:var(--muted)}
+.hud .timer{color:var(--accent-ink)}
+.ticks{display:flex;gap:4px}
+.ticks button{
+  width:15px;height:3px;border:0;padding:0;cursor:pointer;
+  background:#e4e8ef;transition:background .15s ease;
+}
+.ticks button:hover{background:#b6bfcd}
+.ticks button.past{background:#cbd2dd}
+.ticks button.cur{background:var(--ink)}
+.ticks button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- speaker notes drawer ---------- */
+.slide .notes{display:none}
+.notes-drawer{
+  position:absolute;left:50%;transform:translate(-50%,calc(100% + 60px));
+  bottom:56px;width:min(1080px,94%);max-height:300px;
+  background:#fff;
+  border:0;border-radius:12px 12px 0 0;
+  box-shadow:0 -6px 16px -10px rgba(20,22,26,.35);
+  transition:transform .3s cubic-bezier(.3,.8,.3,1), visibility 0s linear .3s;
+  visibility:hidden;
+  z-index:45;display:flex;flex-direction:column;
+}
+body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transition:transform .3s cubic-bezier(.3,.8,.3,1)}
+.nd-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 22px;border-bottom:1px solid var(--hair);
+  font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+}
+.nd-head b{color:var(--ink);font-weight:600}
+.nd-body{padding:16px 24px 22px;overflow:auto;font-size:15px;line-height:1.65;color:var(--body)}
+.nd-body p{margin:0 0 10px}
+.nd-body strong{color:var(--ink);font-weight:600}
+.nd-body::-webkit-scrollbar{width:10px}
+.nd-body::-webkit-scrollbar-thumb{background:#dfe3eb;border-radius:5px;border:3px solid #fff}
+.nd-body::-webkit-scrollbar-track{background:transparent}
+
+/* ---------- overlays: overview + help ---------- */
+.overlay{
+  position:absolute;inset:0;z-index:60;display:none;
+  background:var(--paper);
+  padding:52px 72px 88px;
+}
+.overlay.open{display:block}
+.ov-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--hair-2);padding-bottom:16px;margin-bottom:10px}
+.ov-title{font-size:26px;font-weight:600;letter-spacing:-.02em}
+.ov-sub{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.03em;color:var(--muted)}
+.ov-list{display:grid;grid-auto-flow:column;grid-template-rows:repeat(11,auto);gap:0 44px}
+.ov-row{
+  width:100%;display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:center;
+  padding:9px 10px;background:none;border:0;border-bottom:1px solid var(--hair);
+  color:var(--body);cursor:pointer;text-align:left;font-family:inherit;
+}
+.ov-row:hover{background:var(--tint);color:var(--ink)}
+.ov-row:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.ov-row .n{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.ov-row.cur .n{color:var(--accent-ink)}
+.ov-row .t{font-size:15.5px;font-weight:600;color:inherit}
+.ov-row .s{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);justify-self:end;white-space:nowrap}
+
+.help-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 64px;max-width:960px}
+.help-row{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--hair)}
+.help-row .k{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:12px;color:var(--ink)}
+.help-row .k kbd{
+  display:inline-block;min-width:26px;text-align:center;padding:3px 7px;margin-right:4px;
+  border:1px solid var(--hair-2);border-bottom-width:2px;border-radius:6px;background:#fff;
+  font-family:inherit;font-size:11px;color:var(--ink)
+}
+.help-row .v{font-size:15px;color:var(--body)}
+
+/* ---------- blackout ---------- */
+.blackout{position:absolute;inset:0;background:#000;z-index:80;display:none}
+.blackout.on{display:block}
+
+/* ---------- print ---------- */
+@page{size:13.333in 7.5in;margin:0}
+@media print{
+  html,body{overflow:visible;background:#fff}
+  .stage{position:static;overflow:visible}
+  .canvas{position:relative;left:auto;top:auto;transform:none !important;width:1280px;height:auto;overflow:visible}
+  .canvas::after{display:none}
+  #deck{display:block}
+  .hud,.notes-drawer,.overlay,.blackout{display:none !important}
+  .slide{
+    position:relative;inset:auto;display:block;
+    visibility:visible !important;opacity:1 !important;
+    width:1280px;height:720px;break-after:page;page-break-after:always;
+    transition:none;overflow:hidden;
+  }
+  .slide:last-child{break-after:auto;page-break-after:auto}
+  .fig [data-draw]{stroke-dashoffset:0 !important;animation:none !important}
+  .fig .pop{opacity:1 !important;animation:none !important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important;animation:none !important}
+  .fig [data-draw]{stroke-dashoffset:0}
+  .fig .pop{opacity:1}
+  .traverse{display:none}
+}
+
+/* ---------- focus ---------- */
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="canvas" id="canvas">
+
+    <main id="deck">
+
+      <!-- ============ 01 · COPERTINA ============ -->
+      <section class="slide" data-title="Copertina" data-section="Apertura" data-slug="copertina">
+        <div class="sbody">
+          <div class="cover-top">
+            <span class="mono">Agent SKILL · 20 minuti</span>
+            <span class="mono">2026</span>
+          </div>
+          <div class="cover-main">
+            <h1 class="claim">Fidarsi è bene,<br> verificare è meglio.</h1>
+            <p class="lead" style="max-width:64ch">Come cambia il lavoro dei software engineer quando gli agenti fanno tutto (o quasi) e perché gli eval delle skill sono la competenza da costruire adesso.</p>
+            <span class="anno" style="margin-top:-12px;text-transform:none;letter-spacing:.03em">Il fatto · Prima e dopo · Il ruolo · Il setup · Costruttori · Gli eval · Chiusura</span>
+          </div>
+          <div class="cover-foot" style="justify-content:flex-end">
+            <span class="mono">Domande alla fine</span>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Apertura.</strong> Questo talk racconta due cose intrecciate: come sta cambiando il mestiere del software engineer e perché, tra tutte le competenze, <strong>gli eval delle skill</strong> sono quelle da costruire adesso.</p>
+          <p>Il titolo è una promessa: quando qualcosa cresce troppo per essere letto riga per riga, l'unico modo di governarlo è <strong>verificarlo</strong>. Il talk tiene insieme il quadro e un'azione concreta.</p>
+          <p>Navigazione per il relatore: frecce avanti e indietro; <strong>P</strong> apre la finestra del relatore — note, anteprima, prossima slide e timer — da tenere sul portatile, mentre in proiezione resta solo la slide; O per l'indice, ? per i tasti.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 02 · IL PRESENTE ============ -->
+      <section class="slide" data-title="Il presente" data-section="Il fatto" data-slug="fatto">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Il presente</h2>
+            <p class="lead">I modelli di frontiera fanno già buona parte del lavoro che fino a ieri era il nostro quotidiano: <strong>non solo il codice</strong>.</p>
+          </div>
+          <div class="scontent">
+            <div class="wtable" style="max-width:1020px">
+              <div class="wrow"><span class="w-name">Architetture</span><span class="w-right stat ok">Già in esercizio</span></div>
+              <div class="wrow"><span class="w-name">Codice</span><span class="w-right stat ok">Già in esercizio</span></div>
+              <div class="wrow"><span class="w-name">Code review</span><span class="w-right stat ok">Già in esercizio</span></div>
+              <div class="wrow"><span class="w-name">Debugging</span><span class="w-right stat ok">Già in esercizio</span></div>
+              <div class="wrow"><span class="w-name">Incidenti</span><span class="w-right stat ok">Già in esercizio</span></div>
+              <div class="wrow"><span class="w-name">Test</span><span class="w-right stat ok">Già in esercizio</span></div>
+            </div>
+            <p class="small" style="margin-top:22px">Non ci rende inutili. <strong>Cambia dove mettiamo il valore.</strong></p>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Il fatto, senza drama.</strong> Progettano architetture, scrivono codice, fanno code review e debugging, gestiscono incidenti, producono test. Non è un annuncio: è ciò che vediamo ogni settimana.</p>
+          <p>La frase da consegnare alla sala è quella in basso: non diventiamo inutili. Ma se il prodotto «codice» si sposta, il posto dove mettiamo il mestiere si sposta con lui. È la transizione che apre tutto il resto del talk.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 03 · ARREDARE L'AMBIENTE ============ -->
+      <section class="slide" data-title="Arredare l'ambiente" data-section="Prima e dopo" data-slug="prima">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Arredare l'ambiente</h2>
+            <p class="lead">Per accogliere al meglio i nuovi ospiti. Il software engineer diventa l'<strong>architetto del contesto e dei processi</strong>: dare agli agenti molta autonomia senza abbassare lo standard del prodotto.</p>
+          </div>
+          <div class="scontent">
+            <div class="plan">
+              <div class="p-row"><span class="p-n">01</span><span class="p-t">Intento<em>Chiaro, non ambiguo, in linguaggio naturale ma con rigore — prima della soluzione.</em></span></div>
+              <div class="p-row"><span class="p-n">02</span><span class="p-t">Ambiente e vincoli<em>Ambiente di sviluppo sandboxed e isomorfo alla CI · linting · pipeline veloci · moduli IaC · script quando si può, skill se serve.</em></span></div>
+            </div>
+            <div class="fig" style="margin-top:34px;max-width:1020px">
+              <svg viewBox="0 0 1000 76" aria-label="Scala dei vincoli: tutto il deterministico possibile, il giudizio solo dove serve">
+                <line x1="6" y1="30" x2="596" y2="30" class="st" pathLength="1" data-draw style="--dd:150ms"/>
+                <line x1="600" y1="30" x2="994" y2="30" class="st-dim" stroke-dasharray="7 8" pathLength="1" data-draw style="--dd:650ms"/>
+                <path class="pop" style="--dd:800ms" d="M 588 32 L 610 21 L 610 43 Z" fill="var(--accent)"/>
+                <text x="6" y="66" class="lbl lbl-ink pop" style="--dd:900ms">Deterministico · linter · script · CI</text>
+                <text x="994" y="66" text-anchor="end" class="lbl pop" style="--dd:950ms">Giudizio · skill · revisione</text>
+              </svg>
+              <p class="figcap"><span class="anno">La scala dei vincoli — il deterministico fa il primo passaggio, il giudizio riceve il resto.</span></p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Arredare l'ambiente, prima dell'implementazione, in due mosse.</strong> Gli ospiti sono gli agenti: più l'ambiente è chiaro e ordinato, meglio si muovono. Uno: <strong>definire l'intento</strong> in modo chiaro e non ambiguo — linguaggio naturale, ma con rigore, e prima di passare alla soluzione. Due: <strong>preparare l'ambiente e i vincoli</strong> — sviluppo isomorfo alla CI, linting, pipeline di verifica veloci, vincoli aziendali come i moduli Terraform standard; linter e script dove si può, skill dove serve giudizio.</p>
+          <p>I vincoli hanno due nature: alcuni sono <strong>deterministici</strong> (linter, script, controlli che non discutono), altri no e vivono nelle <strong>skill</strong> — verifica per backend, frontend, infrastruttura. La regola è in figura: usare il deterministico ogni volta che si può, e delegare al giudizio solo il resto.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 04 · ANELLI NELL'IO ============ -->
+      <section class="slide" data-title="Anelli nell'IO" data-section="Prima e dopo" data-slug="dopo">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Anelli nell'IO</h2>
+            <p class="lead">Sistemi automatici — loop o grafi di <strong>agenti verificatori</strong> — che controllano una cosa sola: il risultato rispetta l'intento?</p>
+          </div>
+          <div class="scontent">
+            <div class="fig" style="max-width:1000px">
+              <svg viewBox="0 0 1000 300" aria-label="L'anello completo: intento, requisiti non funzionali, design della soluzione, implementazione, agenti verificatori, esito">
+                <path class="st" pathLength="1" data-draw style="--dd:120ms" d="M 500 45 A 330 105 0 0 1 500 255 A 330 105 0 0 1 500 45 Z"/>
+                <circle class="node pop" style="--dd:780ms" cx="500" cy="45" r="7"/>
+                <circle class="node pop" style="--dd:840ms" cx="786" cy="98" r="7"/>
+                <circle class="node pop" style="--dd:900ms" cx="786" cy="202" r="7"/>
+                <circle class="node pop" style="--dd:960ms" cx="500" cy="255" r="7"/>
+                <circle class="node pop" style="--dd:1020ms" cx="214" cy="202" r="7"/>
+                <circle class="node-acc pop" style="--dd:1080ms" cx="214" cy="98" r="7"/>
+                <text x="500" y="27" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1120ms">Intento · requisiti business</text>
+                <text x="816" y="102" text-anchor="start" class="lbl pop" style="--dd:1180ms">Requisiti non funzionali</text>
+                <text x="816" y="198" text-anchor="start" class="lbl lbl-ink pop" style="--dd:1240ms">Design della soluzione</text>
+                <text x="816" y="213" text-anchor="start" class="lbl pop" style="--dd:1300ms" font-size="10.5">· agent</text>
+                <text x="500" y="289" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1360ms">Implementazione · agent</text>
+                <text x="198" y="198" text-anchor="end" class="lbl pop" style="--dd:1420ms">Agenti verificatori</text>
+                <text x="198" y="213" text-anchor="end" class="lbl pop" style="--dd:1480ms" font-size="10.5">· loop e grafi</text>
+                <text x="198" y="102" text-anchor="end" class="lbl pop" style="--dd:1540ms">Esito · gate</text>
+                <text x="500" y="156" text-anchor="middle" class="lbl pop" style="--dd:1600ms">il risultato rispetta l'intento?</text>
+                <rect class="traverse" x="-5" y="-5" width="10" height="10" rx="2" fill="var(--accent)">
+                  <animateMotion dur="18s" repeatCount="indefinite" rotate="auto"
+                    path="M 500 45 A 330 105 0 0 1 500 255 A 330 105 0 0 1 500 45 Z"/>
+                </rect>
+              </svg>
+              <p class="figcap"><span class="anno">L'anello completo — intento e requisiti, design, implementazione, verifica: il giro che chiude il cerchio tra ciò che volevamo e ciò che è arrivato.</span></p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Anelli nell'IO.</strong> In figura c'è il ciclo intero, nell'ordine in cui accade: l'<strong>intento</strong> — requisiti di business e non funzionali — guida il <strong>design della soluzione</strong> e l'<strong>implementazione</strong>, due passi che oggi fanno gli agent. Poi entrano in scena i sistemi automatici: loop o grafi di agenti verificatori.</p>
+          <p>Non servono a «trovare bug»: servono a controllare che il risultato rispetti l'<strong>intento</strong>. La parola chiave è <em>sistema</em>: un gate che gira sempre, non un controllo eroico ogni tanto. Nota: questo vale dopo l'implementazione, ma lo stesso anello tornerà nella parte sugli eval — cambia il materiale, non la forma.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 05 · MEAT PROXY ============ -->
+      <section class="slide" data-title="Meat proxy" data-section="Il ruolo" data-slug="meat-proxy">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Meat proxy</h2>
+            <p class="lead">Cosa non fare: l'<strong>intermediario manuale</strong> tra l'agente e i suoi strumenti.</p>
+          </div>
+          <div class="scontent">
+            <div class="wtable" style="max-width:1020px">
+              <div class="wrow"><span class="w-name">Log<span class="w-sub">Copiati a mano, ora in chat</span></span><span class="w-right stat warn">Da correggere</span></div>
+              <div class="wrow"><span class="w-name">Comandi<span class="w-sub">Rilanciati a mano, uno per uno</span></span><span class="w-right stat warn">Da correggere</span></div>
+              <div class="wrow"><span class="w-name">Output<span class="w-sub">Incollati a mano, ritagliati a occhio</span></span><span class="w-right stat warn">Da correggere</span></div>
+            </div>
+            <p class="small" style="margin-top:22px">Così si continua a <strong>microgestire</strong>: solo con un agente al posto del collega.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Il meat proxy.</strong> Molti di noi usano gli agenti in modo inefficiente: passano ore a copiare log, rilanciare comandi, incollare output. In pratica fanno da intermediari manuali tra l'agente e gli strumenti di diagnostica o di esecuzione.</p>
+          <p>Il punto non è la colpa: è il <strong>segnale</strong>. Se stai facendo il ponte umano tra due macchine, stai microgestendo — solo con un agente al posto di un collega. Il rimedio non è «usare meglio il prompt»: è togliere il ponte, cioè dare all'agente accesso agli strumenti.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 06 · IL SETUP È IL LAVORO ============ -->
+      <section class="slide" data-title="Il setup è il lavoro" data-section="Il setup" data-slug="setup">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Il setup è il lavoro</h2>
+            <p class="lead">Skill scritte bene e ambiente organizzato sono un <strong>investimento</strong>: diventa <em>il lavoro</em>, non "un extra".</p>
+          </div>
+          <div class="scontent">
+            <div class="cols signal">
+              <div>
+                <div class="c-head">Strumenti spuntati<span>Sotto scadenza: si controlla tutto, a mano.</span></div>
+                <div class="c-row">
+                  <span class="c-mark" aria-hidden="true"><svg viewBox="0 0 17 17" fill="none" stroke="var(--bad)" stroke-width="1.8" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="7.2"/><line x1="5.9" y1="5.9" x2="11.1" y2="11.1"/><line x1="11.1" y1="5.9" x2="5.9" y2="11.1"/></svg></span>
+                  <span class="c-name">Controlli ogni passaggio</span>
+                  <span class="c-sub">perché non ti fidi</span>
+                </div>
+                <div class="c-row">
+                  <span class="c-mark" aria-hidden="true"><svg viewBox="0 0 17 17" fill="none" stroke="var(--bad)" stroke-width="1.8" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="7.2"/><line x1="5.9" y1="5.9" x2="11.1" y2="11.1"/><line x1="11.1" y1="5.9" x2="5.9" y2="11.1"/></svg></span>
+                  <span class="c-name">Rilanci tutto a mano</span>
+                  <span class="c-sub">come un ponte tra due macchine</span>
+                </div>
+                <div class="c-row">
+                  <span class="c-mark" aria-hidden="true"><svg viewBox="0 0 17 17" fill="none" stroke="var(--bad)" stroke-width="1.8" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="7.2"/><line x1="5.9" y1="5.9" x2="11.1" y2="11.1"/><line x1="11.1" y1="5.9" x2="5.9" y2="11.1"/></svg></span>
+                  <span class="c-name">Rileggi tutto il risultato</span>
+                  <span class="c-sub">il collo di bottiglia sei tu</span>
+                </div>
+              </div>
+              <div>
+                <div class="c-head">Strumenti affilati<span>Sotto scadenza: il processo scorre.</span></div>
+                <div class="c-row">
+                  <span class="c-mark" aria-hidden="true"><svg viewBox="0 0 17 17" fill="none" stroke="var(--ok)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="7.2"/><path d="M 5.2 8.8 L 7.6 11.2 L 11.9 6.4"/></svg></span>
+                  <span class="c-name">Skill chiare e brevi</span>
+                  <span class="c-sub">il ragionamento, non il minutaggio</span>
+                </div>
+                <div class="c-row">
+                  <span class="c-mark" aria-hidden="true"><svg viewBox="0 0 17 17" fill="none" stroke="var(--ok)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="7.2"/><path d="M 5.2 8.8 L 7.6 11.2 L 11.9 6.4"/></svg></span>
+                  <span class="c-name">Gate automatici</span>
+                  <span class="c-sub">il deterministico fa il primo passaggio</span>
+                </div>
+                <div class="c-row">
+                  <span class="c-mark" aria-hidden="true"><svg viewBox="0 0 17 17" fill="none" stroke="var(--ok)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="7.2"/><path d="M 5.2 8.8 L 7.6 11.2 L 11.9 6.4"/></svg></span>
+                  <span class="c-name">La revisione guarda l'intento</span>
+                  <span class="c-sub">non le virgole</span>
+                </div>
+              </div>
+            </div>
+            <p class="small" style="margin-top:24px">Le Skill codificano la conoscenza di dominio dei software engineer, ciò che un agent generalista non può possedere senza guida.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Il setup è il lavoro.</strong> La soluzione al meat proxy è investire nel setup: scrivere skill e organizzare l'ambiente. Se lavori sotto scadenza con strumenti spuntati, sei costretto a controllare ogni passaggio — e lo fai tu, a mano. I segni in figura sono lì per questo: rosso dove il processo pesa su di te, verde dove scorre.</p>
+          <p>Con strumenti automatici e skill chiare, il processo diventa fluido e veloce. La frase da lasciare alla sala: <strong>il setup non è overhead, è un investimento</strong> — e il momento in cui si salda o si sconta è esattamente la deadline.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 07 · OPERAI O COSTRUTTORI ============ -->
+      <section class="slide" data-title="Operai o costruttori" data-section="Costruttori" data-slug="costruttori">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Operai o costruttori</h2>
+            <p class="lead">Non siamo più gli operai della fabbrica: ne siamo i <strong>costruttori</strong>.</p>
+          </div>
+          <div class="scontent">
+            <div class="fig" style="max-width:1000px">
+              <svg viewBox="0 0 1000 300" aria-label="Lo scambio: correggere l'output o correggere la skill">
+                <line x1="30" y1="150" x2="330" y2="150" class="st" pathLength="1" data-draw style="--dd:100ms"/>
+                <circle class="node pop" style="--dd:520ms" cx="345" cy="150" r="10"/>
+                <line x1="345" y1="150" x2="382" y2="188" class="st-acc pop" style="--dd:560ms" stroke-linecap="round" stroke-width="3"/>
+                <path class="st-dim" stroke-dasharray="8 9" pathLength="1" data-draw style="--dd:640ms" d="M 340 148 Q 560 148 640 74 T 780 56"/>
+                <path class="st" pathLength="1" data-draw style="--dd:1000ms" d="M 350 152 Q 560 152 640 210 T 780 244"/>
+                <g class="pop" style="--dd:1500ms" stroke="var(--bad)" stroke-width="2.5">
+                  <line x1="784" y1="42" x2="806" y2="64"/>
+                  <line x1="806" y1="42" x2="784" y2="64"/>
+                </g>
+                <text x="818" y="60" class="lbl pop" style="--dd:1550ms">Correggere l'output</text>
+                <circle class="node-ok pop" style="--dd:1500ms" cx="790" cy="244" r="7"/>
+                <text x="806" y="248" class="lbl lbl-ink pop" style="--dd:1550ms">Correggere la skill</text>
+                <text x="30" y="136" class="lbl lbl-ink pop" style="--dd:520ms">Risultato sbagliato</text>
+                <text x="345" y="196" class="lbl pop" style="--dd:600ms" fill="var(--accent-ink)">lo scambio</text>
+              </svg>
+              <p class="figcap"><span class="anno">Lo scambio — dove si applica la correzione: sul caso singolo o sull'ambiente che lo produce.</span></p>
+            </div>
+            <p class="lead" style="margin-top:26px">Quando un risultato è sbagliato, non si corregge il risultato, ma <strong>l'ambiente che l'ha prodotto</strong>.<br> Ovvero le skill.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Il cambio di mentalità più importante.</strong> Non siamo più gli operai della fabbrica: ne siamo i costruttori. La conseguenza pratica è lo scambio in figura: quando un risultato è sbagliato, la correzione non va sul risultato — va sull'<strong>ambiente</strong> che l'ha prodotto: la skill, il vincolo, il passaggio mancante.</p>
+          <p>Questa è la differenza tra rattoppare e costruire: la prima correzione fa passare il caso singolo, la seconda sistema lo scambio per tutti i casi successivi.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 08 · LA SKILL CAMBIA FORMA ============ -->
+      <section class="slide" data-title="La skill cambia forma" data-section="Costruttori" data-slug="skill-forma">
+        <div class="sbody">
+          <div class="shead">
+            <h2>La skill cambia forma</h2>
+            <p class="lead">Una skill raccoglie in forma sintetica il <strong>ragionamento</strong> e la <strong>competenza di dominio</strong> del software engineer.</p>
+          </div>
+          <div class="scontent">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) 378px;gap:48px;align-items:start">
+              <div>
+                <div class="cols" style="gap:48px">
+                  <div>
+                    <div class="c-head">Prima<span>Istruzioni minuziose, comandi rigidi.</span></div>
+                    <div style="padding:18px 0 6px" aria-hidden="true">
+                      <div style="height:3px;border-radius:2px;background:#dfe3eb;margin:0 0 10px;width:97%"></div>
+                      <div style="height:3px;border-radius:2px;background:#dfe3eb;margin:0 0 10px;width:92%"></div>
+                      <div style="height:3px;border-radius:2px;background:#dfe3eb;margin:0 0 10px;width:95%"></div>
+                      <div style="height:3px;border-radius:2px;background:#dfe3eb;margin:0 0 10px;width:88%"></div>
+                      <div style="height:3px;border-radius:2px;background:#dfe3eb;margin:0 0 10px;width:96%"></div>
+                      <div style="height:3px;border-radius:2px;background:#dfe3eb;margin:0 0 10px;width:93%"></div>
+                      <div style="height:3px;border-radius:2px;background:#dfe3eb;margin:0 0 10px;width:90%"></div>
+                      <div style="height:3px;border-radius:2px;background:#dfe3eb;margin:0 0 10px;width:94%"></div>
+                      <div style="height:3px;border-radius:2px;background:#dfe3eb;margin:0 0 10px;width:67%"></div>
+                    </div>
+                    <span class="mono">12 pagine di istruzioni</span>
+                  </div>
+                  <div>
+                    <div class="c-head">Ora<span>Più breve, stessa competenza.</span></div>
+                    <div style="padding:18px 0 8px;font-size:19px;font-weight:600;line-height:1.55;color:var(--ink)">
+                      Flusso di lavoro.<br>Passaggi logici.<br>All'agente i dettagli di esecuzione.
+                    </div>
+                    <span class="mono">3 righe</span>
+                  </div>
+                </div>
+                <p class="small" style="margin-top:28px">La skill non è il <strong>come si fa</strong>: descrive l'<strong>aspettativa dell'outcome</strong>. Il come lo mette l'agent.</p>
+              </div>
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">F</span><span><span class="q-name">Francesco</span><span class="q-handle">@frankdilo</span></span></div>
+                <p>Wipe all your skills and start from scratch.</p>
+                <p>With AI models getting so good, there is a lot of value in starting from scratch with your skills stack.</p>
+                <p>All the cruft in your CLAUDE.md and skill files accumulated over the years is actively harming smarter models.</p>
+                <p>This particularly applies if you create skills by directly prompting AI models and your skills are bloated and full of duplicated instructions and redundant guardrails.</p>
+              </figure>
+            </div>
+            <div class="wtable tight" style="max-width:1000px;margin-top:22px">
+              <div class="wrow">
+                <span class="w-name" style="font-size:16.5px">Colma un gap del modello</span>
+                <span class="w-right stat bad">Obsolescenza rapida</span>
+              </div>
+              <div class="wrow">
+                <span class="w-name" style="font-size:16.5px">Incorpora conoscenza specifica di dominio</span>
+                <span class="w-right stat ok">Vita lunga</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>La skill cambia forma.</strong> Una skill raccoglie sinteticamente il ragionamento e la competenza di dominio del software engineer. Con i modelli di oggi diventa più breve e cambia mestiere: non prescrive il <em>come</em>, descrive l'<strong>aspettativa dell'outcome</strong> — e il come lo mette l'agent.</p>
+          <p>Il contrasto in figura è voluto: prima dodici pagine di istruzioni minuziose, oggi tre righe di flusso. E non è pigrizia: come dice il post qui accanto, il cruft accumulato nei file di skill non aiuta i modelli più intelligenti — li danneggia. Una skill gonfia di istruzioni duplicate è essa stessa un problema da misurare.</p>
+          <p>E c'è un secondo asse: la <strong>durata</strong>. Le skill più soggette a obsolescenza sono quelle che servono a <strong>colmare un gap nella capacità dei modelli</strong>: quando il modello recupera quel gap, la skill smette di servire. Le più longeve sono quelle che <strong>incorporano conoscenza specifica di dominio</strong> — vincoli, vocabolario, regole che restano veri a prescindere dal modello. È lì che vale la pena investire.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 09 · LO STATO DELL'ARTE SI SPOSTA ============ -->
+      <section class="slide" data-title="Lo stato dell'arte si sposta · dax" data-section="Costruttori" data-slug="stato-arte">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Lo stato dell'arte si sposta</h2>
+          </div>
+          <div class="scontent">
+            <div class="tstack">
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">d</span><span><span class="q-name">dax</span><span class="q-handle">@thdxr</span></span></div>
+                <p>a weird inversion with LLMs is the models improve faster than the tinkerers</p>
+                <p>when i see people with <mark>custom workflows and setups</mark> they're all addressing <mark>problems that don't exist anymore</mark></p>
+                <p>the person naively using vanilla codex is more likely to be experiencing state of the art</p>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Il contro-argomento, messo in scena senza difese.</strong> Prompt engineering, Plan Mode, MCP, Spec Driven Development: ogni strato ha avuto il suo momento e oggi viene rimesso in discussione. Le stesse persone che fino a ieri costruivano harness e workflow dicono che quei livelli sono diventati peso. Farlo vedere è più onesto che far finta di niente.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 10 · LO STATO DELL'ARTE SI SPOSTA ============ -->
+      <section class="slide" data-title="Lo stato dell'arte si sposta · nader dabit" data-section="Costruttori" data-slug="stato-arte-2">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Lo stato dell'arte si sposta</h2>
+          </div>
+          <div class="scontent">
+            <div class="tstack">
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">d</span><span><span class="q-name">dax</span><span class="q-handle">@thdxr</span></span></div>
+                <p>a weird inversion with LLMs is the models improve faster than the tinkerers</p>
+                <p>when i see people with <mark>custom workflows and setups</mark> they're all addressing <mark>problems that don't exist anymore</mark></p>
+                <p>the person naively using vanilla codex is more likely to be experiencing state of the art</p>
+              </figure>
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">nd</span><span><span class="q-name">nader dabit</span><span class="q-handle">@dabit3</span></span></div>
+                <p>hard truth: most agent skills <mark>are not helping you</mark>, some are <mark>actively making things worse</mark>.</p>
+                <p>we as engineers like control, to feel important. admitting the model doesn't need us is uncomfortable. but if you're using a frontier harness + model, you only need good prompting</p>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>nader dabit, la voce più scomoda.</strong> La maggior parte delle skill non aiuta, alcune peggiorano attivamente i risultati. Con un modello di frontiera, dice, basta un buon prompting — il controllo che ci teniamo stretto è un'illusione. Da tenere: è una provocazione, non una verità rivelata.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 11 · LO STATO DELL'ARTE SI SPOSTA ============ -->
+      <section class="slide" data-title="Lo stato dell'arte si sposta · Nshen" data-section="Costruttori" data-slug="stato-arte-3">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Lo stato dell'arte si sposta</h2>
+          </div>
+          <div class="scontent">
+            <div class="tstack">
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">d</span><span><span class="q-name">dax</span><span class="q-handle">@thdxr</span></span></div>
+                <p>a weird inversion with LLMs is the models improve faster than the tinkerers</p>
+                <p>when i see people with <mark>custom workflows and setups</mark> they're all addressing <mark>problems that don't exist anymore</mark></p>
+                <p>the person naively using vanilla codex is more likely to be experiencing state of the art</p>
+              </figure>
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">nd</span><span><span class="q-name">nader dabit</span><span class="q-handle">@dabit3</span></span></div>
+                <p>hard truth: most agent skills <mark>are not helping you</mark>, some are <mark>actively making things worse</mark>.</p>
+                <p>we as engineers like control, to feel important. admitting the model doesn't need us is uncomfortable. but if you're using a frontier harness + model, you only need good prompting</p>
+              </figure>
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">N</span><span><span class="q-name">Nshen</span><span class="q-handle">@nshen121 · tradotto dal cinese</span></span></div>
+                <p>Yes, any so-called <mark>harness or skills framework or custom workflows</mark> or whatever on top of Claude code all turned into <mark>negative points over time</mark>. Now it's all been ripped out, and direct chatting is the most efficient.</p>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Nshen.</strong> Harness, framework di skill, workflow su misura: col tempo sono diventati punti negativi. Li ha tolti tutti, e dice che la chat diretta è la via più efficiente. Un'altra voce che smonta il setup da cui veniamo.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 12 · LO STATO DELL'ARTE SI SPOSTA ============ -->
+      <section class="slide" data-title="Lo stato dell'arte si sposta · Andrei Maxim" data-section="Costruttori" data-slug="stato-arte-4">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Lo stato dell'arte si sposta</h2>
+          </div>
+          <div class="scontent">
+            <div class="tstack">
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">d</span><span><span class="q-name">dax</span><span class="q-handle">@thdxr</span></span></div>
+                <p>a weird inversion with LLMs is the models improve faster than the tinkerers</p>
+                <p>when i see people with <mark>custom workflows and setups</mark> they're all addressing <mark>problems that don't exist anymore</mark></p>
+                <p>the person naively using vanilla codex is more likely to be experiencing state of the art</p>
+              </figure>
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">nd</span><span><span class="q-name">nader dabit</span><span class="q-handle">@dabit3</span></span></div>
+                <p>hard truth: most agent skills <mark>are not helping you</mark>, some are <mark>actively making things worse</mark>.</p>
+                <p>we as engineers like control, to feel important. admitting the model doesn't need us is uncomfortable. but if you're using a frontier harness + model, you only need good prompting</p>
+              </figure>
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">N</span><span><span class="q-name">Nshen</span><span class="q-handle">@nshen121 · tradotto dal cinese</span></span></div>
+                <p>Yes, any so-called <mark>harness or skills framework or custom workflows</mark> or whatever on top of Claude code all turned into <mark>negative points over time</mark>. Now it's all been ripped out, and direct chatting is the most efficient.</p>
+              </figure>
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">AM</span><span><span class="q-name">Andrei Maxim</span><span class="q-handle">@rockatanescu</span></span></div>
+                <p>I don't think <mark>writing a spec and splitting it into tickets</mark> is how you should use agents since Sol 5.6/Opus 5. Just tell the agent what you want to do and it will do it.</p>
+                <p>If the task is large, discuss with the agent how to split it in several shippable PRs and do it one at a time.</p>
+                <div class="q-embed"><b>mattpocock/skills v1.3 is out!</b> — /pr writes readable PR bodies with hard evidence; /implement-spec takes a spec and tickets and implements them …</div>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Andrei Maxim chiude il coro.</strong> Scrivere una spec e spacchettarla in ticket, dice, non è più il modo di usare gli agenti: si dice all'agente cosa fare, e per i lavori grandi si concordano più PR in sequenza.</p>
+          <p>La lettura giusta non è «allora smettiamo di costruire», né «difendiamo il nostro setup». È che lo stato dell'arte si sposta: quello che vale oggi domani può valere zero. L'unico antidoto è <strong>misurare</strong>.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 13 · LO STATO DELL'ARTE SI SPOSTA ============ -->
+      <section class="slide" data-title="Lo stato dell'arte si sposta · DHH" data-section="Costruttori" data-slug="stato-arte-5">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Lo stato dell'arte si sposta</h2>
+          </div>
+          <div class="scontent">
+            <div class="tstack">
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">d</span><span><span class="q-name">dax</span><span class="q-handle">@thdxr</span></span></div>
+                <p>a weird inversion with LLMs is the models improve faster than the tinkerers</p>
+                <p>when i see people with <mark>custom workflows and setups</mark> they're all addressing <mark>problems that don't exist anymore</mark></p>
+                <p>the person naively using vanilla codex is more likely to be experiencing state of the art</p>
+              </figure>
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">nd</span><span><span class="q-name">nader dabit</span><span class="q-handle">@dabit3</span></span></div>
+                <p>hard truth: most agent skills <mark>are not helping you</mark>, some are <mark>actively making things worse</mark>.</p>
+                <p>we as engineers like control, to feel important. admitting the model doesn't need us is uncomfortable. but if you're using a frontier harness + model, you only need good prompting</p>
+              </figure>
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">N</span><span><span class="q-name">Nshen</span><span class="q-handle">@nshen121 · tradotto dal cinese</span></span></div>
+                <p>Yes, any so-called <mark>harness or skills framework or custom workflows</mark> or whatever on top of Claude code all turned into <mark>negative points over time</mark>. Now it's all been ripped out, and direct chatting is the most efficient.</p>
+              </figure>
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">AM</span><span><span class="q-name">Andrei Maxim</span><span class="q-handle">@rockatanescu</span></span></div>
+                <p>I don't think <mark>writing a spec and splitting it into tickets</mark> is how you should use agents since Sol 5.6/Opus 5. Just tell the agent what you want to do and it will do it.</p>
+                <p>If the task is large, discuss with the agent how to split it in several shippable PRs and do it one at a time.</p>
+                <div class="q-embed"><b>mattpocock/skills v1.3 is out!</b> — /pr writes readable PR bodies with hard evidence; /implement-spec takes a spec and tickets and implements them …</div>
+              </figure>
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">DH</span><span><span class="q-name">DHH</span><span class="q-handle">@dhh</span></span></div>
+                <p>People keep asking me for my setup. It's really just any harness, multiple agents concurrently, <mark>barely any skills</mark>, and using <mark>adversarial reviews</mark>. There's no magic sauce (or source!). The models are great out of the box.</p>
+              </figure>
+            </div>
+            <p class="small" style="margin-top:16px">Lo stato dell'arte si sposta in fretta: senza una misura, una skill invecchia <strong>senza avvisarti</strong>.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>DHH, una delle voci più influenti — e la più tranchant.</strong> Creatore di Rails, punto di riferimento per generazioni di sviluppatori: dice che il suo setup è «qualsiasi harness, più agenti in parallelo, quasi nessuna skill, e review avversariali». Nessuna pozione magica: i modelli sono già ottimi appena usciti dalla scatola.</p>
+          <p>È il vertice del coro, non un invito a smettere di costruire. La lettura è che <strong>lo stato dell'arte si sposta</strong>: quello che vale oggi domani può valere zero, e senza una misura una skill invecchia senza avvisarti. Da qui il talk entra nella parte che conta: <strong>gli eval</strong>.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 14 · DIVISORE: GLI EVAL ============ -->
+      <section class="slide" data-title="Gli eval" data-section="Gli eval" data-slug="eval">
+        <div class="sbody">
+          <div class="divider-main">
+            <h2 class="statement" style="max-width:none">Gli eval</h2>
+            <p class="lead" style="font-size:21px;max-width:52ch">I test delle skill, ovvero: come mi assicuro che il mio lavoro ha un impatto positivo?.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Il cuore del talk.</strong> Fin qui il racconto: dove si sposta il valore, cosa facciamo prima e dopo, gli errori da evitare, il cambio di mentalità. Ora la competenza: gli eval.</p>
+          <p>Promemoria per il relatore: rallentare. Da questa slide in poi ogni concetto ha bisogno di un respiro in più — la sala deve uscire sapendo scrivere un caso, non sapendo che «gli eval esistono».</p>
+        </aside>
+      </section>
+
+      <!-- ============ 15 · MEGLIO O PEGGIO ============ -->
+      <section class="slide" data-title="Meglio o peggio?" data-section="Gli eval" data-slug="domanda">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Meglio o peggio?</h2>
+            <p class="lead">Una skill è un artefatto che evolve. A ogni modifica, la domanda è questa.</p>
+          </div>
+          <div class="scontent">
+            <div class="wtable" style="max-width:1020px">
+              <div class="wrow"><span class="w-name">«Va meglio di prima»<span class="w-sub">Un'affermazione, non una prova.</span></span><span class="w-right stat warn">Non provato</span></div>
+              <div class="wrow"><span class="w-name">«Va peggio di prima»<span class="w-sub">Spesso se ne accorge l'utente.</span></span><span class="w-right stat warn">Non provato</span></div>
+            </div>
+            <p class="lead" style="margin-top:26px">Risposta: con lo stesso metodo che usiamo per il codice. <strong>I test.</strong> Per le skill si chiamano <strong>eval</strong>.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>La domanda di partenza.</strong> Una skill è un artefatto che evolve: la scrivi, la usi, la modifichi. Come si fa a sapere se una modifica la migliora o la peggiora? Oggi la risposta di default è l'impressione: «mi sembra meglio».</p>
+          <p>La risposta giusta è quella che diamo al codice da cinquant'anni: <strong>i test</strong>. Per le skill si chiamano eval. Stessa disciplina, artefatto diverso.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 16 · COM'È FATTO UN EVAL ============ -->
+      <section class="slide" data-title="Com'è fatto un eval" data-section="Gli eval" data-slug="anatomia">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Com'è fatto un eval</h2>
+            <p class="lead">Un caso di test versionato. <strong>Tre parti, niente di più.</strong></p>
+          </div>
+          <div class="scontent">
+            <div class="panel" style="max-width:1000px">
+              <div class="p-bar">
+                <span class="p-title">Caso di verifica</span>
+                <span class="stat ok">Validato</span>
+              </div>
+              <div class="p-body">
+                <div class="frow2"><span class="f-k">Prompt</span><span class="f-v">Quello che riceve l'agente <em>: l'input della prova.</em></span></div>
+                <div class="frow2"><span class="f-k">Risultato atteso</span><span class="f-v">Cosa deve succedere <em>: l'esito osservabile.</em></span></div>
+                <div class="frow2"><span class="f-k">Aspettative verificabili</span><span class="f-v">Controlli che passano o falliscono <em>: niente «sembra ok».</em></span></div>
+                <div class="frow2"><span class="f-k">Versione</span><span class="f-v"><span class="code">eval @1.0 · skill @v3</span></span></div>
+              </div>
+            </div>
+            <p class="small" style="margin-top:22px">Vive nel repository accanto alla skill: <strong>versionato, eseguito a ogni modifica</strong>.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Anatomia.</strong> Un eval è un caso di test versionato e contiene tre cose: un <strong>prompt</strong> (quello che riceve l'agente), un <strong>risultato atteso</strong> (cosa deve succedere) e un insieme di <strong>aspettative verificabili</strong> — controlli che possono passare o fallire, non giudizi a sentimento.</p>
+          <p>La parola chiave è <em>versionato</em>: l'eval è un artefatto del repository, accanto alla skill. Quando la skill cambia, il caso dice subito se il contratto regge ancora. L'esito è «validato», non «sembrava ok».</p>
+        </aside>
+      </section>
+
+      <!-- ============ 17 · IL FORMATO ============ -->
+      <section class="slide" data-title="Il formato" data-section="Gli eval" data-slug="formato">
+        <div class="sbody">
+          <div class="shead">
+            <h2 style="font-family:'Spline Sans Mono',ui-monospace,Menlo,monospace;font-size:34px;letter-spacing:-.01em">evals.json</h2>
+            <p class="lead">Il formato più diffuso per scrivere un eval. <strong>Non</strong> uno standard universale.</p>
+          </div>
+          <div class="scontent">
+            <div style="display:grid;grid-template-columns:392px minmax(0,1fr);gap:44px;align-items:start">
+              <div>
+                <div class="wtable" style="max-width:392px">
+                  <div class="wrow"><span class="mono">Formato più diffuso</span><span class="w-right w-name code">evals.json</span></div>
+                  <div class="wrow"><span class="mono">Dove è descritto</span><span class="w-right w-name code">agentskills.io</span></div>
+                  <div class="wrow"><span class="mono">Standard universale</span><span class="w-right w-name" style="color:var(--muted);font-weight:400">non esiste ancora</span></div>
+                </div>
+                <p class="small" style="margin-top:22px">Non aspettare lo standard: <strong>scrivi il primo caso con quello che c'è</strong>.</p>
+              </div>
+              <div class="snippet">
+                <div class="s-bar">
+                  <span class="s-title">Un caso, in chiaro</span>
+                  <span class="stat ok">Versionato</span>
+                </div>
+                <pre>{
+  <span class="k">"skill_name"</span>: <span class="v">"uc-engraver"</span>,
+  <span class="k">"evals"</span>: [
+    {
+      <span class="k">"id"</span>: <span class="v">0</span>,
+      <span class="k">"name"</span>: <span class="v">"create-complete-use-case"</span>,
+      <span class="k">"prompt"</span>: <span class="v">"Using the parent DR/SRS and its PRD,
+                 create UC-01 for selecting a saved card.
+                 Actor: \"Cittadino pagatore\". Write the child
+                 under use-cases/ and update the index."</span>,
+      <span class="k">"expected_output"</span>: <span class="v">"A complete UC-01 child document
+                 and a synchronized parent catalog row."</span>,
+      <span class="k">"expectations"</span>: [
+        <span class="v">"One child Markdown file under use-cases/."</span>,
+        <span class="v">"All required sections, entities by name,
+         typed errors by identifier."</span>,
+        <span class="v">"Exact actor name \"Cittadino pagatore\"."</span>,
+        <span class="v">"Parent catalog updated with ID, title and link."</span>
+      ],
+      <span class="k">"files"</span>: []
+    },
+    <span class="m">…</span>
+  ]
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Il formato, in chiaro.</strong> Oggi non esiste uno standard universale per gli eval. Il formato più diffuso è <strong>evals.json</strong>, descritto su agentskills.io. A sinistra la cornice, a destra il contenuto vero: <span class="code">skill_name</span>, e per ogni eval <span class="code">id</span>, <span class="code">name</span>, <span class="code">prompt</span>, <span class="code">expected_output</span>, <span class="code">expectations</span>, <span class="code">files</span>.</p>
+          <p>Il punto da lasciare: il formato è il contenitore, non la sostanza. Caso, atteso e aspettative restano gli stessi anche se domani cambia — e gli <span class="code">expectations</span> sono la parte che conta: controlli che passano o falliscono, non «sembra ok». Non c'è motivo di aspettare lo standard per partire.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 18 · LE SESSIONI INSEGNANO ============ -->
+      <section class="slide" data-title="Le sessioni insegnano" data-section="Gli eval" data-slug="sessioni">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Le sessioni insegnano</h2>
+            <p class="lead">Gli eval non bastano da soli: vanno uniti alle <strong>retrospettive delle sessioni passate</strong>.</p>
+          </div>
+          <div class="scontent">
+            <div class="fig" style="max-width:1000px">
+              <svg viewBox="0 0 1000 236" aria-label="Dalle sessioni reali ai nuovi casi di eval">
+                <line x1="90" y1="96" x2="910" y2="96" class="st" pathLength="1" data-draw style="--dd:100ms"/>
+                <circle class="node pop" style="--dd:620ms" cx="180" cy="96" r="7"/>
+                <circle class="node pop" style="--dd:700ms" cx="500" cy="96" r="7"/>
+                <circle class="node-acc pop" style="--dd:780ms" cx="820" cy="96" r="7"/>
+                <text x="180" y="80" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:840ms">Sessioni reali</text>
+                <text x="180" y="62" text-anchor="middle" class="lbl pop" style="--dd:900ms" font-size="10.5">dove ha funzionato, dove no</text>
+                <text x="500" y="80" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:960ms">Retrospettiva</text>
+                <text x="500" y="62" text-anchor="middle" class="lbl pop" style="--dd:1020ms" font-size="10.5">si rilegge il registro</text>
+                <text x="820" y="80" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1080ms">Nuovi casi di eval</text>
+                <text x="820" y="62" text-anchor="middle" class="lbl pop" style="--dd:1140ms" font-size="10.5">il prossimo controllo</text>
+                <path class="st-dim" stroke-dasharray="7 8" pathLength="1" data-draw style="--dd:1200ms" d="M 820 108 Q 510 224 216 108"/>
+                <path class="pop" style="--dd:1900ms" d="M 198 108 L 216 100 L 216 116 Z" fill="var(--fig-dim)"/>
+                <text x="500" y="204" text-anchor="middle" class="lbl pop" style="--dd:1950ms">i casi rientrano negli eval della skill</text>
+              </svg>
+            </div>
+            <p class="small" style="margin-top:16px">Le sessioni reali mostrano dove la skill ha funzionato e dove no: e da lì nascono i casi di eval <strong>che ancora non c'erano</strong>.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Gli eval non bastano da soli.</strong> Un eval è scritto da chi immagina i casi; le sessioni reali portano i casi che nessuno ha immaginato. Per questo il controllo tramite eval va unito alle <strong>retrospettive delle sessioni passate</strong>.</p>
+          <p>Il ciclo è questo: si rilegge il registro delle sessioni, si trova dove la skill ha funzionato e dove no, e da lì nascono <strong>nuovi casi di eval</strong>. Nota per chi ha scritto gli appunti: la frase lasciata a metà si chiude qui — le retrospettive servono a trovare nuovi casi.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 19 · HARBOR ============ -->
+      <section class="slide" data-title="Harbor" data-section="Gli eval" data-slug="harbor">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Harbor</h2>
+            <p class="lead">Per valutare i nostri eval abbiamo usato <strong>Harbor</strong>: framework open source per task di agenti in sandbox, dagli autori di <span class="code">terminal-bench</span>.</p>
+          </div>
+          <div class="scontent">
+            <div class="cols" style="gap:56px">
+              <div>
+                <div class="c-head">Cosa ci dà<span>Il motore sotto gli eval.</span></div>
+                <div class="c-row"><span class="c-name">Sandbox riproducibili</span><span class="c-sub">ogni caso gira in un ambiente isolato e ricostruibile</span></div>
+                <div class="c-row"><span class="c-name">Task e criteri standard</span><span class="c-sub">prompt, atteso e rubriche descritti allo stesso modo</span></div>
+                <div class="c-row"><span class="c-name">Esecuzioni in parallelo</span><span class="c-sub">molti casi insieme, con la traccia di ogni passo</span></div>
+                <div class="c-row"><span class="c-name">Confronto tra versioni</span><span class="c-sub">stessi casi, stesso ambiente: il delta ha senso</span></div>
+              </div>
+              <div>
+                <div class="c-head">Il wrapper di casa<span class="code" style="font-size:13px">harbor-bench</span></div>
+                <div class="c-row"><span class="c-name">Da <span class="code">evals.json</span> ai task</span><span class="c-sub">un comando genera task e configurazione dalla fonte unica</span></div>
+                <div class="c-row"><span class="c-name">Un comando per il confronto</span><span class="c-sub">base contro testa, sullo stesso set di casi</span></div>
+                <div class="c-row"><span class="c-name">Report del delta</span><span class="c-sub">punteggio, token, costo, passi, durata — per task</span></div>
+                <div class="c-row"><span class="c-name">Calibrato su GitHub Copilot</span><span class="c-sub">i task girano su Copilot CLI, senza configurazione a mano</span></div>
+              </div>
+            </div>
+            <div class="noteline">
+              <p class="small">Sviluppato da noi dentro <span class="code">pagopa/dx</span>: <span class="code">apps/harbor-bench</span>.</p>
+              <span class="anno">harborframework.com · github.com/pagopa/dx</span>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Il motore.</strong> Harbor è il framework open source per specificare task di agenti in sandbox ed eseguirli in modo riproducibile; nasce dagli autori di terminal-bench. Ci dà ambienti isolati, task e criteri in un formato standard, esecuzioni in parallelo e tracce leggibili. Il valore per noi è il <strong>confronto</strong>: stessi casi, stesso ambiente, quindi il delta ha senso.</p>
+          <p><strong>Il wrapper di casa.</strong> Su Harbor abbiamo costruito <span class="code">harbor-bench</span>, dentro pagopa/dx: <span class="code">convert</span> trasforma evals.json in task, <span class="code">compare</span> lancia base e testa, <span class="code">report</span> produce il delta per task — punteggio, token, costo, passi, durata. La fonte resta una sola, evals.json; i risultati non si sovrascrivono.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 20 · GENERATOR E JUDGE ============ -->
+      <section class="slide" data-title="Generator e judge" data-section="Gli eval" data-slug="generator-judge">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Generator e judge</h2>
+            <p class="lead">La PoC interna di skill self-improvement: <strong>due sessioni, mai una</strong>.</p>
+          </div>
+          <div class="scontent">
+            <div style="display:grid;grid-template-columns:1fr 104px 1fr;align-items:center;gap:0">
+              <div class="panel">
+                <div class="p-bar"><span class="p-title">Sessione generator</span><span class="stat ok">Esegue</span></div>
+                <div class="p-body" style="padding-top:2px;padding-bottom:6px">
+                  <div class="wrow" style="padding:12px 0"><span class="w-name" style="font-size:16.5px">Carica la skill<span class="w-sub">Il contesto è il suo.</span></span></div>
+                  <div class="wrow" style="padding:12px 0"><span class="w-name" style="font-size:16.5px">Esegue il compito<span class="w-sub">Produce un risultato.</span></span></div>
+                </div>
+              </div>
+              <div style="text-align:center">
+                <svg viewBox="0 0 104 30" class="fig" aria-hidden="true" style="width:104px;margin:0 auto">
+                  <line x1="4" y1="15" x2="78" y2="15" class="st-dim" stroke-dasharray="6 7" pathLength="1" data-draw style="--dd:200ms"/>
+                  <path class="pop" style="--dd:700ms" d="M 76 7 L 96 15 L 76 23 Z" fill="var(--fig-dim)"/>
+                </svg>
+                <div class="anno" style="margin-top:4px;text-transform:none;letter-spacing:.02em;font-size:11.5px">risultato</div>
+              </div>
+              <div class="panel">
+                <div class="p-bar"><span class="p-title">Sessione judge</span><span class="stat ok">Valuta</span></div>
+                <div class="p-body" style="padding-top:2px;padding-bottom:6px">
+                  <div class="wrow" style="padding:12px 0"><span class="w-name" style="font-size:16.5px">Legge risultato e intento<span class="w-sub">Contesto separato.</span></span></div>
+                  <div class="wrow" style="padding:12px 0"><span class="w-name" style="font-size:16.5px">Giudica, non esegue<span class="w-sub">Verdetto motivato.</span></span></div>
+                </div>
+              </div>
+            </div>
+            <div class="wtable tight" style="max-width:1000px;margin-top:26px">
+              <div class="wrow">
+                <span class="w-name" style="font-size:17px">Criteri deterministici<span class="w-sub">File, sezioni, formato, ID: pass o fail, senza interpretazione.</span></span>
+                <span class="w-right mono">script</span>
+              </div>
+              <div class="wrow">
+                <span class="w-name" style="font-size:17px">Criteri di giudizio<span class="w-sub">Qualità semantica e aderenza all'intento: criteri espliciti e verdetto motivato.</span></span>
+                <span class="w-right mono">LLM as judge</span>
+              </div>
+            </div>
+            <div class="noteline">
+              <p class="small">Chi esegue non giudica: il giudice è una sessione a parte, con il suo contesto.</p>
+              <span class="anno">schema illustrativo · PoC interna</span>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Esempio uno: generator e judge.</strong> La PoC interna di skill self-improvement: una <strong>sessione generator</strong> esegue la skill e produce un risultato; una <strong>sessione judge separata</strong> valuta il risultato rispetto all'intento.</p>
+          <p>Importante: i criteri non sono tutti uguali. Quelli <strong>deterministici</strong> li controlla uno script — il file esiste, le sezioni ci sono, il formato e gli ID tornano: pass o fail, senza interpretazione. Quelli che richiedono <strong>giudizio</strong> — qualità semantica, aderenza all'intento — li valuta un <strong>LLM as judge</strong>, con criteri espliciti e un verdetto motivato. Il judge non è un oracolo: è un secondo paio d'occhi con una rubrica.</p>
+          <p>Perché le sessioni sono separate? Perché chi esegue si compiace: rileggere il proprio output con lo stesso contesto è auto-valutazione, e l'auto-valutazione perdona. Il giudice separato no — vede solo risultato e criteri.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 21 · BANCO DI PROVA ============ -->
+      <section class="slide" data-title="Banco di prova" data-section="Gli eval" data-slug="banco">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Banco di prova</h2>
+            <p class="lead">Un wrapper esegue gli eval in sandbox e confronta <strong>due versioni della stessa skill</strong>.</p>
+          </div>
+          <div class="scontent">
+            <div class="wtable tight" style="max-width:1040px">
+              <div class="wrow" style="grid-template-columns:1fr 150px 150px;padding:9px 0">
+                <span class="mono">Dimensione</span><span class="w-right mono">v1</span><span class="w-right mono">v2</span>
+              </div>
+              <div class="wrow" style="grid-template-columns:1fr 150px 150px"><span class="w-name" style="font-size:16.5px">Struttura e formato dell'output<span class="w-sub">sezioni, campi e ordine come da contratto</span></span><span class="w-right stat ok">Pass</span><span class="w-right stat ok">Pass</span></div>
+              <div class="wrow" style="grid-template-columns:1fr 150px 150px"><span class="w-name" style="font-size:16.5px">Vocabolario di dominio<span class="w-sub">attori ed entità con i nomi esatti, non sinonimi</span></span><span class="w-right stat bad">Fail</span><span class="w-right stat ok">Pass</span></div>
+              <div class="wrow" style="grid-template-columns:1fr 150px 150px"><span class="w-name" style="font-size:16.5px">Completezza e tracciabilità<span class="w-sub">nessun blocco mancante; link a API, design, fonti</span></span><span class="w-right stat bad">Fail</span><span class="w-right stat ok">Pass</span></div>
+              <div class="wrow" style="grid-template-columns:1fr 150px 150px"><span class="w-name" style="font-size:16.5px">Input mancante o vuoto<span class="w-sub">chiede o degrada; non inventa</span></span><span class="w-right stat bad">Fail</span><span class="w-right stat ok">Pass</span></div>
+              <div class="wrow" style="grid-template-columns:1fr 150px 150px"><span class="w-name" style="font-size:16.5px">Errore gestito<span class="w-sub">segnalato come previsto, non silenziato</span></span><span class="w-right stat bad">Fail</span><span class="w-right stat ok">Pass</span></div>
+            </div>
+            <div class="noteline" style="margin-top:0">
+              <p class="small" style="padding-top:14px">La domanda non è «funziona?»: è <strong>«funziona meglio di prima?»</strong>.</p>
+              <span class="stat ok">v2 promossa</span>
+            </div>
+            <p class="anno" style="margin-top:10px;text-transform:none;letter-spacing:.03em">Esiti illustrativi · stessi casi per v1 e v2 · wrapper interno</p>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Esempio due: il banco di prova.</strong> Un wrapper di benchmark che esegue gli eval in sandbox e confronta due versioni della stessa skill: la v1 e la v2, sugli stessi casi, nello stesso ambiente. Le dimensioni sono dichiarate una per una — struttura e formato, vocabolario di dominio, completezza, input vuoto, errori — così il confronto non si nasconde dietro un punteggio unico.</p>
+          <p>Il valore non è il punteggio: è il <strong>confronto</strong>. «Funziona?» lo sapevamo già. La domanda nuova è «funziona <em>meglio di prima</em>?» — e in sandbox la risposta è riproducibile. Se un caso peggiora, si vede prima dell'utente.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 22 · PER PROVARE ============ -->
+      <section class="slide" data-title="Per Provare" data-section="Chiusura" data-slug="provatelo">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Per Provare</h2>
+            <p class="lead">Due comandi per confrontare una skill modificata localmente con quella su git.</p>
+          </div>
+          <div class="scontent">
+            <div class="snippet cmd">
+              <div class="s-bar"><span class="s-title">Installa</span><span class="anno">01</span></div>
+              <pre>
+mise use uv
+uv tool install "git+https://github.com/pagopa/dx@main#subdirectory=apps/harbor-bench"
+</pre>
+            </div>
+            <div class="snippet cmd" style="margin-top:16px">
+              <div class="s-bar"><span class="s-title">Confronta</span><span class="anno">02</span></div>
+              <pre>COPILOT_GITHUB_TOKEN=$(gh auth token) harbor-bench compare \
+  https://github.com/pagopa/dx/tree/main/plugins/aiepdf/skills/dr-blacksmith \                
+  plugins/aiepdf/skills/dr-blacksmith -t 'dr-blacksmith-*-intake-*' --format html</pre>
+            </div>
+            <div class="noteline" style="margin-top:14px">
+              <p class="small">Una skill, un caso, versionato: il confronto gira a ogni modifica.</p>
+              <span class="anno">report in runs/&lt;run-id&gt;/comparison.html</span>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Come si prova, in due comandi.</strong> Il banco è dentro <span class="code">pagopa/dx</span>, in <span class="code">apps/harbor-bench</span>: si installa come tool con <span class="code">uv</span> — niente virtualenv, niente configurazione a mano.</p>
+          <p>Il confronto è il secondo comando: la skill del workspace — qui <span class="code">dr-blacksmith</span> — contro la stessa skill presa da git, gli stessi casi selezionati con <span class="code">-t</span>, e il report del delta in HTML. Il token arriva da <span class="code">gh auth token</span>.</p>
+          <p>Da portare a casa: il primo confronto costa un comando, non un framework. Una skill, un caso, versionato, e ogni modifica passa da una misura invece che da un'impressione.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 23 · SKILLS ARE MOSTLY DEAD (chheplo) ============ -->
+      <section class="slide" data-title="Skills are mostly dead · chheplo" data-section="Chiusura" data-slug="skills-dead">
+        <div class="sbody">
+          <div class="shead">
+            <h2>"Skills are mostly dead"...</h2>
+          </div>
+          <div class="scontent">
+            <div class="tstack">
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">PD</span><span><span class="q-name">Pratik Desai</span><span class="q-handle">@chheplo</span></span></div>
+                <p><mark>Skills are mostly dead.</mark>. Custom skills that I created a while ago are actually <mark>working against the new models</mark> and burning either more tokens, or generating subpar results.</p>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Chiusura, con la voce di fuori.</strong> Pratik Desai — «Skills are mostly dead» — dice che le skill che aveva scritto tempo fa ora <em>lavorano contro</em> i modelli nuovi: più token, risultati peggiori. È la tesi del talk che torna dall'esterno: ciò che era valido ieri è oggi possibile sia già obsoleto, e una skill che nessuno verifica invecchia senza avvisarti.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 24 · SKILLS ARE MOSTLY DEAD (mattpocock) ============ -->
+      <section class="slide" data-title="Skills are mostly dead · mattpocock" data-section="Chiusura" data-slug="skills-dead-2">
+        <div class="sbody">
+          <div class="shead">
+            <h2>...o no?</h2>
+          </div>
+          <div class="scontent">
+            <div class="tstack" style="height:270px">
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">PD</span><span><span class="q-name">Pratik Desai</span><span class="q-handle">@chheplo</span></span></div>
+                <p><mark>Skills are mostly dead</mark>. Custom skills that I created a while ago are actually <mark>working against the new models</mark> and burning either more tokens, or generating subpar results.</p>
+              </figure>
+              <figure class="quote">
+                <div class="q-who"><span class="q-av">MP</span><span><span class="q-name">Matt Pocock</span><span class="q-handle">@mattpocockuk</span></span></div>
+                <p>“Models are getting better, we don't need skills!”</p>
+                <p>What if I told you that models are <mark>also getting better at <em>using</em> skills</mark>?</p>
+                <p>Good skills tell the model <mark>what you care about</mark>, then stay out of its way.</p>
+                <div class="q-meta">3:23 PM · Oct 8, 2026 · 15.8K Views</div>
+              </figure>
+            </div>
+            <p class="statement" style="margin-top:4px">Domande?</p>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Skills are mostly dead, ma non è la fine della storia.</strong> Pratik Desai dice che le skill scritte tempo fa ora lavorano contro i modelli nuovi: più token, risultati peggiori. Matt Pocock, dallo stesso filone, sposta però il bersaglio: i modelli non stanno solo migliorando <em>senza</em> le skill — stanno migliorando anche <em>nell'usarle</em>. Una buona skill non prescrive il come: dice al modello cosa ti interessa, e poi si toglie di mezzo.</p>
+          <p>L'appello resta quello, anche se non è più scritto in slide: <strong>una skill, un caso, versionato, che gira a ogni modifica</strong>. Non serve un framework: serve il primo caso scritto. Il resto è manutenzione. Poi grazie e domande.</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <footer class="hud" id="hud">
+      <div class="l">
+        <span class="brand">Agent SKILL</span>
+        <span>·</span>
+        <span id="hudSec">Apertura</span>
+      </div>
+      <div class="ticks" id="hudTicks" role="navigation" aria-label="Vai alla slide"></div>
+      <div class="r">
+        <span class="timer" id="hudTimer" hidden>T 00:00</span>
+        <span class="num"><b id="hudCur">01</b>&nbsp;/&nbsp;<span id="hudTot">18</span></span>
+        <span class="keys">P relatore · O indice · ? tasti</span>
+      </div>
+    </footer>
+
+    <aside class="notes-drawer" id="notesDrawer" aria-hidden="true">
+      <div class="nd-head">
+        <span>Note — <b id="ndNum">01</b></span>
+        <span>N per chiudere</span>
+      </div>
+      <div class="nd-body" id="notesBody"></div>
+    </aside>
+
+    <div class="overlay" id="overview" role="dialog" aria-label="Indice delle sezioni">
+      <div class="ov-head">
+        <span class="ov-title">Indice</span>
+        <span class="ov-sub">O o Esc per chiudere · ← → per navigare</span>
+      </div>
+      <div class="ov-list" id="ovList"></div>
+    </div>
+
+    <div class="overlay" id="help" role="dialog" aria-label="Tasti">
+      <div class="ov-head">
+        <span class="ov-title">Tasti</span>
+        <span class="ov-sub">Esc per chiudere</span>
+      </div>
+      <div class="help-grid" id="helpGrid">
+        <div class="help-row"><span class="k"><kbd>←</kbd><kbd>→</kbd><kbd>Spazio</kbd></span><span class="v">slide avanti e indietro</span></div>
+        <div class="help-row"><span class="k"><kbd>P</kbd></span><span class="v">finestra del relatore — note, anteprima, prossima slide, timer</span></div>
+        <div class="help-row"><span class="k"><kbd>O</kbd></span><span class="v">indice delle sezioni</span></div>
+        <div class="help-row"><span class="k"><kbd>F</kbd></span><span class="v">schermo intero</span></div>
+        <div class="help-row"><span class="k"><kbd>1</kbd>…<kbd>9</kbd></span><span class="v">salta alla slide</span></div>
+        <div class="help-row"><span class="k"><kbd>T</kbd><kbd>R</kbd></span><span class="v">timer — avvia, riazzera</span></div>
+        <div class="help-row"><span class="k"><kbd>B</kbd></span><span class="v">sipario (schermo nero)</span></div>
+        <div class="help-row"><span class="k"><kbd>?</kbd></span><span class="v">questo pannello</span></div>
+      </div>
+    </div>
+
+    <div class="blackout" id="blackout" aria-hidden="true"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   Agent SKILL — runtime
+   ============================================================ */
+(function(){
+  'use strict';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('canvas');
+  const deckEl = document.getElementById('deck');
+  const slides = Array.from(deckEl.querySelectorAll('.slide'));
+  const N = slides.length;
+
+  /* ---------- scale stage ---------- */
+  function fit(){
+    const s = Math.min(innerWidth / 1280, innerHeight / 720);
+    canvas.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+  }
+  addEventListener('resize', fit); fit();
+
+  function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  /* ---------- deck state ---------- */
+  let cur = -1;
+  const hudSec = document.getElementById('hudSec');
+  const hudCur = document.getElementById('hudCur');
+  const hudTot = document.getElementById('hudTot');
+  const ticksBox = document.getElementById('hudTicks');
+  const notesBody = document.getElementById('notesBody');
+  const ndNum = document.getElementById('ndNum');
+  hudTot.textContent = String(N).padStart(2,'0');
+
+  slides.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.title = (s.dataset.title || '') + ' — slide ' + (i+1);
+    b.setAttribute('aria-label', 'Vai alla slide ' + (i+1) + ': ' + (s.dataset.title || ''));
+    b.addEventListener('click', () => go(i));
+    ticksBox.appendChild(b);
+  });
+
+  function slug(s,i){ return (s.dataset.slug || String(i+1)); }
+
+  function go(n, opts){
+    n = Math.max(0, Math.min(N-1, n));
+    if (n === cur && !(opts && opts.force)) return;
+    const prev = slides[cur];
+    if (prev) prev.classList.remove('active');
+    cur = n;
+    const s = slides[cur];
+    s.classList.add('active');
+    hudSec.textContent = s.dataset.section || '';
+    hudCur.textContent = String(cur+1).padStart(2,'0');
+    const notes = s.querySelector('.notes');
+    notesBody.innerHTML = notes ? notes.innerHTML : '<p>—</p>';
+    ndNum.textContent = String(cur+1).padStart(2,'0');
+    Array.from(ticksBox.children).forEach((b,i)=>{ b.className = i===cur?'cur':(i<cur?'past':''); });
+    document.querySelectorAll('#ovList .ov-row').forEach((r,i)=>r.classList.toggle('cur', i===cur));
+    if (!(opts && opts.silent)) location.hash = slug(s, cur);
+    requestAnimationFrame(()=>document.getElementById('notesDrawer').setAttribute('aria-hidden', document.body.classList.contains('nd-open') ? 'false':'true'));
+    renderPresenter();
+  }
+
+  /* ---------- overview ---------- */
+  const ovList = document.getElementById('ovList');
+  slides.forEach((s,i) => {
+    const r = document.createElement('button');
+    r.type = 'button'; r.className = 'ov-row';
+    r.innerHTML = '<span class="n">'+String(i+1).padStart(2,'0')+'</span><span class="t">'+escapeHtml(s.dataset.title||'')+'</span><span class="s">'+escapeHtml(s.dataset.section||'')+'</span>';
+    r.addEventListener('click', () => { closeAll(); go(i); });
+    ovList.appendChild(r);
+  });
+
+  /* ---------- overlays ---------- */
+  const overview = document.getElementById('overview');
+  const help = document.getElementById('help');
+  const blackout = document.getElementById('blackout');
+  function closeAll(){
+    overview.classList.remove('open'); help.classList.remove('open');
+    document.body.classList.remove('nd-open');
+  }
+  function toggle(el){ const o = el.classList.contains('open'); closeAll(); if(!o) el.classList.add('open'); }
+
+  /* ---------- timer ---------- */
+  const timerEl = document.getElementById('hudTimer');
+  let tStart = 0, tAcc = 0, tOn = false, tInt = 0;
+  function fmt(ms){
+    const s = Math.floor(ms/1000), m = Math.floor(s/60);
+    return String(m).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+  }
+  function tPaint(){ timerEl.textContent = 'T ' + fmt(tAcc + (tOn ? Date.now()-tStart : 0)); renderPresenter(); }
+  function tToggle(){
+    tOn = !tOn; timerEl.hidden = false;
+    if (tOn){ tStart = Date.now(); tInt = setInterval(tPaint, 1000); }
+    else { tAcc += Date.now()-tStart; clearInterval(tInt); }
+    tPaint();
+  }
+  function tReset(){ tOn=false; tAcc=0; clearInterval(tInt); timerEl.hidden = true; renderPresenter(); }
+
+  /* ---------- keyboard ---------- */
+  let lastKey = '', lastKeyAt = 0;
+  addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
+    const now = performance.now();
+    if (e.key === lastKey && now - lastKeyAt < 200) return;
+    lastKey = e.key; lastKeyAt = now;
+    switch (e.key){
+      case 'ArrowRight': case 'PageDown': case ' ': e.preventDefault(); go(cur+1); break;
+      case 'ArrowLeft': case 'PageUp': e.preventDefault(); go(cur-1); break;
+      case 'Home': e.preventDefault(); go(0); break;
+      case 'End': e.preventDefault(); go(N-1); break;
+      case 'n': case 'N': document.body.classList.toggle('nd-open'); break;
+      case 'p': case 'P': openPresenter(); break;
+      case 'o': case 'O': toggle(overview); break;
+      case '?': case 'h': case 'H': toggle(help); break;
+      case 'f': case 'F':
+        if (document.fullscreenElement) document.exitFullscreen();
+        else document.documentElement.requestFullscreen?.();
+        break;
+      case 't': case 'T': tToggle(); break;
+      case 'r': case 'R': tReset(); break;
+      case 'b': case 'B': blackout.classList.toggle('on'); break;
+      case 'Escape': blackout.classList.remove('on'); closeAll(); break;
+      default:
+        if (/^[1-9]$/.test(e.key)) go(parseInt(e.key,10)-1);
+    }
+  });
+  blackout.addEventListener('click', () => blackout.classList.remove('on'));
+
+  /* ---------- touch ---------- */
+  let tx = 0;
+  addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 48) go(cur + (dx < 0 ? 1 : -1));
+  }, {passive:true});
+
+  /* ---------- presenter window ---------- */
+  let pwin = null;
+  function fsState(){
+    const s = slides[cur];
+    const nx = slides[Math.min(N-1, cur+1)];
+    const notes = s.querySelector('.notes');
+    return {
+      i: cur, total: N,
+      title: s.dataset.title || '', section: s.dataset.section || '',
+      nextTitle: cur < N-1 ? (nx.dataset.title || '') : 'fine',
+      notes: notes ? notes.innerHTML : '<p>—</p>',
+      elapsed: tAcc + (tOn ? Date.now()-tStart : 0),
+      running: tOn
+    };
+  }
+  function renderPresenter(){
+    if (!pwin) return;
+    if (pwin.closed){ pwin = null; return; }
+    try { pwin.fsRender(fsState()); } catch(e){}
+  }
+  const P_CSS = `
+html,body{height:100%}
+.pv{margin:0;height:100vh;display:flex;flex-direction:column;background:#e9eaec;color:#14161a;font-family:"Titillium Web","Helvetica Neue",Arial,sans-serif;overflow:hidden}
+.pv-top{display:flex;align-items:baseline;gap:12px;padding:11px 20px;background:#fbfbfa;border-bottom:1px solid #dfe3eb;font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#6b7079;white-space:nowrap}
+.pv-brand{color:#14161a;font-weight:600}
+.pv-timer{color:#007986;font-weight:600}
+.pv-num{color:#14161a;font-weight:600}
+.pv-grow{flex:1}
+.pv-run{color:#6b7079}
+.pv-main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,62fr) minmax(0,38fr);gap:16px;padding:16px}
+.pv-left{display:flex;flex-direction:column;gap:9px;min-width:0}
+.pv-frame{width:100%;max-width:620px;aspect-ratio:16/9;background:#fbfbfa;border:1px solid #dfe3eb;border-radius:10px;overflow:hidden;flex:none}
+.pv-stage{width:1280px;height:720px;position:relative;transform-origin:0 0}
+.pv-stage .slide{position:absolute;inset:0;opacity:1!important;visibility:visible!important;transition:none!important;padding:60px 72px 92px}
+.pv-stage .fig [data-draw]{stroke-dashoffset:0!important;animation:none!important}
+.pv-stage .fig .pop{opacity:1!important;animation:none!important}
+.pv-stage .traverse{display:none}
+.pv-stage .hud{display:none}
+.pv-next{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6b7079;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pv-next b{color:#14161a;font-weight:600;text-transform:none;letter-spacing:0}
+.pv-notes{background:#fff;border:1px solid #dfe3eb;border-radius:10px;display:flex;flex-direction:column;min-width:0}
+.pv-notes-head{display:flex;justify-content:space-between;gap:14px;padding:11px 18px;border-bottom:1px solid #e8ebf1;font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#6b7079}
+.pv-notes-head>span:first-child{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pv-notes-head>span:last-child{flex:none}
+.pv-notes-head b{color:#14161a;font-weight:600;text-transform:none;letter-spacing:0}
+.pv-notes-body{padding:14px 18px 20px;overflow:auto;font-size:14.5px;line-height:1.6;color:#4a4f57}
+.pv-notes-body p{margin:0 0 10px}
+.pv-notes-body strong{color:#14161a;font-weight:600}
+.pv-notes-body em{font-style:italic}
+.pv-foot{display:flex;align-items:center;gap:10px;padding:10px 20px;background:#fbfbfa;border-top:1px solid #dfe3eb}
+.pv-foot button{font:inherit;font-size:13px;padding:5px 12px;border:1px solid #dfe3eb;border-bottom-width:2px;border-radius:6px;background:#fff;color:#14161a;cursor:pointer}
+.pv-foot button:hover{background:#f5f6f8}
+.pv-hint{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.06em;color:#6b7079}`;
+  const P_BODY = `
+<header class="pv-top">
+  <span class="pv-brand">Agent SKILL</span><span>·</span><span id="pSec">—</span>
+  <span class="pv-grow"></span>
+  <span class="pv-timer" id="pTimer">T 00:00</span>
+  <span class="pv-run" id="pRun">fermo</span>
+  <span id="pClock">--:--</span>
+  <span class="pv-num" id="pNum">01 / 21</span>
+</header>
+<main class="pv-main">
+  <section class="pv-left">
+    <div class="pv-frame" id="pFrame"><div class="pv-stage" id="pPrev"></div></div>
+    <div class="pv-next">slide corrente · prossima: <b id="pNext">—</b></div>
+  </section>
+  <section class="pv-notes">
+    <div class="pv-notes-head"><span>Note · <b id="pTitle">—</b></span><span>finestra del relatore</span></div>
+    <div class="pv-notes-body" id="pNotes"></div>
+  </section>
+</main>
+<footer class="pv-foot">
+  <button type="button" id="bPrev">◀ indietro</button>
+  <button type="button" id="bNext">avanti ▶</button>
+  <span class="pv-grow"></span>
+  <span class="pv-hint">← → naviga · T timer · R reset</span>
+  <button type="button" id="bTimer">timer</button>
+  <button type="button" id="bReset">reset</button>
+</footer>`;
+  const P_JS = '(function(){'
+    + 'var doc=document;'
+    + 'function el(id){return doc.getElementById(id);}'
+    + 'function fmt(ms){var s=Math.floor(ms/1000),m=Math.floor(s/60);return ("0"+m).slice(-2)+":"+("0"+(s%60)).slice(-2);}'
+    + 'function cmd(name){try{if(window.opener) window.opener[name]();}catch(e){}}'
+    + 'var last=-1;'
+    + 'function render(st){'
+    + 'if(!st) return;'
+    + 'el("pSec").textContent=st.section;'
+    + 'el("pNum").textContent=("0"+(st.i+1)).slice(-2)+" / "+("0"+st.total).slice(-2);'
+    + 'el("pTitle").textContent=st.title;'
+    + 'el("pNext").textContent=st.nextTitle;'
+    + 'el("pNotes").innerHTML=st.notes;'
+    + 'el("pTimer").textContent="T "+fmt(st.elapsed);'
+    + 'el("pRun").textContent=st.running?"in corso":(st.elapsed>0?"in pausa":"fermo");'
+    + 'if(st.i!==last){last=st.i;try{var src=window.opener?window.opener.fsGetSlide():null;var box=el("pPrev");while(box.firstChild)box.removeChild(box.firstChild);if(src)box.appendChild(doc.importNode(src,true));}catch(e){el("pPrev").textContent="anteprima non disponibile";}}'
+    + '}'
+    + 'window.fsRender=render;'
+    + 'function fitPrev(){var f=el("pFrame");if(!f)return;var k=f.clientWidth/1280;el("pPrev").style.transform="scale("+k+")";}'
+    + 'addEventListener("resize",fitPrev);'
+    + 'el("bPrev").addEventListener("click",function(){cmd("fsNavBack");});'
+    + 'el("bNext").addEventListener("click",function(){cmd("fsNavFwd");});'
+    + 'el("bTimer").addEventListener("click",function(){cmd("fsTimerToggle");});'
+    + 'el("bReset").addEventListener("click",function(){cmd("fsTimerReset");});'
+    + 'addEventListener("keydown",function(e){'
+    + 'if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();cmd("fsNavFwd");}'
+    + 'else if(e.key==="ArrowLeft"){e.preventDefault();cmd("fsNavBack");}'
+    + 'else if(e.key==="t"||e.key==="T"){cmd("fsTimerToggle");}'
+    + 'else if(e.key==="r"||e.key==="R"){cmd("fsTimerReset");}'
+    + '});'
+    + 'function clock(){var d=new Date();el("pClock").textContent=("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);}'
+    + 'setInterval(clock,15000);clock();'
+    + 'fitPrev();'
+    + 'try{if(window.opener&&window.opener.fsState)render(window.opener.fsState());}catch(e){}'
+    + '})();';
+  function openPresenter(){
+    if (pwin && !pwin.closed){ pwin.focus(); return; }
+    const w = window.open('', 'fuoriscala-relatore', 'width=1180,height=820');
+    if (!w) return;
+    const deckCss = Array.from(document.querySelectorAll('style')).map(s => s.textContent).join('\n');
+    w.document.open();
+    w.document.write('<!doctype html><html lang="it"><head><meta charset="utf-8">'
+      + '<base href="' + document.baseURI + '">'
+      + '<title>Agent SKILL — finestra del relatore</title>'
+      + '<link rel="preconnect" href="https://fonts.googleapis.com">'
+      + '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+      + '<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">'
+      + '<style>' + deckCss + '</style>'
+      + '<style>' + P_CSS + '</style></head><body class="pv">'
+      + P_BODY
+      + '<scr' + 'ipt>' + P_JS + '</' + 'scr' + 'ipt></body></html>');
+    w.document.close();
+    pwin = w;
+    setTimeout(renderPresenter, 80);
+  }
+  window.fsState = fsState;
+  window.fsGetSlide = function(){
+    const node = slides[cur].cloneNode(true);
+    node.querySelectorAll('img').forEach(function(img){
+      const src = img.getAttribute('src');
+      if (src && src.indexOf('://') < 0 && src.indexOf('data:') !== 0){
+        try { img.src = new URL(src, document.baseURI).href; } catch(e){}
+      }
+    });
+    return node;
+  };
+  window.fsNavFwd = function(){ go(cur+1); };
+  window.fsNavBack = function(){ go(cur-1); };
+  window.fsTimerToggle = function(){ tToggle(); renderPresenter(); };
+  window.fsTimerReset = function(){ tReset(); renderPresenter(); };
+
+  /* ---------- boot ---------- */
+  const h = location.hash.replace('#','');
+  let start = 0;
+  if (h){
+    const num = parseInt(h,10);
+    if (!isNaN(num)) start = Math.max(0, Math.min(N-1, num-1));
+    else { const idx = slides.findIndex(s => s.dataset.slug === h); if (idx >= 0) start = idx; }
+  }
+  go(start, {silent: true});
+})();
+</script>
+</body>
+</html>
