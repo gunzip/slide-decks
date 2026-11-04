@@ -473,27 +473,29 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       </section>
 
       <!-- ============ 02 · LE MOTIVAZIONI ============ -->
-      <section class="slide" data-title="Due problemi reali" data-section="Il contesto" data-slug="due-problemi">
+      <section class="slide" data-title="Tre problemi reali" data-section="Il contesto" data-slug="tre-problemi">
         <div class="sbody">
           <div class="shead">
-            <h2>Due problemi che affrontiamo ogni giorno</h2>
+            <h2>Tre problemi che affrontiamo ogni giorno</h2>
             <p class="lead">Perché oggi è difficile mantenere allineati design e codice, e cosa serve per <strong>garantire qualità e velocità nel tempo</strong>.</p>
           </div>
           <div class="scontent">
             <div class="plan">
               <div class="p-row"><span class="p-n">01</span><span class="p-t">Figma e codice divergono nel silenzio<em>L'allineamento oggi è manuale: mancano collegamenti stabili tra i nodi Figma e i componenti React, con continue discrepanze visive.</em></span></div>
-              <div class="p-row"><span class="p-n">02</span><span class="p-t">Lo stack è fermo a ieri<em>mui-italia è legato a React 18 e al client rendering classico: non supporta i React Server Components (RSC) né le novità di React 19.</em></span></div>
+              <div class="p-row"><span class="p-n">02</span><span class="p-t">Stili imposti e lotta continua agli override<em>Con mui-italia dobbiamo adattarci a pattern esterni e i consumer combattono con override complessi. Il nuovo approccio è 100% nostro e personalizzabile a piacimento.</em></span></div>
+              <div class="p-row"><span class="p-n">03</span><span class="p-t">Lo stack è fermo a ieri<em>mui-italia è legato a React 18 e al client rendering classico: non supporta i React Server Components (RSC) né le novità di React 19.</em></span></div>
             </div>
             <div class="noteline">
-              <p class="small">L'obiettivo del POC: dimostrare che <strong>possiamo automatizzare il flusso</strong> con uno stack leggero e contemporaneo.</p>
+              <p class="small">L'obiettivo del POC: dimostrare che <strong>possiamo automatizzare il flusso</strong> con uno stack leggero, contemporaneo e interamente su misura.</p>
               <span class="anno">Architettura · 2026</span>
             </div>
           </div>
         </div>
         <aside class="notes">
-          <p><strong>I due nodi da sciogliere.</strong> Il primo problema è il disallineamento continuo: chi sviluppa riceve un link a Figma e cerca di riprodurlo a occhio. Nel giro di pochi mesi, design e codice prendono strade diverse.</p>
-          <p>Il secondo è architetturale: mui-italia è nato cinque anni fa. È vincolato a React 18 e non può sfruttare i React Server Components per abbattere il JavaScript inviato al browser.</p>
-          <p>Questo POC nasce per risolvere alla radice queste due frizioni, automatizzando il passaggio da Figma al codice e modernizzando le fondamenta tecnologiche.</p>
+          <p><strong>I tre nodi da sciogliere.</strong> Il primo problema è il disallineamento continuo: chi sviluppa riceve un link a Figma e cerca di riprodurlo a occhio. Nel giro di pochi mesi, design e codice prendono strade diverse.</p>
+          <p>Il secondo è la rigidità stilistica: mui-italia ci vincola ai canoni e ai pattern di Material UI. I consumer dei nostri componenti si ritrovano a combattere contro gli stili predefiniti a colpi di override fragili e complessi. Con il nuovo approccio abbiamo invece un sistema 100% nostro, pensato per le esigenze di PagoPA e personalizzabile a piacimento senza doversi adattare a librerie terze.</p>
+          <p>Il terzo è architetturale: mui-italia è nato cinque anni fa. È vincolato a React 18 e non può sfruttare i React Server Components per abbattere il JavaScript inviato al browser.</p>
+          <p>Questo POC nasce per risolvere alla radice queste tre frizioni: automazione continua da Figma, libertà stilistica totale e fondamenta tecnologiche moderne.</p>
         </aside>
       </section>
 
@@ -515,6 +517,11 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 </div>
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
+                  <span class="c-name">Stili imposti &amp; override</span>
+                  <span class="c-sub">I consumer devono combattere contro lo stile MUI con continui override.</span>
+                </div>
+                <div class="c-row">
+                  <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
                   <span class="c-name">Runtime CSS-in-JS</span>
                   <span class="c-sub">Emotion inietta stili via JS: bundle pesante e overhead sul browser.</span>
                 </div>
@@ -530,6 +537,11 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
                   <span class="c-name">353 nodi Figma tracciati</span>
                   <span class="c-sub">Ogni componente e variante ha un <span class="code">nodeId</span> sincronizzato da API.</span>
+                </div>
+                <div class="c-row">
+                  <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
+                  <span class="c-name">100% nostro e su misura</span>
+                  <span class="c-sub">Nessun vincolo da subire: componenti nostri e personalizzabili a piacimento.</span>
                 </div>
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
@@ -550,8 +562,8 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
         </div>
         <aside class="notes">
-          <p><strong>Cosa cambia nella pratica.</strong> Con mui-italia, se un designer cambia un padding su Figma, lo sviluppatore deve accorgersene, modificare il tema TypeScript a mano e sperare che non rompa altri punti. Inoltre, ogni pagina carica Emotion e ricalcola gli stili a runtime.</p>
-          <p>Con @pagopa/ui, i nodi Figma sono censiti via API: 353 nodi tra componenti, varianti e icone. I token vengono estratti automaticamente e compilati in CSS puro statico.</p>
+          <p><strong>Cosa cambia nella pratica.</strong> Con mui-italia, se un designer cambia un padding su Figma, lo sviluppatore deve accorgersene, modificare il tema TypeScript a mano e sperare che non rompa altri punti. Inoltre ci si ritrova vincolati alle scelte di Material UI: i consumer devono lottare contro gli stili predefiniti con complessi override CSS, mentre ogni pagina carica Emotion e ricalcola gli stili a runtime.</p>
+          <p>Con @pagopa/ui, i nodi Figma sono censiti via API: 353 nodi tra componenti, varianti e icone. I token vengono estratti automaticamente e compilati in CSS puro statico. E soprattutto il design system è totalmente nostro: niente opinioni esterne da subire o override forzati.</p>
           <p>Chi sviluppa l'applicazione importa solo CSS già ottimizzato e componenti compatibili con React Server Components, con impatto zero sui tempi di risposta e sul bundle finale.</p>
         </aside>
       </section>
@@ -572,7 +584,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
               <div class="p-body">
                 <div class="frow2"><span class="f-k">React 19 &amp; RSC</span><span class="f-v">Supporto nativo a React Server Components. <em>Zero JS al client per componenti statici, confini 'use client' minimi.</em></span></div>
                 <div class="frow2"><span class="f-k">Zero CSS-in-JS</span><span class="f-v">Tailwind 4 compilato a monte, varianti con CVA. <em>Nessun runtime di styling o ThemeProvider per i consumer.</em></span></div>
-                <div class="frow2"><span class="f-k">Primitive Headless</span><span class="f-v">Base UI per logica e accessibilità. <em>Tastiera e WAI-ARIA garantite a monte, stili liberi da vincoli esterni.</em></span></div>
+                <div class="frow2"><span class="f-k">Primitive Headless</span><span class="f-v">Base UI per logica e accessibilità, senza stili imposti. <em>Tastiera e WAI-ARIA a monte; markup e stile 100% nostri, zero override da combattere.</em></span></div>
                 <div class="frow2"><span class="f-k">Build &amp; Packaging</span><span class="f-v">Vite 8, ESM puro e subpath exports. <em>Tree-shaking reale: l'app importa e scarica solo ciò che usa davvero.</em></span></div>
               </div>
             </div>
@@ -585,7 +597,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <aside class="notes">
           <p><strong>Le scelte tecnologiche.</strong> Primo: React 19 con Server Components nativi. I componenti di presentazione possono essere renderizzati interamente sul server senza spedire JavaScript al browser dell'utente cittadino.</p>
           <p>Secondo: zero CSS-in-JS. Diciamo addio a Emotion e al ricalcolo continuo di stili. Il CSS viene precompilato nel pacchetto: il principio è lo stesso documentato da GitHub Engineering nell'articolo "Improving site performance by shipping more CSS".</p>
-          <p>Terzo: primitive headless (Base UI). Non reinventiamo la gestione del focus, dei menu a tendina o delle modali accessibili: usiamo primitive testate e ci applichiamo le classi di stile compilate.</p>
+          <p>Terzo: primitive headless (Base UI). Non subiamo stili preimpostati contro cui dover combattere come avveniva con MUI: deleghiamo solo accessibilità, focus e gestione tastiera. Lo stile è al 100% nostro, modellato direttamente dai token di Figma.</p>
           <p>Quarto: packaging ESM moderno con subpath exports. Se importi Button, il bundler include solo il codice di Button, non l'intera libreria.</p>
         </aside>
       </section>
@@ -917,12 +929,12 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <div class="sbody">
           <div class="divider-main">
             <h2 class="statement" style="max-width:none">Costruiamolo insieme</h2>
-            <p class="lead" style="font-size:21px;max-width:58ch">La PoC dimostra che possiamo avere <strong>allineamento automatico da Figma a React</strong>, architettura moderna con <strong>React 19 / RSC</strong> e <strong>zero runtime CSS</strong>.
+            <p class="lead" style="font-size:21px;max-width:58ch">La PoC dimostra che possiamo avere <strong>allineamento automatico da Figma a React</strong>, architettura moderna con <strong>React 19 / RSC</strong>, <strong>zero runtime CSS</strong> e un <strong>design system 100% nostro</strong> (senza stili imposti né override).
               <br><br>Servono: conoscenza di dominio (design system, trade-off)<br>e delle best-practice frontend.<br><br>Progetto pilota da cui partire?</p>
           </div>
         </div>
         <aside class="notes">
-          <p><strong>Conclusioni.</strong> La tecnologia c'è e le fondamenta sono pronte: abbiamo dimostrato che il sync con Figma può essere automatico, che possiamo sfruttare React 19 e i Server Components, e che possiamo liberarci dal peso del runtime CSS-in-JS.</p>
+          <p><strong>Conclusioni.</strong> La tecnologia c'è e le fondamenta sono pronte: abbiamo dimostrato che il sync con Figma può essere automatico, che possiamo sfruttare React 19 e i Server Components, liberarci dal peso del runtime CSS-in-JS e abbandonare la lotta contro gli stili imposti di MUI grazie a una soluzione interamente nostra.</p>
           <p>Ora serve il passaggio più importante: portarlo a contatto con le esigenze reali dei team e dei prodotti di PagoPA.</p>
           <p>Grazie per l'attenzione, apriamo lo spazio per domande, dubbi e proposte su quale progetto pilota scegliere.</p>
         </aside>
