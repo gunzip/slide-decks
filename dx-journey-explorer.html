@@ -1,0 +1,1118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DX Journey Explorer — one map</title>
+<meta name="description" content="An interactive map of the PagoPA DX platform: seven stages, 24 use cases and the people they serve, on a single canvas.">
+<style>
+  /* --------------------------------------------------------------- tokens */
+  :root {
+    --bg:#070b14; --bg-2:#0a101d; --ink:#eef3fb; --ink-2:#a9b6cd; --ink-3:#74839c;
+    --line:rgba(148,163,184,.16); --line-2:rgba(148,163,184,.28);
+    --card:rgba(17,25,41,.86); --card-2:rgba(23,33,52,.94);
+    --teal:#5eead4; --sky:#38bdf8; --violet:#a78bfa; --amber:#fbbf24; --pink:#f472b6;
+    --r:16px; --r-sm:11px;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{font-size:16px;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(900px 620px at 12% -8%, rgba(94,234,212,.13), transparent 62%),
+      radial-gradient(820px 560px at 92% 6%, rgba(167,139,250,.15), transparent 60%),
+      radial-gradient(700px 620px at 62% 108%, rgba(56,189,248,.10), transparent 62%),
+      linear-gradient(180deg,#080d17,#060a12 60%,#05080f);
+  }
+  #field{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55}
+  .skip{position:absolute;left:-9999px;top:0;z-index:99;background:var(--teal);color:#04120f;
+    padding:10px 16px;border-radius:0 0 10px 0;font-weight:700}
+  .skip:focus{left:0}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:8px}
+  .ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.7;
+    stroke-linecap:round;stroke-linejoin:round;flex:none}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* ---------------------------------------------------------------- shell */
+  #app{position:relative;z-index:1;height:100vh;display:flex;flex-direction:column}
+  .topbar{
+    flex:none;display:flex;align-items:center;gap:14px;padding:10px 18px;
+    border-bottom:1px solid var(--line);background:rgba(7,11,20,.82);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  }
+  .brand{display:flex;align-items:center;gap:11px;background:none;border:0;padding:4px;
+    color:inherit;font:inherit;cursor:pointer;border-radius:12px}
+  .brand-mark{
+    width:38px;height:38px;flex:none;display:grid;place-items:center;border-radius:11px;
+    background:linear-gradient(140deg,var(--teal),#38bdf8 55%,var(--violet));
+    color:#04120f;font-weight:800;font-size:14px;letter-spacing:.02em;
+    box-shadow:0 6px 20px rgba(56,189,248,.28);
+  }
+  .brand-copy{display:flex;flex-direction:column;line-height:1.15;text-align:left}
+  .brand-copy strong{font-size:15.5px;font-weight:700;letter-spacing:-.01em}
+  .brand-copy small{font-size:12px;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase}
+  .top-spacer{flex:1}
+  .top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .tbtn{
+    display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:11px;
+    border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--ink-2);
+    font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;transition:.16s;
+  }
+  .tbtn:hover{color:var(--ink);border-color:var(--line-2);background:rgba(255,255,255,.06)}
+  .tbtn .ic{font-size:15px}
+  .tbtn-primary{
+    background:linear-gradient(140deg,rgba(94,234,212,.20),rgba(56,189,248,.18));
+    border-color:rgba(94,234,212,.45);color:#d9fbf4;
+  }
+  .tbtn-primary:hover{background:linear-gradient(140deg,rgba(94,234,212,.30),rgba(56,189,248,.26));color:#fff}
+  .zoom{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:11px;overflow:hidden}
+  .zoom button{
+    border:0;background:rgba(255,255,255,.03);color:var(--ink-2);font:inherit;font-size:13px;
+    font-weight:600;padding:8px 11px;cursor:pointer;transition:.16s;min-width:36px;
+  }
+  .zoom button:hover{background:rgba(255,255,255,.09);color:var(--ink)}
+  .zoom button + button{border-left:1px solid var(--line)}
+  .zoom .zval{font-family:var(--mono);font-size:12px;min-width:52px;color:var(--ink-3);cursor:default}
+  .zoom .zval:hover{background:rgba(255,255,255,.03);color:var(--ink-3)}
+
+  /* ------------------------------------------------------------- map head */
+  .map-head{
+    flex:none;display:flex;align-items:center;gap:20px;padding:11px 20px;
+    border-bottom:1px solid rgba(148,163,184,.10);background:rgba(9,14,24,.5);
+  }
+  .mh-title{margin:0;font-size:15px;color:var(--ink-2);line-height:1.35}
+  .mh-title strong{color:var(--ink);font-weight:700}
+  .mh-legend{display:flex;align-items:center;gap:18px;margin:0;padding:0;list-style:none;flex-wrap:wrap}
+  .mh-legend li{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-3);letter-spacing:.01em}
+  .lg{width:26px;height:2px;border-radius:2px;flex:none}
+  .lg-order{background:linear-gradient(90deg,rgba(148,163,184,.25),rgba(148,163,184,.85))}
+  .lg-loop{background:none;border-top:2px dashed rgba(192,132,252,.85);height:0}
+  .lg-actor{background:none;border-top:2px dashed rgba(125,211,252,.75);height:0}
+
+  /* ---------------------------------------------------------------- canvas */
+  .map-wrap{position:relative;flex:1;min-height:0}
+  .map-scroll{
+    position:absolute;inset:0;overflow:auto;display:flex;
+    scrollbar-width:thin;scrollbar-color:rgba(148,163,184,.35) transparent;
+    cursor:grab;
+  }
+  .map-scroll.dragging{cursor:grabbing}
+  .map-scroll::-webkit-scrollbar{width:10px;height:10px}
+  .map-scroll::-webkit-scrollbar-thumb{background:rgba(148,163,184,.28);border-radius:8px}
+  .map-scroll::-webkit-scrollbar-track{background:transparent}
+  .map-zoom{margin:auto;flex:none;position:relative}
+  .map-space{position:absolute;top:0;left:0;transform-origin:0 0}
+  .map-edges{position:absolute;inset:0;overflow:visible;pointer-events:none}
+  .map-nodes{position:absolute;inset:0}
+
+  .hint{
+    position:absolute;left:18px;bottom:16px;z-index:3;display:flex;align-items:center;gap:8px;
+    padding:7px 13px;border-radius:11px;border:1px solid var(--line);
+    background:rgba(10,16,29,.88);backdrop-filter:blur(10px);
+    font-size:12.5px;color:var(--ink-3);pointer-events:none;transition:opacity .4s;
+  }
+  .hint .ic{font-size:14px}
+  .hint.off{opacity:0}
+
+  /* ---------------------------------------------------------------- actors */
+  .actor{
+    position:absolute;display:flex;align-items:center;gap:11px;padding:0 13px;
+    border:1px solid var(--line);border-radius:13px;background:rgba(16,24,40,.82);
+    color:var(--ink-2);font:inherit;text-align:left;cursor:pointer;transition:.18s;
+  }
+  .actor:hover{border-color:rgba(125,211,252,.45);background:rgba(22,33,54,.92);color:var(--ink);transform:translateX(2px)}
+  .actor .ac-ic{
+    width:30px;height:30px;flex:none;display:grid;place-items:center;border-radius:9px;
+    background:rgba(125,211,252,.12);color:#9fd8fb;font-size:16px;
+  }
+  .actor .ac-txt{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+  .actor strong{font-size:14.5px;font-weight:650;color:var(--ink);letter-spacing:-.005em}
+  .actor small{font-size:10.5px;color:var(--ink-3);letter-spacing:.05em;text-transform:uppercase;margin-top:2px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .actor[aria-pressed="true"]{
+    border-color:rgba(125,211,252,.75);background:rgba(28,45,72,.96);
+    box-shadow:0 0 0 1px rgba(125,211,252,.3),0 10px 26px rgba(56,189,248,.22);
+  }
+  .actor.hot{border-color:rgba(125,211,252,.65);background:rgba(26,42,68,.95)}
+  .actor.dim{opacity:.28;filter:saturate(.4)}
+  .who-label{
+    position:absolute;left:40px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:700;
+  }
+
+  /* -------------------------------------------------------------- stations */
+  .station{
+    position:absolute;display:flex;flex-direction:column;gap:6px;padding:11px 15px;
+    border:1px solid var(--line);border-left:3px solid var(--c);border-radius:14px;
+    background:linear-gradient(140deg,rgba(19,28,45,.94),rgba(14,21,35,.9));
+    color:inherit;font:inherit;text-align:left;cursor:pointer;transition:.2s;overflow:hidden;
+  }
+  .station:hover{border-color:var(--line-2);border-left-color:var(--c);background:rgba(24,36,58,.96);
+    box-shadow:0 14px 34px rgba(0,0,0,.4)}
+  .station[aria-expanded="true"]{
+    border-color:color-mix(in srgb,var(--c) 42%,transparent);
+    box-shadow:0 0 0 1px color-mix(in srgb,var(--c) 22%,transparent),0 18px 44px rgba(0,0,0,.46);
+    background:linear-gradient(140deg,rgba(24,36,58,.98),rgba(15,23,38,.94));
+  }
+  .st-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .st-code{font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:600}
+  .st-code b{color:var(--c);font-weight:700}
+  .st-chev{font-size:16px;color:var(--ink-3);transition:transform .25s,color .2s}
+  .station[aria-expanded="true"] .st-chev{transform:rotate(180deg);color:var(--c)}
+  .st-name{font-size:19px;font-weight:700;line-height:1.22;letter-spacing:-.015em;color:var(--ink)}
+  .st-why{
+    font-size:14px;line-height:1.45;color:var(--ink-2);margin:0;padding-top:9px;
+    border-top:1px solid var(--line);
+  }
+  .st-why b{color:var(--c);font-weight:700}
+  .station.hot{border-left-color:var(--c)}
+  .station.dim{opacity:.24;filter:saturate(.35)}
+
+  /* --------------------------------------------------------------- use cases */
+  .uc{
+    position:absolute;display:flex;flex-direction:column;gap:0;padding:11px 14px;
+    border:1px solid var(--line);border-radius:13px;
+    background:rgba(17,26,42,.9);color:inherit;font:inherit;text-align:left;cursor:pointer;
+    transition:.18s;overflow:hidden;
+  }
+  .uc:hover{border-color:var(--line-2);background:rgba(23,35,55,.96);transform:translateX(3px)}
+  .uc[aria-expanded="true"]{
+    border-color:color-mix(in srgb,var(--c) 40%,transparent);
+    background:linear-gradient(140deg,rgba(23,35,55,.98),rgba(16,25,41,.95));
+    box-shadow:0 14px 34px rgba(0,0,0,.42);
+  }
+  .uc-line{display:flex;align-items:baseline;gap:10px}
+  .uc-num{
+    font-family:var(--mono);font-size:12px;font-weight:700;color:var(--c);
+    padding:2px 7px;border-radius:6px;background:color-mix(in srgb,var(--c) 14%,transparent);flex:none;
+  }
+  .uc-verb{font-size:17px;font-weight:650;line-height:1.25;letter-spacing:-.01em;color:var(--ink)}
+  .uc-what{font-size:14.5px;line-height:1.5;color:var(--ink-2);margin-top:9px}
+  .uc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .tag{
+    font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;
+    border:1px solid var(--line);color:var(--ink-2);white-space:nowrap;
+  }
+  .tag-prio{color:#04120f;background:color-mix(in srgb,var(--c) 78%,white);border-color:transparent;font-weight:700}
+  .tag-who{background:rgba(125,211,252,.09);border-color:rgba(125,211,252,.28);color:#bfe4fb}
+  .uc.hot{border-color:rgba(125,211,252,.6)}
+  .uc.dim{opacity:.22;filter:saturate(.35)}
+
+  /* ------------------------------------------------------------------ tour */
+  .tour{
+    position:fixed;left:22px;bottom:22px;z-index:20;width:min(400px,calc(100vw - 44px));
+    padding:18px 18px 14px;border-radius:18px;border:1px solid rgba(94,234,212,.32);
+    background:linear-gradient(150deg,rgba(17,28,45,.98),rgba(11,18,31,.98));
+    box-shadow:0 26px 70px rgba(0,0,0,.6);opacity:0;transform:translateY(14px);
+    pointer-events:none;transition:.28s;
+  }
+  .tour.on{opacity:1;transform:none;pointer-events:auto}
+  .tour-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+  .tour-step{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--teal);font-weight:700}
+  .tour-x{border:0;background:none;color:var(--ink-3);font-size:18px;cursor:pointer;padding:2px 4px;border-radius:7px}
+  .tour-x:hover{color:var(--ink);background:rgba(255,255,255,.07)}
+  .tour h2{margin:0 0 7px;font-size:19px;font-weight:700;letter-spacing:-.02em;line-height:1.22}
+  .tour p{margin:0;font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+  .tour-foot{display:flex;align-items:center;gap:8px;margin-top:15px}
+  .tour-dots{display:flex;gap:5px;margin-right:auto}
+  .tour-dots i{width:7px;height:7px;border-radius:50%;background:rgba(148,163,184,.32)}
+  .tour-dots i.on{background:var(--teal);box-shadow:0 0 0 3px rgba(94,234,212,.16)}
+
+  .toast{
+    position:fixed;left:50%;bottom:24px;transform:translate(-50%,16px);z-index:30;
+    padding:11px 18px;border-radius:12px;border:1px solid rgba(94,234,212,.35);
+    background:rgba(12,22,34,.97);font-size:14px;color:#d9fbf4;opacity:0;
+    transition:.24s;pointer-events:none;box-shadow:0 18px 40px rgba(0,0,0,.5);
+  }
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+
+  @keyframes bloom{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+  .bloom{animation:bloom .26s ease both}
+
+  /* ------------------------------------------------------------ responsive */
+  @media (max-width:900px){
+    .map-head{flex-direction:column;align-items:flex-start;gap:8px;padding:10px 16px}
+    .mh-title{font-size:14px}
+    .brand-copy small{display:none}
+    .topbar{padding:9px 12px;gap:8px}
+    .tbtn span{display:none}
+    .tbtn{padding:9px 11px}
+  }
+  @media (max-width:560px){
+    .mh-legend{gap:12px}
+    .hint{display:none}
+    .tour{left:12px;right:12px;width:auto;bottom:12px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001s!important;transition-duration:.001s!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#map">Skip to the map</a>
+<canvas id="field" aria-hidden="true"></canvas>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.6 8.4-2.2 5.2-5 2.2 2.2-5.2z"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><path d="M6 16V9a3 3 0 0 1 3-3h7"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></symbol>
+  <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.6-8 5.5 5.5 0 0 1 10.7-1.3A3.5 3.5 0 0 1 17 18z"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 8-8M16 4l4 4M14 6l4 4"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 3v6M15 3v6"/><path d="M6 9h12v3a6 6 0 0 1-12 0z"/><path d="M12 18v3"/></symbol>
+  <symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 12 18 6"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M5 15c-1 3-1 4-1 4s1 0 4-1M9 18l-3-3"/><path d="M14 4c3 0 6 3 6 6 0 4-4 7-4 7l-6-6s3-7 4-7z"/><circle cx="15" cy="9" r="1.5"/></symbol>
+  <symbol id="i-activity" viewBox="0 0 24 24"><path d="M3 12h4l2-6 4 12 2-6h6"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2"/><path d="M15.5 14.5A5 5 0 0 1 21 20"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01M9 16h6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><path d="M7 12h10M15 9l3 3-3 3"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 9 3 3-3 3M13 15h4"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M9 3H3v6M15 21h6v-6M3 3l7 7M21 21l-7-7"/></symbol>
+  <symbol id="i-collapse" viewBox="0 0 24 24"><path d="M3 9h6V3M21 15h-6v6M9 9 3 3M15 15l6 6"/></symbol>
+</defs></svg>
+
+<div id="app">
+  <header class="topbar">
+    <button class="brand" id="brandBtn" aria-label="DX Journey Explorer — recentre the map">
+      <span class="brand-mark">DX</span>
+      <span class="brand-copy"><strong>Developer Experience</strong><small>One map</small></span>
+    </button>
+    <div class="top-spacer"></div>
+    <div class="top-actions">
+      <div class="zoom" role="group" aria-label="Zoom">
+        <button id="zoomOut" aria-label="Zoom out">−</button>
+        <button class="zval" id="zoomVal" aria-live="off" tabindex="-1">100%</button>
+        <button id="zoomIn" aria-label="Zoom in">+</button>
+        <button id="zoomFit" aria-label="Fit the whole map">Fit</button>
+      </div>
+      <button class="tbtn" id="expandAll" aria-label="Open every stage">
+        <svg class="ic" aria-hidden="true"><use href="#i-expand"></use></svg><span>Open all</span>
+      </button>
+      <button class="tbtn" id="collapseAll" aria-label="Close everything">
+        <svg class="ic" aria-hidden="true"><use href="#i-collapse"></use></svg><span>Close</span>
+      </button>
+      <button class="tbtn tbtn-primary" id="tourBtn">
+        <svg class="ic" aria-hidden="true"><use href="#i-sparkles"></use></svg><span>Guided tour</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="map-head">
+    <p class="mh-title">One map: <strong>what DX does</strong>, in what order, and <strong>for whom</strong>.</p>
+    <ul class="mh-legend">
+      <li><span class="lg lg-order"></span>stage order</li>
+      <li><span class="lg lg-loop"></span>feedback loop</li>
+      <li><span class="lg lg-actor"></span>who is involved</li>
+    </ul>
+  </div>
+
+  <div class="map-wrap">
+    <main class="map-scroll" id="map" tabindex="-1">
+      <div class="map-zoom" id="mapZoom">
+        <div class="map-space" id="mapSpace">
+          <svg class="map-edges" id="edges" aria-hidden="true"></svg>
+          <div class="map-nodes" id="nodes"></div>
+        </div>
+      </div>
+    </main>
+    <p class="hint" id="hint">
+      <svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>
+      Click a stage to open it · drag to pan · ⌘/Ctrl + scroll to zoom
+    </p>
+  </div>
+</div>
+
+<div class="tour" id="tour" role="dialog" aria-modal="false" aria-labelledby="tourTitle">
+  <div class="tour-top">
+    <span class="tour-step" id="tourStep">1 / 5</span>
+    <button class="tour-x" id="tourClose" aria-label="Close the tour">
+      <svg class="ic" aria-hidden="true"><use href="#i-close"></use></svg>
+    </button>
+  </div>
+  <h2 id="tourTitle">This is DX</h2>
+  <p id="tourText"></p>
+  <div class="tour-foot">
+    <span class="tour-dots" id="tourDots"></span>
+    <button class="tbtn" id="tourPrev">Back</button>
+    <button class="tbtn tbtn-primary" id="tourNext">Next</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------------------------------------------------------------- data */
+
+  const PHASES = [
+    { id:'SB-01', code:'01', name:'Discover and choose', icon:'compass', color:'#5eead4',
+      why:'Most wasted effort starts from the wrong starting point.',
+      ucs:['UC-01','UC-02','UC-22'] },
+    { id:'SB-02', code:'02', name:'Shape product work', icon:'briefcase', color:'#38bdf8',
+      why:'Ambiguity gets expensive once code exists.',
+      ucs:['UC-20'] },
+    { id:'SB-03', code:'03', name:'Prepare workspace and environment', icon:'cube', color:'#818cf8',
+      why:'Setup repeats per team and per project — and it is where newcomers stall.',
+      ucs:['UC-03','UC-04','UC-05','UC-06'] },
+    { id:'SB-04', code:'04', name:'Build, connect and secure', icon:'lock', color:'#a78bfa',
+      why:'Access and connectivity are where autonomy meets accountability.',
+      ucs:['UC-08','UC-09','UC-10','UC-11','UC-12','UC-24'] },
+    { id:'SB-05', code:'05', name:'Validate, release and publish', icon:'rocket', color:'#f472b6',
+      why:'Consistent gates make speed safe, and reusable assets compound the gain.',
+      ucs:['UC-13','UC-15','UC-16'] },
+    { id:'SB-06', code:'06', name:'Observe and operate', icon:'radar', color:'#fbbf24',
+      why:'You cannot delegate operations you cannot see.',
+      ucs:['UC-14','UC-17','UC-18','UC-19'] },
+    { id:'SB-07', code:'07', name:'Support and evolve', icon:'sparkles', color:'#c084fc',
+      why:'A platform that cannot learn from its users stops being useful.',
+      ucs:['UC-07','UC-21','UC-23'] }
+  ];
+
+  const UCS = [
+    { id:'UC-01', n:'01', verb:'Ask, and get an answer with sources', prio:'Must', phase:'SB-01',
+      what:'Ask a platform question in natural language and get an answer drawn from DX sources, with those sources shown.' },
+    { id:'UC-02', n:'02', verb:'Find what the platform can do', prio:'Must', phase:'SB-01',
+      what:'Discover the capabilities DX exposes — including the ones a coding agent can invoke — and use them in place.' },
+    { id:'UC-03', n:'03', verb:'Start from a workspace that works', prio:'Must', phase:'SB-03',
+      what:'Generate a workspace from a guided default instead of assembling one by hand.' },
+    { id:'UC-04', n:'04', verb:'Give the workspace a place to deploy', prio:'Must', phase:'SB-03',
+      what:'Attach a deployment environment to an existing workspace, with the required configuration produced for you.' },
+    { id:'UC-05', n:'05', verb:'Same environment, every time', prio:'Must', phase:'SB-03',
+      what:'Start a development environment that behaves the same for everyone on the team.' },
+    { id:'UC-06', n:'06', verb:'Check the workspace against the path', prio:'Must', phase:'SB-03',
+      what:'Assess how far a workspace follows the agreed guidance, and see what is missing.' },
+    { id:'UC-07', n:'07', verb:'Move without starting over', prio:'Must', phase:'SB-07',
+      what:'Migrate an existing project onto a supported path without rebuilding it from scratch.' },
+    { id:'UC-08', n:'08', verb:'Infrastructure, planned before created', prio:'Must', phase:'SB-04',
+      what:'Turn an infrastructure need into a reviewed, provisionable plan.' },
+    { id:'UC-09', n:'09', verb:'Access, granted narrowly', prio:'Must', phase:'SB-04',
+      what:'Request and grant access to a resource with the narrowest scope that works.' },
+    { id:'UC-10', n:'10', verb:'Connect without opening everything', prio:'Must', phase:'SB-04',
+      what:'Connect two privately owned networks without exposing either one publicly.' },
+    { id:'UC-11', n:'11', verb:'One service, two clouds', prio:'Should', phase:'SB-04',
+      what:'Connect environments that live on different clouds so a service can span both.' },
+    { id:'UC-12', n:'12', verb:'Integrate without leaking trust', prio:'Must', phase:'SB-04',
+      what:'Integrate two services with explicit identity, scope and failure behavior.' },
+    { id:'UC-13', n:'13', verb:'Checks before merge, not after', prio:'Must', phase:'SB-05',
+      what:'Check a change against the configured gates before it integrates.' },
+    { id:'UC-14', n:'14', verb:'Notice when reality moves', prio:'Must', phase:'SB-06',
+      what:'Detect when deployed infrastructure no longer matches its declared state.' },
+    { id:'UC-15', n:'15', verb:'Release, with a way back', prio:'Must', phase:'SB-05',
+      what:'Release a service through a path that includes the safety checks agreed for it.' },
+    { id:'UC-16', n:'16', verb:'Make a good thing reusable', prio:'Must', phase:'SB-05',
+      what:'Version a reusable asset and publish it so other teams can adopt it deliberately.' },
+    { id:'UC-17', n:'17', verb:'See the service as it runs', prio:'Must', phase:'SB-06',
+      what:'Get operational visibility for a service, including the dashboards that make it readable.' },
+    { id:'UC-18', n:'18', verb:'See cost before the invoice', prio:'Should', phase:'SB-06',
+      what:'Surface resources whose cost profile is a risk, before it becomes a surprise.' },
+    { id:'UC-19', n:'19', verb:'Measure the path, not the noise', prio:'Should', phase:'SB-06',
+      what:'Explore engineering and adoption metrics with enough context to be trustworthy.' },
+    { id:'UC-20', n:'20', verb:'Shape the work with an agent', prio:'Should', phase:'SB-02',
+      what:'Use an agent to turn a product initiative into structured, reviewable work.' },
+    { id:'UC-21', n:'21', verb:'Know which agent helps more', prio:'Should', phase:'SB-07',
+      what:'Compare agent capabilities on comparable runs instead of on impressions.' },
+    { id:'UC-22', n:'22', verb:'Check before you commit', prio:'Should', phase:'SB-01',
+      what:'Assess whether a technology fits the agreed adoption guidance before committing to it.' },
+    { id:'UC-23', n:'23', verb:'Ask for help, leave it better', prio:'Should', phase:'SB-07',
+      what:'Get support when the path does not fit, and feed the improvement back into the platform.' },
+    { id:'UC-24', n:'24', verb:'Give the agent the right expertise', prio:'Should', phase:'SB-04',
+      what:'Give a coding agent the specialist guidance a task needs, inside the work itself.' }
+  ];
+
+  const ROLES = [
+    { icon:'users',      short:'Product engineering team', kind:'Primary customer' },
+    { icon:'terminal',   short:'Developer',                kind:'Primary customer' },
+    { icon:'bot',        short:'Coding agent',             kind:'Delegated collaborator' },
+    { icon:'layers',     short:'DX team',                  kind:'Platform owner' },
+    { icon:'briefcase',  short:'Product stakeholder',      kind:'Secondary' },
+    { icon:'server',     short:'Service / infra operator', kind:'Participant' },
+    { icon:'key',        short:'Resource owner',           kind:'Approval authority' },
+    { icon:'database',   short:'Data owner',               kind:'Approval authority' },
+    { icon:'check',      short:'Reviewer / approver',      kind:'Gate' },
+    { icon:'shield',     short:'Security & privacy',       kind:'Constraint' },
+    { icon:'globe',      short:'Service consumer',         kind:'Dependent' }
+  ];
+
+  /* use case -> roles involved (indexes into ROLES) */
+  const LINKS = {
+    'UC-01':[1,2,0], 'UC-02':[1,2,0], 'UC-22':[1,2,0], 'UC-20':[4,2,0],
+    'UC-03':[1,2,0], 'UC-04':[1,2,5], 'UC-05':[1,0],   'UC-06':[1,2,8],
+    'UC-08':[1,2,5], 'UC-09':[6,1,2,9], 'UC-10':[5,6,9], 'UC-11':[5,0],
+    'UC-12':[0,5,7,9,10], 'UC-24':[1,2,3],
+    'UC-13':[1,2,8], 'UC-15':[0,8,5], 'UC-16':[3,0,10],
+    'UC-14':[5,0],   'UC-17':[0,5],   'UC-18':[0,5,2], 'UC-19':[3,0,4],
+    'UC-07':[1,2,3], 'UC-21':[3,2,1], 'UC-23':[0,3,1]
+  };
+
+  const TOUR = [
+    { title:'This is DX', text:'A shared path from idea to trusted service — built for product teams, and for the coding agents working on their behalf.' },
+    { title:'Seven stages, top to bottom', text:'The solid line on the left is the order work usually follows. It is a spine, not a gate: teams move back and forth as they learn.' },
+    { title:'Open a stage where it sits', text:'Nothing hides behind a panel. Clicking a stage unfolds its use cases right beside it — the map grows, nothing is replaced.' },
+    { title:'Who is involved', text:'The left column is the people. Product teams and developers are the customers; agents act on their behalf; other roles appear where a decision is needed.' },
+    { title:'Follow one use case', text:'Click a use case to see what it means and which roles it touches — the dashed lines show who has to be in the room.' }
+  ];
+
+  /* ------------------------------------------------------------- helpers */
+
+  const $  = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const phaseOf = id => PHASES.find(p => p.id === id);
+  const phaseOfUC = id => PHASES.find(p => p.ucs.includes(id));
+  const ucOf = id => UCS.find(u => u.id === id);
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const ic = (name, cls = 'ic') => `<svg class="${cls}" aria-hidden="true"><use href="#i-${name}"></use></svg>`;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+  /* ------------------------------------------------------------ geometry */
+
+  const G = {
+    top: 28, ax: 40, aw: 236, actH: 50, actStep: 58, actTop: 22,
+    spine: 330, bx: 354, bw: 300,
+    cx: 730, cw: 460,
+    stH: 92, stHOpen: 178, stGap: 10,
+    ucH: 76, ucHOpen: 224, ucGap: 10,
+    width: 730 + 460 + 48
+  };
+
+  const state = {
+    openStations: new Set(),
+    openUCs: new Set(),
+    focusUC: null,
+    focusActor: null
+  };
+
+  const nodesEl = $('#nodes');
+  const edgesEl = $('#edges');
+  const spaceEl = $('#mapSpace');
+  const zoomEl  = $('#mapZoom');
+  const scrollEl = $('#map');
+
+  /* --------------------------------------------------------------- layout */
+
+  function layout() {
+    let y = G.top;
+    const stations = [];
+    PHASES.forEach(p => {
+      const open = state.openStations.has(p.id);
+      const chipH = p.ucs.reduce((s, id) => s + (state.openUCs.has(id) ? G.ucHOpen : G.ucH) + G.ucGap, 0) - G.ucGap;
+      const h = Math.max(open ? G.stHOpen : G.stH, open ? chipH : 0);
+      stations.push({ p, open, top: y, h, chipsH: chipH });
+      y += h + G.stGap;
+    });
+    const stagesBottom = y - G.stGap;
+
+    const actors = ROLES.map((r, i) => ({ i, r, y: G.actTop + i * G.actStep }));
+    const actorsBottom = actors[actors.length - 1].y + G.actH;
+
+    const H = Math.max(stagesBottom, actorsBottom) + 36;
+    const W = state.openStations.size ? G.cx + G.cw + 48 : G.bx + G.bw + 48;
+    return { stations, actors, H, W };
+  }
+
+  /* --------------------------------------------------------------- render */
+
+  function hotSets() {
+    const ucs = new Set(), actors = new Set(), stations = new Set();
+    if (state.focusUC) {
+      ucs.add(state.focusUC);
+      (LINKS[state.focusUC] || []).forEach(i => actors.add(i));
+      stations.add(ucOf(state.focusUC).phase);
+    }
+    if (state.focusActor != null) {
+      actors.add(state.focusActor);
+      UCS.filter(u => (LINKS[u.id] || []).includes(state.focusActor))
+          .forEach(u => { ucs.add(u.id); stations.add(u.phase); });
+    }
+    return { ucs, actors, stations, active: !!(state.focusUC || state.focusActor != null) };
+  }
+
+  let lastLayout = null;
+
+  function render(opts) {
+    const ae = document.activeElement;
+    const ds = (ae && ae.dataset) || {};
+    const focusKey = ds.uc || ds.station || ds.actor || null;
+    const focusAttr = ds.station ? 'station' : ds.uc ? 'uc' : ds.actor ? 'actor' : null;
+
+    const L = layout();
+    lastLayout = L;
+    const hot = hotSets();
+    spaceEl.style.width = L.W + 'px';
+    spaceEl.style.height = L.H + 'px';
+
+    /* actors */
+    let html = `<span class="who-label" style="top:4px">Who is involved</span>`;
+    L.actors.forEach(a => {
+      const cls = 'actor' + (hot.actors.has(a.i) ? ' hot' : '') + (hot.active && !hot.actors.has(a.i) ? ' dim' : '');
+      html += `<button class="${cls}" data-actor="${a.i}" aria-pressed="${state.focusActor === a.i}"
+        style="left:${G.ax}px;top:${a.y}px;width:${G.aw}px;height:${G.actH}px"
+        title="${esc(a.r.short)} — ${esc(a.r.kind)}">
+        <span class="ac-ic">${ic(a.r.icon)}</span>
+        <span class="ac-txt"><strong>${esc(a.r.short)}</strong><small>${esc(a.r.kind)}</small></span>
+      </button>`;
+    });
+
+    /* stages + clusters */
+    L.stations.forEach(st => {
+      const p = st.p;
+      const cls = 'station' + (hot.stations.has(p.id) ? ' hot' : '') + (hot.active && !hot.stations.has(p.id) ? ' dim' : '');
+      html += `<button class="${cls}" data-station="${p.id}" aria-expanded="${st.open}"
+        aria-controls="cluster-${p.id}" style="left:${G.bx}px;top:${st.top}px;width:${G.bw}px;height:${st.open ? G.stHOpen : G.stH}px;--c:${p.color}">
+        <span class="st-top">
+          <span class="st-code">Stage <b>${p.code}</b> · ${p.ucs.length} use case${p.ucs.length > 1 ? 's' : ''}</span>
+          <span class="st-chev">${ic('chevron-down')}</span>
+        </span>
+        <span class="st-name">${esc(p.name)}</span>
+        ${st.open ? `<p class="st-why"><b>Why:</b> ${esc(p.why)}</p>` : ''}
+      </button>`;
+
+      if (st.open) {
+        html += `<div class="cluster" id="cluster-${p.id}" role="group" aria-label="${esc(p.name)} use cases">`;
+        let cy = st.top;
+        p.ucs.forEach(id => {
+          const u = ucOf(id);
+          const open = state.openUCs.has(id);
+          const h = open ? G.ucHOpen : G.ucH;
+          const ucls = 'uc' + (hot.ucs.has(id) ? ' hot' : '') + (hot.active && !hot.ucs.has(id) ? ' dim' : '');
+          const who = (LINKS[id] || []).map(i => ROLES[i].short);
+          html += `<button class="${ucls}" data-uc="${id}" aria-expanded="${open}"
+            style="left:${G.cx}px;top:${cy}px;width:${G.cw}px;height:${h}px;--c:${p.color}">
+            <span class="uc-line"><span class="uc-num">${u.n}</span><span class="uc-verb">${esc(u.verb)}</span></span>
+            ${open ? `<span class="uc-what">${esc(u.what)}</span>
+              <span class="uc-tags"><span class="tag tag-prio">${esc(u.prio)}</span>${
+                who.map(w => `<span class="tag tag-who">${esc(w)}</span>`).join('')}</span>` : ''}
+          </button>`;
+          cy += h + G.ucGap;
+        });
+        html += `</div>`;
+      }
+    });
+
+    nodesEl.innerHTML = html;
+    drawEdges(L, hot);
+    applyScale();
+
+    if (focusKey && focusAttr) {
+      const back = nodesEl.querySelector(`[data-${focusAttr}="${focusKey}"]`);
+      if (back) back.focus({ preventScroll: true });
+    }
+    if (opts && opts.scrollTo) {
+      const el = nodesEl.querySelector(opts.scrollTo);
+      if (el) scrollIntoView(el);
+    }
+  }
+
+  /* ---------------------------------------------------------------- edges */
+
+  const NS = 'http://www.w3.org/2000/svg';
+  function mk(tag, attrs) {
+    const el = document.createElementNS(NS, tag);
+    for (const k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+
+  function drawEdges(L, hot) {
+    edgesEl.setAttribute('viewBox', `0 0 ${L.W} ${L.H}`);
+    edgesEl.setAttribute('width', L.W);
+    edgesEl.setAttribute('height', L.H);
+    edgesEl.innerHTML = '';
+
+    const g = mk('g', {});
+    edgesEl.appendChild(g);
+
+    const cardCx = G.bx;
+    const stageY = L.stations.map(s => s.top + (s.open ? G.stHOpen : G.stH) / 2);
+
+    /* chronology: spine segments between stage cards */
+    for (let i = 0; i < L.stations.length; i++) {
+      const s = L.stations[i];
+      const yMid = s.top + (s.open ? G.stHOpen : G.stH) / 2;
+      g.appendChild(mk('line', {
+        x1: G.spine, y1: yMid, x2: G.bx, y2: yMid,
+        stroke: 'rgba(148,163,184,.30)', 'stroke-width': 1.5
+      }));
+      g.appendChild(mk('circle', {
+        cx: G.spine, cy: yMid, r: 4.5, fill: '#0a101d',
+        stroke: s.p.color, 'stroke-width': 2
+      }));
+      if (i < L.stations.length - 1) {
+        const yNext = L.stations[i + 1].top + (L.stations[i + 1].open ? G.stHOpen : G.stH) / 2;
+        g.appendChild(mk('line', {
+          x1: G.spine, y1: yMid, x2: G.spine, y2: yNext,
+          stroke: 'rgba(148,163,184,.30)', 'stroke-width': 1.5
+        }));
+        const my = (yMid + yNext) / 2;
+        g.appendChild(mk('path', {
+          d: `M ${G.spine - 4.5} ${my - 4} L ${G.spine} ${my} L ${G.spine - 4.5} ${my + 4}`,
+          fill: 'none', stroke: 'rgba(148,163,184,.55)', 'stroke-width': 1.5,
+          'stroke-linecap': 'round', 'stroke-linejoin': 'round'
+        }));
+      }
+    }
+
+    /* feedback loop: last stage back to the first */
+    const yFirst = stageY[0], yLast = stageY[stageY.length - 1];
+    const rx = G.spine - 34;
+    g.appendChild(mk('path', {
+      d: `M ${G.spine - 9} ${yLast} C ${rx} ${yLast} ${rx} ${yFirst} ${G.spine - 12} ${yFirst}`,
+      fill: 'none', stroke: 'rgba(192,132,252,.62)', 'stroke-width': 1.8,
+      'stroke-dasharray': '5 6', 'stroke-linecap': 'round'
+    }));
+    g.appendChild(mk('path', {
+      d: `M ${G.spine - 12} ${yFirst} l -6 -4 l 0 8 z`,
+      fill: 'rgba(192,132,252,.8)'
+    }));
+    const loopLabel = mk('text', {
+      x: G.spine - 20, y: (yFirst + yLast) / 2, fill: 'rgba(192,132,252,.85)',
+      'font-size': 12, 'font-weight': 700, 'text-anchor': 'middle',
+      transform: `rotate(-90 ${G.spine - 20} ${(yFirst + yLast) / 2})`,
+      'letter-spacing': '.12em', style: 'text-transform:uppercase'
+    });
+    loopLabel.textContent = 'LEARNINGS FEED BACK';
+    g.appendChild(loopLabel);
+
+    /* stage -> its use cases (a small distribution tree) */
+    L.stations.forEach(s => {
+      if (!s.open) return;
+      const barX = G.bx + G.bw + 26;
+      const yStart = s.top + (s.open ? G.stHOpen : G.stH) / 2;
+      let cy = s.top;
+      const centers = [];
+      s.p.ucs.forEach(id => {
+        const h = state.openUCs.has(id) ? G.ucHOpen : G.ucH;
+        centers.push(cy + h / 2);
+        cy += h + G.ucGap;
+      });
+      const yTop = centers[0], yBot = centers[centers.length - 1];
+      const stroke = s.p.color;
+      g.appendChild(mk('path', {
+        d: `M ${G.bx + G.bw} ${yStart} H ${barX} V ${yBot}`,
+        fill: 'none', stroke, 'stroke-width': 1.4, opacity: .34
+      }));
+      centers.forEach(yc => {
+        g.appendChild(mk('path', {
+          d: `M ${barX} ${yc} H ${G.cx}`,
+          fill: 'none', stroke, 'stroke-width': 1.4, opacity: .34
+        }));
+        g.appendChild(mk('circle', { cx: barX, cy: yc, r: 2.6, fill: stroke, opacity: .6 }));
+      });
+      if (centers.length > 1) {
+        g.appendChild(mk('path', {
+          d: `M ${barX} ${yTop} V ${yBot}`,
+          fill: 'none', stroke, 'stroke-width': 1.4, opacity: .34
+        }));
+      }
+    });
+
+    /* who is involved: dashed links from roles to use cases */
+    if (hot.active && (hot.ucs.size || hot.actors.size)) {
+      L.actors.forEach(a => {
+        if (!hot.actors.has(a.i)) return;
+        const y1 = a.y + G.actH / 2;
+        const x1 = G.ax + G.aw;
+        L.stations.forEach(s => {
+          if (!s.open) return;
+          let cy = s.top;
+          s.p.ucs.forEach(id => {
+            const h = state.openUCs.has(id) ? G.ucHOpen : G.ucH;
+            const yc = cy + h / 2;
+            if (hot.ucs.has(id)) {
+              const mid = (x1 + G.cx) / 2;
+              g.appendChild(mk('path', {
+                d: `M ${x1} ${y1} C ${mid - 60} ${y1} ${mid + 40} ${yc} ${G.cx} ${yc}`,
+                fill: 'none', stroke: 'rgba(125,211,252,.72)', 'stroke-width': 1.7,
+                'stroke-dasharray': '4 5', 'stroke-linecap': 'round'
+              }));
+              g.appendChild(mk('circle', { cx: G.cx, cy: yc, r: 3.2, fill: 'rgba(125,211,252,.9)' }));
+            }
+            cy += h + G.ucGap;
+          });
+        });
+      });
+    }
+  }
+
+  /* ------------------------------------------------------------- zoom/pan */
+
+  let scale = 1, autoFit = true;
+
+  function applyScale() {
+    const W = lastLayout ? lastLayout.W : G.width;
+    const H = lastLayout ? lastLayout.H : 900;
+    zoomEl.style.width = Math.round(W * scale) + 'px';
+    zoomEl.style.height = Math.round(H * scale) + 'px';
+    spaceEl.style.transform = `scale(${scale})`;
+    syncZoomLabel();
+  }
+  function syncZoomLabel() { $('#zoomVal').textContent = Math.round(scale * 100) + '%'; }
+
+  function fitScale() {
+    const L = lastLayout || layout();
+    const vw = scrollEl.clientWidth - 40, vh = scrollEl.clientHeight - 40;
+    /* On narrow screens a true fit-to-width would shrink the type below reading
+       size, so we stop at a legible floor and let the canvas be panned. */
+    const floor = vw < 620 ? .7 : .34;
+    return clamp(Math.min(vw / L.W, vh / L.H), floor, 1);
+  }
+  function fit() {
+    autoFit = true;
+    scale = fitScale();
+    applyScale();
+    const L = lastLayout || layout();
+    const centred = L.W * scale > scrollEl.clientWidth;
+    scrollEl.scrollLeft = centred ? Math.max(0, (G.spine + G.bw / 2) * scale - scrollEl.clientWidth / 2) : 0;
+    scrollEl.scrollTop = 0;
+  }
+  function setScale(s) {
+    const L = lastLayout || layout();
+    const prev = scale;
+    const cw = scrollEl.clientWidth, ch = scrollEl.clientHeight;
+    const cxr = (scrollEl.scrollLeft + cw / 2) / (L.W * prev);
+    const cyr = (scrollEl.scrollTop + ch / 2) / (L.H * prev);
+    scale = clamp(s, .34, 1.6);
+    applyScale();
+    scrollEl.scrollLeft = cxr * L.W * scale - cw / 2;
+    scrollEl.scrollTop = cyr * L.H * scale - ch / 2;
+  }
+
+  function scrollIntoView(el) {
+    const r = el.getBoundingClientRect();
+    const host = scrollEl.getBoundingClientRect();
+    if (r.top < host.top + 20 || r.bottom > host.bottom - 20) {
+      scrollEl.scrollTop += r.top - host.top - 70;
+    }
+    if (r.left < host.left + 20 || r.right > host.right - 20) {
+      scrollEl.scrollLeft += r.left - host.left - 60;
+    }
+  }
+
+  /* ------------------------------------------------------------ expansion */
+
+  function focusStation(id) {
+    const el = nodesEl.querySelector(`[data-station="${id}"]`);
+    if (el) el.focus();
+  }
+  function openStation(id, focus) {
+    state.openStations.add(id);
+    render({ scrollTo: focus ? `[data-station="${id}"]` : null });
+    revealChips();
+  }
+  /* Narrow viewports cannot show the stage and its use cases at once, so when a
+     stage unfolds we pan the canvas to where the new content appeared. */
+  function revealChips() {
+    const chipsLeft = G.cx * scale;
+    if (chipsLeft > scrollEl.scrollLeft + scrollEl.clientWidth - 60) {
+      scrollEl.scrollLeft = chipsLeft - 26;
+    }
+  }
+  function closeStation(id) {
+    state.openStations.delete(id);
+    phaseOf(id).ucs.forEach(u => state.openUCs.delete(u));
+    render();
+  }
+  function toggleStation(id) {
+    if (state.openStations.has(id)) closeStation(id); else openStation(id, true);
+  }
+  function toggleUC(id) {
+    if (state.openUCs.has(id)) {
+      state.openUCs.delete(id);
+      if (state.focusUC === id) state.focusUC = null;
+    } else {
+      state.openUCs.add(id);
+      state.focusUC = id;
+      state.focusActor = null;
+    }
+    render({ scrollTo: `[data-uc="${id}"]` });
+  }
+  function toggleActor(i) {
+    if (state.focusActor === i) { state.focusActor = null; }
+    else {
+      state.focusActor = i;
+      state.focusUC = null;
+      const mine = UCS.filter(u => (LINKS[u.id] || []).includes(i));
+      mine.forEach(u => state.openStations.add(u.phase));
+      render({ scrollTo: `[data-uc="${mine[0].id}"]` });
+      toast(ROLES[i].short + ' is involved in ' + mine.length + ' of ' + UCS.length + ' use cases');
+      return;
+    }
+    render();
+  }
+
+  function expandAll() {
+    PHASES.forEach(p => state.openStations.add(p.id));
+    render();
+    /* Fitting the whole map would shrink the type past reading size, so we only
+       fit the width and let the canvas scroll down through the stages. */
+    autoFit = true;
+    scale = clamp((scrollEl.clientWidth - 40) / lastLayout.W, .7, 1);
+    applyScale();
+    scrollEl.scrollTop = 0;
+    toast('Every stage is open — ' + UCS.length + ' use cases on one map');
+  }
+  function collapseAll() {
+    state.openStations.clear(); state.openUCs.clear();
+    state.focusUC = null; state.focusActor = null;
+    render();
+    autoFit = true; scale = fitScale(); applyScale();
+    toast('Collapsed to the seven stages');
+  }
+
+  /* --------------------------------------------------------------- toast */
+
+  let toastT;
+  function toast(msg) {
+    const t = $('#toast');
+    t.textContent = msg; t.classList.add('on');
+    clearTimeout(toastT);
+    toastT = setTimeout(() => t.classList.remove('on'), 2400);
+  }
+
+  /* ------------------------------------------------------------- routing */
+
+  function revealFromHash() {
+    const h = (location.hash || '').replace(/^#\/?/, '');
+    const el = /^UC-\d+$/.test(h) ? nodesEl.querySelector(`[data-uc="${h}"]`)
+             : /^SB-\d+$/.test(h) ? nodesEl.querySelector(`[data-station="${h}"]`)
+             : null;
+    if (el) scrollIntoView(el);
+  }
+  window.addEventListener('hashchange', () => { routeFromHash(); revealFromHash(); });
+
+  function routeFromHash() {
+    const h = (location.hash || '').replace(/^#\/?/, '');
+    if (!h) return;
+    if (/^UC-\d+$/.test(h)) {
+      const u = ucOf(h);
+      if (u) { state.openStations.add(u.phase); state.openUCs.add(h); state.focusUC = h; state.focusActor = null; }
+    } else if (/^SB-\d+$/.test(h)) {
+      state.openStations.add(h);
+    } else if (/^who\/(\d+)$/.test(h)) {
+      const i = Number(RegExp.$1);
+      if (ROLES[i]) { state.focusActor = i; state.focusUC = null;
+        UCS.filter(u => (LINKS[u.id] || []).includes(i)).forEach(u => state.openStations.add(u.phase));
+      }
+    }
+    render();
+    const target = h.startsWith('UC-') ? `[data-uc="${h}"]`
+                 : h.startsWith('SB-') ? `[data-station="${h}"]`
+                 : `[data-actor="${h.split('/')[1]}"]`;
+    const el = nodesEl.querySelector(target);
+    if (el) scrollIntoView(el);
+  }
+
+  /* ---------------------------------------------------------------- tour */
+
+  let tourIdx = -1;
+
+  function tourShow(i) {
+    tourIdx = clamp(i, 0, TOUR.length - 1);
+    const s = TOUR[tourIdx];
+    $('#tourStep').textContent = (tourIdx + 1) + ' / ' + TOUR.length;
+    $('#tourTitle').textContent = s.title;
+    $('#tourText').textContent = s.text;
+    $('#tourDots').innerHTML = TOUR.map((_, k) => `<i class="${k === tourIdx ? 'on' : ''}"></i>`).join('');
+    $('#tourPrev').disabled = tourIdx === 0;
+    $('#tourNext').textContent = tourIdx === TOUR.length - 1 ? 'Done' : 'Next';
+    $('#tour').classList.add('on');
+
+    if (tourIdx === 0) {
+      state.openStations.clear(); state.openUCs.clear();
+      state.focusUC = null; state.focusActor = null;
+      render(); autoFit = true; scale = fitScale(); applyScale();
+    }
+    if (tourIdx === 1) {
+      autoFit = true; scale = Math.min(1, fitScale() * 1.06); applyScale();
+      const first = nodesEl.querySelector('[data-station="SB-01"]');
+      if (first) scrollEl.scrollTop = 0;
+    }
+    if (tourIdx === 2) { openStation('SB-04', true); }
+    if (tourIdx === 3) { render(); scrollEl.scrollTop = 0; }
+    if (tourIdx === 4) { state.openUCs.add('UC-09'); state.focusUC = 'UC-09'; render({ scrollTo: '[data-uc="UC-09"]' }); }
+  }
+  function tourEnd() {
+    tourIdx = -1;
+    $('#tour').classList.remove('on');
+  }
+
+  /* --------------------------------------------------------------- events */
+
+  document.addEventListener('click', e => {
+    const st = e.target.closest('[data-station]');
+    if (st) { toggleStation(st.dataset.station); return; }
+    const uc = e.target.closest('[data-uc]');
+    if (uc) { toggleUC(uc.dataset.uc); return; }
+    const ac = e.target.closest('[data-actor]');
+    if (ac) { toggleActor(Number(ac.dataset.actor)); return; }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if ($('#tour').classList.contains('on')) { tourEnd(); return; }
+      if (state.focusUC) { state.focusUC = null; render(); return; }
+      if (state.focusActor != null) { state.focusActor = null; render(); return; }
+      if (state.openUCs.size) {
+        const firstOpen = [...state.openUCs][0];
+        const backUC = state.focusUC || firstOpen;
+        const back = backUC ? phaseOfUC(backUC).id : null;
+        state.openUCs.clear(); state.focusUC = null;
+        render();
+        if (back) focusStation(back);
+        return;
+      }
+      if (state.openStations.size) {
+        state.openStations.clear(); render();
+        focusStation(PHASES[0].id);
+        return;
+      }
+      return;
+    }
+    const st = e.target.closest && e.target.closest('[data-station]');
+    if (!st) return;
+    const idx = PHASES.findIndex(p => p.id === st.dataset.station);
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      if (!state.openStations.has(st.dataset.station)) { openStation(st.dataset.station); }
+      const first = nodesEl.querySelector(`[data-uc="${phaseOf(st.dataset.station).ucs[0]}"]`);
+      if (first) first.focus();
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      closeStation(st.dataset.station);
+      const again = nodesEl.querySelector(`[data-station="${st.dataset.station}"]`);
+      if (again) again.focus();
+    } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const next = PHASES[idx + (e.key === 'ArrowDown' ? 1 : -1)];
+      if (next) {
+        const el = nodesEl.querySelector(`[data-station="${next.id}"]`);
+        if (el) { el.focus(); scrollIntoView(el); }
+      }
+    }
+  });
+
+  $('#expandAll').addEventListener('click', expandAll);
+  $('#collapseAll').addEventListener('click', collapseAll);
+  $('#zoomIn').addEventListener('click', () => { autoFit = false; setScale(scale + .12); });
+  $('#zoomOut').addEventListener('click', () => { autoFit = false; setScale(scale - .12); });
+  $('#zoomFit').addEventListener('click', fit);
+  $('#brandBtn').addEventListener('click', () => {
+    autoFit = true; fit();
+    toast('Recentred');
+  });
+
+  /* pan by drag */
+  let drag = null;
+  scrollEl.addEventListener('pointerdown', e => {
+    if (e.target.closest('button')) return;
+    drag = { x: e.clientX, y: e.clientY, l: scrollEl.scrollLeft, t: scrollEl.scrollTop };
+    scrollEl.classList.add('dragging');
+  });
+  window.addEventListener('pointermove', e => {
+    if (!drag) return;
+    scrollEl.scrollLeft = drag.l - (e.clientX - drag.x);
+    scrollEl.scrollTop = drag.t - (e.clientY - drag.y);
+  });
+  window.addEventListener('pointerup', () => { drag = null; scrollEl.classList.remove('dragging'); });
+
+  /* ctrl/⌘ + wheel zoom */
+  scrollEl.addEventListener('wheel', e => {
+    if (!(e.ctrlKey || e.metaKey)) return;
+    e.preventDefault();
+    autoFit = false;
+    setScale(scale + (e.deltaY > 0 ? -.08 : .08));
+  }, { passive: false });
+
+  /* tour wiring */
+  $('#tourBtn').addEventListener('click', () => tourShow(0));
+  $('#tourNext').addEventListener('click', () => { if (tourIdx >= TOUR.length - 1) tourEnd(); else tourShow(tourIdx + 1); });
+  $('#tourPrev').addEventListener('click', () => tourShow(tourIdx - 1));
+  $('#tourClose').addEventListener('click', tourEnd);
+
+  /* ambience */
+  function ambient() {
+    const cvs = $('#field');
+    if (!cvs || reduceMotion) return;
+    const ctx = cvs.getContext('2d');
+    let W = 0, H = 0, pts = [];
+    const colors = ['94,234,212', '125,211,252', '167,139,250'];
+    const size = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = window.innerWidth; H = window.innerHeight;
+      cvs.width = W * dpr; cvs.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    const seed = () => {
+      const n = Math.round(Math.min(46, Math.max(18, W / 30)));
+      pts = Array.from({ length: n }, () => ({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random() - .5) * .15, vy: (Math.random() - .5) * .15,
+        r: Math.random() * 1.4 + .5, c: colors[Math.floor(Math.random() * colors.length)]
+      }));
+    };
+    size(); seed();
+    window.addEventListener('resize', () => { size(); seed(); });
+    const tick = () => {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of pts) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < -20) p.x = W + 20; if (p.x > W + 20) p.x = -20;
+        if (p.y < -20) p.y = H + 20; if (p.y > H + 20) p.y = -20;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+        ctx.fillStyle = `rgba(${p.c},.45)`; ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* resize */
+  let rT;
+  window.addEventListener('resize', () => {
+    clearTimeout(rT);
+    rT = setTimeout(() => {
+      if (autoFit) { scale = fitScale(); applyScale(); }
+      else applyScale();
+    }, 140);
+  });
+
+  /* hint fade */
+  setTimeout(() => { const h = $('#hint'); if (h) h.classList.add('off'); }, 9000);
+
+  /* ------------------------------------------------------------- bootstrap */
+
+  render();
+  fit();
+  routeFromHash();
+  ambient();
+})();
+</script>
+</body>
+</html>
