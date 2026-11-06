@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>DX Journey Explorer</title>
-<meta name="description" content="Una mappa interattiva del percorso DX: sette fasi, ventiquattro casi d&#39;uso e chi è coinvolto.">
+<meta name="description" content="Una mappa interattiva del golden path DX: sette fasi, ventiquattro casi d&#39;uso, sette ruoli.">
 <style>
 /* ============================================================
    Standard deck — 16:9
@@ -441,16 +441,15 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
 .card.hot{border-color:var(--accent);background:var(--accent-tint);box-shadow:inset 3px 0 0 var(--accent)}
 .card.dim{opacity:.34}
 .card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.c-num{
-  font-family:"Titillio","Helvetica Neue",Arial,sans-serif;
-  font-size:9.5px;line-height:1.05;letter-spacing:.08em;color:var(--faint);font-variant-numeric:tabular-nums;
-}
 .c-verb{
-  margin-top:3px;font-size:11.6px;line-height:1.2;color:var(--ink);
+  font-size:11.6px;line-height:1.2;color:var(--ink);
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
 .card.hot .c-verb{color:var(--accent-ink);font-weight:600}
-.c-roles{margin-top:auto;min-height:13px;display:flex;align-items:center;gap:4px;color:var(--faint);line-height:1}
+.c-roles{
+  margin-top:auto;padding-top:6px;min-height:13px;
+  display:flex;align-items:center;gap:4px;color:var(--faint);line-height:1;
+}
 .card.hot .c-roles{color:var(--accent)}
 .c-roles .more{font-size:9.5px;letter-spacing:.02em}
 
@@ -516,8 +515,8 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
 
           <div class="map-head">
             <div class="mh-l">
-              <span class="anno">DX · journey explorer</span>
-              <h2 class="mh-t">Una mappa: <strong>cosa fa DX</strong>, in che ordine e <strong>per chi</strong>.</h2>
+              <span class="anno">DX · golden path</span>
+              <h2 class="mh-t">Una mappa: <strong>cosa fa DX</strong>, in che ordine e <strong>con quali ruoli</strong>.</h2>
             </div>
             <div class="mh-r">
               <div class="mh-tools">
@@ -535,7 +534,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
 
           <div class="map-detail">
             <span class="md-key" id="mdKey">Mappa</span>
-            <p class="md-txt" id="mdTxt">Sette fasi in ordine, ventiquattro casi d'uso, sette ruoli. <strong>Clicca una scheda</strong> per leggerne il dettaglio; clicca un'icona in alto a destra per vedere chi è coinvolto.</p>
+            <p class="md-txt" id="mdTxt">Sette fasi del golden path, ventiquattro casi d'uso, sette ruoli. <strong>Seleziona una scheda</strong> per il dettaglio; seleziona un ruolo per isolare i casi in cui entra in gioco.</p>
             <span class="md-meta" id="mdMeta"></span>
           </div>
 
@@ -557,10 +556,10 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </div>
 
         <aside class="notes">
-          <p><strong>Che cos'è questa slide.</strong> Una sola mappa per l'intero percorso DX: le sette fasi in ordine, i ventiquattro casi d'uso che le abitano, e i sette ruoli che entrano in gioco. Non è una lista da leggere: è uno strumento da aprire davanti alla sala.</p>
-          <p><strong>Come si guida.</strong> Tutto è visibile in una volta: sette colonne da sinistra a destra, ventiquattro schede. Clicca una scheda e la barra in basso dice cosa serve e chi deve essere nella stanza; clicca un'icona in alto a destra e la mappa resta accesa solo sui casi di quel ruolo. <em>Esc</em> toglie la selezione, <em>Azzera</em> chiude tutto, <em>Tour guidato</em> fa il giro in quattro passi.</p>
-          <p><strong>La tesi da dire a voce.</strong> L'ordine delle fasi è una spina dorsale, non un cancello: i team tornano indietro quando imparano qualcosa. Il valore non sta nel numero di casi d'uso, ma nel fatto che ognuno ha un proprietario e un gate riconoscibile — ed è per questo che la mappa mostra i ruoli dentro le schede, non in una legenda a parte.</p>
-          <p><strong>Se hai poco tempo.</strong> Vai sulla fase 04, fermati su «Accesso, concesso in modo stretto» e mostra i quattro ruoli nella stanza: è il punto in cui autonomia e responsabilità si incontrano davvero.</p>
+          <p><strong>Che cos'è questa slide.</strong> Una sola mappa del golden path DX: le sette fasi in ordine, i ventiquattro casi d'uso che le abitano, i sette ruoli che entrano in gioco. Non è una lista da leggere: è uno strumento di lavoro da aprire davanti alla sala.</p>
+          <p><strong>Come si guida.</strong> Tutto è visibile in una volta: sette colonne da sinistra a destra, ventiquattro schede. Seleziona una scheda e la barra in basso riporta cosa serve e quali ruoli devono essere coinvolti; seleziona un ruolo e la mappa isola i casi in cui compare. <em>Esc</em> toglie la selezione, <em>Azzera</em> chiude tutto, <em>Tour guidato</em> fa il giro in quattro passi.</p>
+          <p><strong>La tesi da dire a voce.</strong> L'ordine delle fasi è una spina dorsale, non un cancello: i team tornano indietro quando un gate non passa. Il valore non sta nel numero di casi d'uso, ma nel fatto che ognuno ha un proprietario e un gate riconoscibile — per questo i ruoli stanno dentro le schede e non in una legenda a parte.</p>
+          <p><strong>Se hai poco tempo.</strong> Vai sulla fase 04, fermati su «Integrare due servizi con identity e scope espliciti» e mostra i quattro ruoli coinvolti: è il punto in cui autonomia e responsabilità si incontrano davvero.</p>
         </aside>
       </section>
 
@@ -921,87 +920,87 @@ html,body{height:100%}
 
     const PHASES = [
       { id:'SB-01', code:'01', name:'Scoprire e scegliere',
-        why:'La maggior parte dello sforzo sprecato nasce dal punto di partenza sbagliato.',
+        why:'Uno stack scelto senza verifica preliminare genera debito che si paga per tutta la vita del servizio.',
         ucs:['UC-01','UC-02','UC-22'] },
       { id:'SB-02', code:'02', name:'Dare forma al lavoro',
-        why:'L\'ambiguità costa caro quando il codice esiste già.',
+        why:'Un requisito ambiguo diventa rework quando il codice esiste già.',
         ucs:['UC-20'] },
       { id:'SB-03', code:'03', name:'Preparare l\'ambiente',
-        why:'Il setup si ripete per team e per progetto, ed è dove chi arriva si blocca.',
+        why:'Il setup manuale si ripete per team e per repository, ed è dove chi arriva si blocca.',
         ucs:['UC-03','UC-04','UC-05','UC-06'] },
       { id:'SB-04', code:'04', name:'Costruire e proteggere',
-        why:'Accessi e connettività sono il punto in cui autonomia e responsabilità si incontrano.',
+        why:'Identity, autorizzazioni e connettività privata: qui autonomia e responsabilità si incontrano.',
         ucs:['UC-08','UC-09','UC-10','UC-11','UC-12','UC-24'] },
       { id:'SB-05', code:'05', name:'Validare e rilasciare',
-        why:'Gate coerenti rendono sicura la velocità, e gli asset riusabili moltiplicano il guadagno.',
+        why:'Gate omogenei rendono sicura la velocità; gli asset versionati moltiplicano il guadagno.',
         ucs:['UC-13','UC-15','UC-16'] },
       { id:'SB-06', code:'06', name:'Osservare e operare',
-        why:'Non puoi delegare un\'operatività che non riesci a vedere.',
+        why:'Non si delega un\'operatività che non si riesce a osservare.',
         ucs:['UC-14','UC-17','UC-18','UC-19'] },
       { id:'SB-07', code:'07', name:'Supportare ed evolvere',
-        why:'Una piattaforma che non impara dai suoi utenti smette di essere utile.',
+        why:'Una piattaforma che non raccoglie feedback dai team smette di essere adottata.',
         ucs:['UC-07','UC-21','UC-23'] }
     ];
 
     const UCS = [
-      { id:'UC-01', n:'01', verb:'Chiedere, e ricevere una risposta con le fonti', prio:'Must', phase:'SB-01',
-        what:'Fai una domanda sulla piattaforma in linguaggio naturale e ottieni una risposta presa dalle fonti DX, con le fonti mostrate.' },
-      { id:'UC-02', n:'02', verb:'Scoprire cosa sa fare la piattaforma', prio:'Must', phase:'SB-01',
-        what:'Scopri le capacità che DX espone, comprese quelle che un agente può invocare, e usale sul posto.' },
-      { id:'UC-03', n:'03', verb:'Partire da un workspace che funziona', prio:'Must', phase:'SB-03',
-        what:'Genera un workspace da un default guidato invece di montarlo a mano pezzo per pezzo.' },
-      { id:'UC-04', n:'04', verb:'Dare al workspace un posto dove rilasciare', prio:'Must', phase:'SB-03',
-        what:'Collega un ambiente di deploy a un workspace esistente, con la configurazione prodotta per te.' },
-      { id:'UC-05', n:'05', verb:'Lo stesso ambiente, ogni volta', prio:'Must', phase:'SB-03',
-        what:'Avvia un ambiente di sviluppo che si comporta allo stesso modo per tutto il team.' },
-      { id:'UC-06', n:'06', verb:'Misurare il workspace rispetto al percorso', prio:'Must', phase:'SB-03',
-        what:'Valuta quanto un workspace segue le indicazioni concordate e cosa manca per allinearsi.' },
-      { id:'UC-07', n:'07', verb:'Migrare senza ricominciare', prio:'Must', phase:'SB-07',
-        what:'Porta un progetto esistente su un percorso supportato senza ricostruirlo da zero.' },
-      { id:'UC-08', n:'08', verb:'Infrastruttura, pianificata prima di esistere', prio:'Must', phase:'SB-04',
-        what:'Trasforma un bisogno di infrastruttura in un piano revisionato e provisionabile.' },
-      { id:'UC-09', n:'09', verb:'Accesso, concesso in modo stretto', prio:'Must', phase:'SB-04',
-        what:'Richiedi e concedi accesso a una risorsa con lo scope più stretto che funziona.' },
-      { id:'UC-10', n:'10', verb:'Collegare senza aprire tutto', prio:'Must', phase:'SB-04',
-        what:'Collega due reti private senza esporne nessuna pubblicamente.' },
-      { id:'UC-11', n:'11', verb:'Un servizio, due cloud', prio:'Should', phase:'SB-04',
-        what:'Collega ambienti che vivono su cloud diversi perché un servizio li attraversi.' },
-      { id:'UC-12', n:'12', verb:'Integrare senza cedere fiducia', prio:'Must', phase:'SB-04',
-        what:'Integra due servizi con identità, scope e comportamento in errore espliciti.' },
-      { id:'UC-13', n:'13', verb:'Controlli prima del merge, non dopo', prio:'Must', phase:'SB-05',
-        what:'Verifica una modifica rispetto ai gate configurati prima che si integri.' },
-      { id:'UC-14', n:'14', verb:'Accorgersi quando la realtà cambia', prio:'Must', phase:'SB-06',
-        what:'Rileva quando l\'infrastruttura deployata non corrisponde più allo stato dichiarato.' },
-      { id:'UC-15', n:'15', verb:'Rilasciare, con una via di ritorno', prio:'Must', phase:'SB-05',
-        what:'Rilascia un servizio lungo un percorso che include i controlli di sicurezza concordati.' },
-      { id:'UC-16', n:'16', verb:'Rendere riusabile una cosa buona', prio:'Must', phase:'SB-05',
-        what:'Versiona un asset riusabile e pubblicalo perché altri team lo adottino con consapevolezza.' },
-      { id:'UC-17', n:'17', verb:'Vedere il servizio mentre gira', prio:'Must', phase:'SB-06',
-        what:'Ottieni visibilità operativa su un servizio, comprese le dashboard che lo rendono leggibile.' },
-      { id:'UC-18', n:'18', verb:'Vedere il costo prima della fattura', prio:'Should', phase:'SB-06',
-        what:'Fai emergere le risorse il cui profilo di costo è un rischio, prima che diventi una sorpresa.' },
-      { id:'UC-19', n:'19', verb:'Misurare il percorso, non il rumore', prio:'Should', phase:'SB-06',
-        what:'Esplora metriche di engineering e adozione con abbastanza contesto da potertene fidare.' },
-      { id:'UC-20', n:'20', verb:'Dare forma al lavoro con un agente', prio:'Should', phase:'SB-02',
-        what:'Usa un agente per trasformare un\'iniziativa di prodotto in lavoro strutturato e revisionabile.' },
-      { id:'UC-21', n:'21', verb:'Sapere quale agente aiuta di più', prio:'Should', phase:'SB-07',
-        what:'Confronta le capacità degli agenti su esecuzioni comparabili, non su impressioni.' },
-      { id:'UC-22', n:'22', verb:'Verificare prima di impegnarsi', prio:'Should', phase:'SB-01',
-        what:'Valuta se una tecnologia rispetta le indicazioni di adozione concordate prima di adottarla.' },
-      { id:'UC-23', n:'23', verb:'Chiedere aiuto, lasciarlo migliore', prio:'Should', phase:'SB-07',
-        what:'Ottieni supporto quando il percorso non calza, e rimanda il miglioramento alla piattaforma.' },
-      { id:'UC-24', n:'24', verb:'Dare all\'agente la competenza giusta', prio:'Should', phase:'SB-04',
-        what:'Fornisci a un agente la guida specialistica che serve a un task, dentro il lavoro stesso.' }
+      { id:'UC-01', n:'01', verb:'Query alla documentazione DX con fonti citate', prio:'Must', phase:'SB-01',
+        what:'Formula una domanda in linguaggio naturale sulla piattaforma e ottieni una risposta estratta dalle fonti DX, con i riferimenti che la sostengono.' },
+      { id:'UC-02', n:'02', verb:'Elencare le capability DX, agenti inclusi', prio:'Must', phase:'SB-01',
+        what:'Consulta il catalogo delle capacità che DX espone, comprese quelle invocabili da un agente, e usale nel contesto di lavoro.' },
+      { id:'UC-03', n:'03', verb:'Provisionare un workspace da template validato', prio:'Must', phase:'SB-03',
+        what:'Genera un workspace da un default approvato, con dipendenze e configurazione già risolte, invece di montarlo a mano.' },
+      { id:'UC-04', n:'04', verb:'Collegare un target di deploy al workspace', prio:'Must', phase:'SB-03',
+        what:'Collega un ambiente di deploy a un workspace esistente; la configurazione di rilascio arriva dal golden path.' },
+      { id:'UC-05', n:'05', verb:'Ambienti di sviluppo riproducibili fra i team', prio:'Must', phase:'SB-03',
+        what:'Avvia un ambiente di sviluppo identico per configurazione e versioni in tutto il team, così i risultati sono confrontabili.' },
+      { id:'UC-06', n:'06', verb:'Misurare l\'aderenza del workspace al golden path', prio:'Must', phase:'SB-03',
+        what:'Valuta quanto un workspace rispetta gli standard di piattaforma concordati ed elenca gli scostamenti da colmare.' },
+      { id:'UC-07', n:'07', verb:'Migrare un progetto sul golden path', prio:'Must', phase:'SB-07',
+        what:'Porta un progetto esistente su un percorso supportato senza ricostruirlo da zero, mantenendo storico e pipeline.' },
+      { id:'UC-08', n:'08', verb:'Pianificare l\'infrastruttura prima del provision', prio:'Must', phase:'SB-04',
+        what:'Trasforma un requisito infrastrutturale in un piano revisionato, con stima e provisioning ripetibile.' },
+      { id:'UC-09', n:'09', verb:'Richiedere e concedere accesso a una risorsa cloud', prio:'Must', phase:'SB-04',
+        what:'Richiedi e concedi accesso a una risorsa cloud con lo scope minimo necessario e una scadenza esplicita.' },
+      { id:'UC-10', n:'10', verb:'Collegare due reti private senza esporle', prio:'Must', phase:'SB-04',
+        what:'Collega due reti private tramite peering o private link, senza esporre alcun endpoint pubblico.' },
+      { id:'UC-11', n:'11', verb:'Un servizio su due cloud, senza endpoint pubblici', prio:'Should', phase:'SB-04',
+        what:'Collega ambienti su cloud diversi perché un servizio li attraversi mantenendo il traffico su rete privata.' },
+      { id:'UC-12', n:'12', verb:'Integrare due servizi con identity e scope espliciti', prio:'Must', phase:'SB-04',
+        what:'Integra due servizi definendo identità, scope e comportamento in errore, senza credenziali condivise.' },
+      { id:'UC-13', n:'13', verb:'Eseguire i gate di qualità prima del merge', prio:'Must', phase:'SB-05',
+        what:'Verifica una modifica contro i gate configurati — test, sicurezza, licenze — prima che venga integrata.' },
+      { id:'UC-14', n:'14', verb:'Rilevare drift fra stato reale e dichiarato', prio:'Must', phase:'SB-06',
+        what:'Rileva quando l\'infrastruttura deployata diverge dallo stato dichiarato e riporta la differenza.' },
+      { id:'UC-15', n:'15', verb:'Rilasciare con rollback rapido e verificato', prio:'Must', phase:'SB-05',
+        what:'Rilascia un servizio lungo il golden path, con i controlli di sicurezza concordati e un rollback provato.' },
+      { id:'UC-16', n:'16', verb:'Versionare e pubblicare un asset riusabile', prio:'Must', phase:'SB-05',
+        what:'Versiona un asset di piattaforma e pubblicalo nel catalogo interno, con note di adozione e vincoli d\'uso.' },
+      { id:'UC-17', n:'17', verb:'Osservare il servizio in esercizio', prio:'Must', phase:'SB-06',
+        what:'Ottieni visibilità operativa su un servizio in esecuzione: metriche, log e dashboard che lo rendono leggibile.' },
+      { id:'UC-18', n:'18', verb:'Prevedere il costo prima della fattura', prio:'Should', phase:'SB-06',
+        what:'Fai emergere le risorse con un profilo di costo anomalo prima che diventi uno scostamento di budget.' },
+      { id:'UC-19', n:'19', verb:'Adozione e performance, non vanity metric', prio:'Should', phase:'SB-06',
+        what:'Esplora metriche di engineering e di adozione con il contesto — coorti, perimetro, periodo — che serve a decidere.' },
+      { id:'UC-20', n:'20', verb:'Trasformare un\'iniziativa in backlog eseguibile', prio:'Should', phase:'SB-02',
+        what:'Usa un agente per convertire un\'iniziativa di prodotto in lavoro strutturato, tracciabile e revisionabile.' },
+      { id:'UC-21', n:'21', verb:'Confrontare gli agenti su esecuzioni comparabili', prio:'Should', phase:'SB-07',
+        what:'Confronta le capacità degli agenti su esecuzioni comparabili e su metriche definite, non su impressioni.' },
+      { id:'UC-22', n:'22', verb:'Verificare una tecnologia prima di adottarla', prio:'Should', phase:'SB-01',
+        what:'Valuta se una tecnologia rispetta gli standard di adozione concordati prima di introdurla in un servizio.' },
+      { id:'UC-23', n:'23', verb:'Ottenere supporto e alimentare il backlog DX', prio:'Should', phase:'SB-07',
+        what:'Ottieni supporto quando il golden path non copre il tuo caso e registra lo scostamento come voce di backlog per la piattaforma.' },
+      { id:'UC-24', n:'24', verb:'Iniettare nell\'agente la competenza del task', prio:'Should', phase:'SB-04',
+        what:'Fornisci a un agente la guida specialistica che serve a un task specifico, dentro il flusso di lavoro.' }
     ];
 
     const ROLES = [
-      { icon:'users',     short:'Team di prodotto',         kind:'chi costruisce, approva e manda in produzione' },
-      { icon:'bot',       short:'Agente di coding',         kind:'chi lavora al posto suo' },
-      { icon:'layers',    short:'Team DX',                  kind:'chi possiede la piattaforma' },
-      { icon:'briefcase', short:'Stakeholder di prodotto',  kind:'chi decide cosa vale la pena' },
+      { icon:'users',     short:'Team di prodotto',         kind:'chi sviluppa, approva e mette in produzione' },
+      { icon:'bot',       short:'Agente di coding',         kind:'chi esegue task al posto del team' },
+      { icon:'layers',    short:'Team DX',                  kind:'chi mantiene piattaforma e golden path' },
+      { icon:'briefcase', short:'Stakeholder di prodotto',  kind:'chi decide priorità e budget' },
       { icon:'database',  short:'Proprietario del dato',    kind:'chi autorizza l\'accesso al dato' },
-      { icon:'shield',    short:'Sicurezza e privacy',      kind:'chi pone il vincolo' },
-      { icon:'globe',     short:'Consumatore del servizio', kind:'chi usa il risultato' }
+      { icon:'shield',    short:'Sicurezza e privacy',      kind:'chi definisce vincoli e controlli' },
+      { icon:'globe',     short:'Consumatore del servizio', kind:'chi consuma il servizio in produzione' }
     ];
 
     const LINKS = {
@@ -1100,7 +1099,6 @@ html,body{height:100%}
           return '<button type="button" class="card' + (u.prio === 'Must' ? ' must' : '') + '"'
             + ' data-uc="' + id + '" data-col="' + ci + '" data-row="' + ri + '"'
             + ' aria-label="' + esc(u.id + ' · ' + u.verb) + '">'
-            + '<span class="c-num">' + u.n + '</span>'
             + '<span class="c-verb">' + esc(u.verb) + '</span>'
             + '<span class="c-roles">' + dots + more + '</span>'
             + '</button>';
@@ -1150,11 +1148,11 @@ html,body{height:100%}
         const n = UCS.filter(u => (LINKS[u.id] || []).includes(state.role)).length;
         mdKey.textContent = 'Ruolo';
         mdTxt.innerHTML = '<strong>' + esc(r.short) + '</strong> — ' + esc(r.kind) + '. '
-          + 'Entra in gioco in ' + plural(n) + ': la mappa resta accesa solo su quelli.';
+          + 'Compare in ' + plural(n) + ': la mappa isola quelli.';
         mdMeta.innerHTML = '<span class="md-n">' + plural(n) + '</span>';
       } else {
         mdKey.textContent = 'Mappa';
-        mdTxt.innerHTML = 'Sette fasi in ordine, ventiquattro casi d\'uso, sette ruoli. <strong>Clicca una scheda</strong> per leggerne il dettaglio; clicca un\'icona in alto a destra per vedere chi è coinvolto.';
+        mdTxt.innerHTML = 'Sette fasi del golden path, ventiquattro casi d\'uso, sette ruoli. <strong>Seleziona una scheda</strong> per il dettaglio; seleziona un ruolo per isolare i casi in cui entra in gioco.';
         mdMeta.innerHTML = '<span class="md-n">24 casi · 7 ruoli</span>';
       }
     }
@@ -1162,10 +1160,10 @@ html,body{height:100%}
     /* ----------------------------------------------------------- tour */
 
     const TOUR = [
-      { title:'Questa è DX', text:'Un percorso condiviso dall\'idea al servizio affidabile: per i team di prodotto e per gli agenti che lavorano al posto loro.' },
-      { title:'Sette colonne, un solo ordine', text:'Da sinistra a destra. L\'altezza delle colonne dice dove il lavoro si concentra: la fase 04 è quella che tocca più persone.' },
-      { title:'Ogni scheda è un caso d\'uso', text:'Ventiquattro in tutto, tutti visibili insieme. Cliccane uno: la barra in basso dice cosa serve e chi deve essere nella stanza.' },
-      { title:'Chi è coinvolto', text:'Le icone in alto a destra sono i sette ruoli. Sviluppatore, reviewer, proprietario della risorsa e operations stanno tutti dentro «Team di prodotto»: la stessa squadra con cappelli diversi. Clicca un altro ruolo e la mappa si accende sui casi che lo riguardano.' }
+      { title:'Che cos\'è questa mappa', text:'Il golden path di DX, dall\'idea al servizio in produzione. Le fasi sono standard di piattaforma, non suggerimenti: ognuna ha un output verificabile.' },
+      { title:'Sette fasi, un solo ordine', text:'Da sinistra a destra. L\'altezza delle colonne dice dove il lavoro si concentra: la fase 04 è quella che coinvolge più ruoli.' },
+      { title:'Ogni scheda è un caso d\'uso', text:'Ventiquattro casi, tutti visibili insieme. Selezionane uno: la barra in basso riporta cosa serve e quali ruoli devono essere coinvolti.' },
+      { title:'Chi è coinvolto', text:'Le icone in alto a destra sono i sette ruoli. Sviluppatore, reviewer, proprietario della risorsa e operations sono accorpati in «Team di prodotto»: stessa squadra, responsabilità diverse. Seleziona un ruolo per isolare i casi che lo riguardano.' }
     ];
 
     let ti = -1;
