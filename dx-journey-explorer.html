@@ -386,6 +386,14 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
 .mh-t strong{color:var(--accent-ink);font-weight:600}
 .mh-r{display:flex;flex-direction:column;align-items:flex-end;gap:9px;flex:none}
 .mh-tools{display:flex;align-items:center;gap:6px}
+.mlegend{
+  display:flex;align-items:center;gap:5px;margin-right:3px;padding-right:11px;
+  border-right:1px solid var(--hair-2);
+  font-family:"Titillio","Helvetica Neue",Arial,sans-serif;
+  font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);white-space:nowrap;
+}
+.mlegend-sw{width:13px;height:11px;border:1px solid var(--hair-2);border-radius:3px;background:#fff;box-shadow:inset 2px 0 0 var(--accent)}
+.mlegend-sw.off{box-shadow:none}
 .mbtn{
   font-family:"Titillio","Helvetica Neue",Arial,sans-serif;
   font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;line-height:1.2;
@@ -569,6 +577,10 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
             </div>
             <div class="mh-r">
               <div class="mh-tools">
+                <span class="mlegend" title="Le schede con la barra teal sono i casi d'uso Must, le altre Should">
+                  <span class="mlegend-sw"></span>Must
+                  <span class="mlegend-sw off" style="margin-left:5px"></span>Should
+                </span>
                 <button class="mbtn" type="button" id="mapReset">Azzera</button>
                 <button class="mbtn" type="button" id="mapTourBtn">Tour guidato</button>
               </div>
@@ -610,7 +622,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
 
         <aside class="notes">
           <p><strong>Che cos'è questa slide.</strong> Una sola mappa del golden path DX: le sette fasi in ordine, i ventiquattro casi d'uso che le abitano, i sette ruoli che entrano in gioco. Non è una lista da leggere: è uno strumento di lavoro da aprire davanti alla sala.</p>
-          <p><strong>Come si guida.</strong> Tutto è visibile in una volta: sette colonne da sinistra a destra, ventiquattro schede. Seleziona una scheda e il pannello laterale mostra cosa serve, i ruoli coinvolti e gli artefatti di <em>pagopa/dx</em> che implementano quel caso — comandi della CLI, moduli Terraform, workflow, action, pagine di documentazione. Seleziona un ruolo e il pannello elenca i casi in cui compare, ognuno cliccabile. <em>Esc</em> chiude il pannello, <em>Azzera</em> chiude tutto, <em>Tour guidato</em> fa il giro in quattro passi.</p>
+          <p><strong>Come si guida.</strong> Tutto è visibile in una volta: sette colonne da sinistra a destra, ventiquattro schede. La barra teal sul bordo sinistro marca i sedici casi <em>Must</em>, le otto schede senza barra sono <em>Should</em>: la legenda in alto a destra lo ricorda, e la stessa etichetta compare nel pannello. Seleziona una scheda e il pannello laterale mostra cosa serve, i ruoli coinvolti e gli artefatti di <em>pagopa/dx</em> che implementano quel caso — comandi della CLI, moduli Terraform, workflow, action, pagine di documentazione. Seleziona un ruolo e il pannello elenca i casi in cui compare, ognuno cliccabile. <em>Esc</em> chiude il pannello, <em>Azzera</em> chiude tutto, <em>Tour guidato</em> fa il giro in quattro passi.</p>
           <p><strong>La tesi da dire a voce.</strong> L'ordine delle fasi è una spina dorsale, non un cancello: i team tornano indietro quando un gate non passa. Il valore non sta nel numero di casi d'uso, ma nel fatto che ognuno ha un proprietario e un gate riconoscibile — per questo i ruoli stanno dentro le schede e non in una legenda a parte.</p>
           <p><strong>Se hai poco tempo.</strong> Vai sulla fase 04, apri «Integrare due servizi con identity e scope espliciti» e mostra i quattro ruoli coinvolti e i tre artefatti che lo implementano: è il punto in cui autonomia e responsabilità si incontrano davvero, e dove il golden path smette di essere una linea guida e diventa codice che gira.</p>
         </aside>
