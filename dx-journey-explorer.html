@@ -533,6 +533,14 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
 }
 .dw-li-t{font-size:11.2px;line-height:1.25;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .dw-note{font-size:11.5px;line-height:1.45;color:var(--muted);margin:2px 0 0}
+.dw-dec{
+  list-style:none;margin:1px 0 0;padding:8px 9px 9px;display:flex;flex-direction:column;gap:6px;
+  background:var(--accent-tint);border:1px solid #d3edf0;border-radius:8px;
+}
+.dw-dec li{display:flex;align-items:flex-start;gap:7px;min-width:0}
+.dw-dec .icon{color:var(--accent);flex:none;margin-top:2px}
+.dw-dec-t{font-size:11.1px;line-height:1.4;color:var(--body);min-width:0}
+.dw-dec-t strong{color:var(--ink);font-weight:600}
 
 .mtour{
   position:absolute;left:24px;bottom:14px;width:560px;max-width:calc(100% - 424px);z-index:30;
@@ -622,7 +630,8 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
 
         <aside class="notes">
           <p><strong>Che cos'è questa slide.</strong> Una sola mappa del golden path DX: le sette fasi in ordine, i ventiquattro casi d'uso che le abitano, i sette ruoli che entrano in gioco. Non è una lista da leggere: è uno strumento di lavoro da aprire davanti alla sala.</p>
-          <p><strong>Come si guida.</strong> Tutto è visibile in una volta: sette colonne da sinistra a destra, ventiquattro schede. La barra teal sul bordo sinistro marca i sedici casi <em>Must</em>, le otto schede senza barra sono <em>Should</em>: la legenda in alto a destra lo ricorda, e la stessa etichetta compare nel pannello. Seleziona una scheda e il pannello laterale mostra cosa serve, i ruoli coinvolti e gli artefatti di <em>pagopa/dx</em> che implementano quel caso — comandi della CLI, moduli Terraform, workflow, action, pagine di documentazione. Seleziona un ruolo e il pannello elenca i casi in cui compare, ognuno cliccabile. <em>Esc</em> chiude il pannello, <em>Azzera</em> chiude tutto, <em>Tour guidato</em> fa il giro in quattro passi.</p>
+          <p><strong>Come si guida.</strong> Tutto è visibile in una volta: sette colonne da sinistra a destra, ventiquattro schede. La barra teal sul bordo sinistro marca i sedici casi <em>Must</em>, le otto schede senza barra sono <em>Should</em>: la legenda in alto a destra lo ricorda, e la stessa etichetta compare nel pannello. Seleziona una scheda e il pannello laterale mostra cosa serve, i ruoli coinvolti, le decisioni che la piattaforma ha già preso e gli artefatti di <em>pagopa/dx</em> che implementano quel caso — comandi della CLI, moduli Terraform, workflow, action, pagine di documentazione. Seleziona un ruolo e il pannello elenca i casi in cui compare, ognuno cliccabile. <em>Esc</em> chiude il pannello, <em>Azzera</em> chiude tutto, <em>Tour guidato</em> fa il giro in quattro passi.</p>
+          <p><strong>Perché adottare e non rifare.</strong> Il punto della sezione «Decisioni che non serve prendere» è il ritorno dell'investimento: ogni artefatto comprime decine di scelte opinionated — identità federata invece di secret, private endpoint invece di esposizione pubblica, version plan invece di numeri a caso — che un team rifarebbe da solo, con esiti diversi dagli altri. Non è codice risparmiato: è allineamento risparmiato. Se qualcuno dice «lo faccio da zero», quella lista è la risposta.</p>
           <p><strong>La tesi da dire a voce.</strong> L'ordine delle fasi è una spina dorsale, non un cancello: i team tornano indietro quando un gate non passa. Il valore non sta nel numero di casi d'uso, ma nel fatto che ognuno ha un proprietario e un gate riconoscibile — per questo i ruoli stanno dentro le schede e non in una legenda a parte.</p>
           <p><strong>Se hai poco tempo.</strong> Vai sulla fase 04, apri «Integrare due servizi con identity e scope espliciti» e mostra i quattro ruoli coinvolti e i tre artefatti che lo implementano: è il punto in cui autonomia e responsabilità si incontrano davvero, e dove il golden path smette di essere una linea guida e diventa codice che gira.</p>
         </aside>
@@ -1107,12 +1116,138 @@ html,body{height:100%}
       box:'<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>',
       workflow:'<rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/>',
       zap:'<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>',
-      'file-text':'<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/>'
+      'file-text':'<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/>',
+      check:'<path d="M20 6 9 17l-5-5"/>'
     };
 
     /* Artefatti di pagopa/dx che implementano ciascun caso d'uso.
        Ogni voce è [titolo, path nel repository]; i link sono verificati su main. */
     const DX_REPO = 'https://github.com/pagopa/dx/blob/main/';
+
+    /* Decisioni opinionated già compresse nell'artefatto: sono la ragione per
+       cui rifare il caso d'uso da zero ha un ritorno basso. */
+    const DECISIONS = {
+      'UC-01': [
+        ['Fonti DX, non memoria', "l'agente legge la documentazione versionata, non ciò che ha visto in addestramento"],
+        ['Citazione obbligatoria', 'ogni risposta porta il riferimento che la sostiene, quindi è verificabile'],
+        ['Un solo punto di accesso', 'il server MCP sostituisce le istruzioni copiate a mano nei prompt']
+      ],
+      'UC-02': [
+        ['Catalogo versionato', 'le capability stanno in un manifest nel repo, non in un wiki'],
+        ['Plugin come unità', 'ogni capability è un pacchetto Agent Plugins: manifest, skills, server MCP'],
+        ['Attivazione selettiva', 'il marketplace dichiara cosa è attivo per default e cosa resta opt-in']
+      ],
+      'UC-03': [
+        ['Monorepo Nx per default', 'struttura, toolchain e dipendenze sono decise una volta per tutti i team'],
+        ['Toolchain bloccata', 'mise fissa le versioni: niente «funziona sulla mia macchina»'],
+        ['Convenzioni già applicate', 'naming, dotfiles e workflow arrivano col template, non da ricordare']
+      ],
+      'UC-04': [
+        ['Deploy solo da pipeline', 'nessun rilascio a mano dalla macchina di chi sviluppa'],
+        ['Ambienti GitHub', 'la configurazione di rilascio vive negli Environment, non in secret sparsi'],
+        ['Ruoli già assegnati', 'il bootstrap crea le identità con lo scope minimo che serve']
+      ],
+      'UC-05': [
+        ['Dev container come contratto', 'editor, runtime e tool stanno nel repo e sono gli stessi per tutti'],
+        ['Stessa immagine in CI', 'ciò che gira in locale è ciò che gira nei gate'],
+        ['Runner self-hosted', 'chi richiede rete privata o hardware dedicato ha un posto dove girare']
+      ],
+      'UC-06': [
+        ['Regole esplicite', 'gli scostamenti dal golden path li elenca un tool, non una review orale'],
+        ['Stessi controlli ovunque', 'il validate del workspace è lo stesso workflow che gira in CI'],
+        ['Deroga tracciata', 'ogni scostamento ammesso ha una voce nel backlog DX']
+      ],
+      'UC-07': [
+        ['Codemod, non riscrittura', 'le trasformazioni sono versionate e ripetibili su più repository'],
+        ['Storico conservato', "si cambia l'impalcatura del progetto, non la sua storia git"],
+        ['Convivenza col legacy', 'la transizione può essere graduale, senza spegnere tutto insieme']
+      ],
+      'UC-08': [
+        ['Plan prima dell\'apply', "nessuna modifica all'infrastruttura passa senza un piano revisionato"],
+        ['Stato remoto con lock', 'un solo scrittore per volta sullo stesso stato'],
+        ['Moduli dal registry', 'il codice Terraform si referenzia per versione, non si copia fra repo']
+      ],
+      'UC-09': [
+        ['Gruppi Entra, non utenti', "Admin, Developers ed Externals per team: l'accesso si gestisce per gruppo"],
+        ['Least privilege', 'i ruoli proposti dai moduli sono già il minimo necessario'],
+        ['Federazione OIDC', 'GitHub verso Azure senza credenziali da ruotare']
+      ],
+      'UC-10': [
+        ['Nessun endpoint pubblico', 'la connettività fra reti passa da private endpoint'],
+        ['Il PE è di chi chiama', 'il codice del private endpoint sta nel repo del team chiamante'],
+        ['Un PE per risorsa', 'condiviso fra le applicazioni dello stesso team, per non moltiplicarlo']
+      ],
+      'UC-11': [
+        ['Rete privata fra cloud', 'la VPN collega AWS e Azure senza esporre servizi su internet'],
+        ['Un modulo per lato', "ogni cloud ha il suo pezzo, l'accoppiamento resta esplicito"],
+        ['Traffico mai pubblico', 'anche fra provider diversi il percorso resta privato']
+      ],
+      'UC-12': [
+        ['Identità federata', 'ogni servizio ha la sua identità, non una chiave condivisa'],
+        ['Scope per dominio', 'lo IAM è granulare, quindi un namespace si può condividere'],
+        ['Service Bus condiviso', "il costo Premium si divide, l'isolamento fra team resta"]
+      ],
+      'UC-13': [
+        ['Gate dichiarati', 'test, sicurezza e licenze stanno nel workflow: la lista è codice'],
+        ['Workflow riusabili', 'le stesse regole per tutti i repository, non copiate e divergenti'],
+        ['Auto-merge', 'quando i gate passano il merge non aspetta una persona']
+      ],
+      'UC-14': [
+        ['Drift rilevato a orario', 'il controllo gira schedulato, non quando qualcuno se ne accorge'],
+        ['Stato remoto come verità', "il confronto è con l'infrastruttura reale, non con la memoria"],
+        ['Detection in sola lettura', 'il rilevamento non modifica né corregge nulla']
+      ],
+      'UC-15': [
+        ['Rollout incrementale', 'la nuova versione si espone a poco a poco, non tutta insieme'],
+        ['Rollback provato', "la via di ritorno è parte della pipeline, non un'ipotesi"],
+        ['Versioni immutabili', 'si torna a un artefatto già noto, non si ricostruisce al volo']
+      ],
+      'UC-16': [
+        ['Versione per pacchetto', 'ogni progetto è versionato in modo indipendente'],
+        ['Version plan nel PR', 'il bump è rivisto insieme al codice che lo motiva'],
+        ['Major con migrazione', 'un breaking change senza guida di migrazione non passa']
+      ],
+      'UC-17': [
+        ['OpenTelemetry', 'si strumenta con standard aperti: il vendor si cambia senza riscrivere'],
+        ['Azure Monitor come collector', 'tracce, metriche e log finiscono in un posto solo'],
+        ['Dashboard come codice', 'la dashboard è Terraform, quindi versionata e rivedibile']
+      ],
+      'UC-18': [
+        ['Analisi in sola lettura', 'nessuno spegne o cancella risorse in automatico'],
+        ['Costo attribuito per tag', 'CostCenter, Owner ed Environment sono obbligatori'],
+        ['Review, non allarme', 'i finding sono spunti di revisione, non azioni automatiche']
+      ],
+      'UC-19': [
+        ['Metriche con perimetro', 'coorti e periodo dichiarati: il numero nudo non si pubblica'],
+        ['Una definizione sola', 'la metrica vive nel core condiviso, non in ogni dashboard'],
+        ['Niente vanity metric', 'si misura ciò che cambia una decisione']
+      ],
+      'UC-20': [
+        ['Backlog versionato', 'il lavoro strutturato è un artefatto nel repo, non un documento che invecchia'],
+        ['Un task, un criterio', 'nessuna voce senza un esito verificabile'],
+        ['Agente propone, persona approva', 'il lavoro generato resta revisionabile']
+      ],
+      'UC-21': [
+        ['Esecuzioni comparabili', 'stesso task e stesso ambiente per ogni agente confrontato'],
+        ['Metriche prima', 'si decide cosa conta prima di guardare i risultati'],
+        ['Benchmark ripetibile', 'il confronto si rilancia, non si racconta']
+      ],
+      'UC-22': [
+        ['Criteri scritti', 'si valuta contro standard di adozione, non contro preferenze'],
+        ['Ciclo di vita dichiarato', 'ogni tecnologia ha uno stato esplicito nel tooling lifecycle'],
+        ['Eccezione motivata', 'una tecnologia nuova entra per deroga argomentata, non per default']
+      ],
+      'UC-23': [
+        ['Un canale solo', "il supporto ha una porta d'ingresso, non dieci caselle di posta"],
+        ['Scostamento a backlog', 'la deroga trovata sul campo diventa voce per la piattaforma'],
+        ['Contributo al monorepo', 'chi incontra il limite può correggerlo alla fonte']
+      ],
+      'UC-24': [
+        ['Competenza come plugin', 'skills e server MCP stanno in un pacchetto, non nel prompt del momento'],
+        ['Contesto versionato', 'le istruzioni evolvono con il repo che descrivono'],
+        ['Una fonte sola', 'niente guide duplicate che divergono fra team']
+      ]
+    };
 
     const ARTEFACTS = {
       'UC-01': [
@@ -1347,11 +1482,19 @@ html,body{height:100%}
         const roles = (LINKS[u.id] || [])
           .map(i => '<span class="dw-r">' + ic(ROLES[i].icon, 12) + esc(ROLES[i].short) + '</span>').join('');
         const arts = ARTEFACTS[u.id] || [];
+        const dec = DECISIONS[u.id] || [];
         dwKey.textContent = u.id + (ph ? ' · ' + ph.name : '');
         dwBody.innerHTML =
           '<h3 class="dw-title" id="dwTitle">' + esc(u.verb) + '</h3>'
           + '<p class="dw-what">' + esc(u.what) + '</p>'
           + '<div class="dw-meta"><span class="dw-tag">' + esc(u.prio) + '</span>' + roles + '</div>'
+          + (dec.length
+            ? '<p class="dw-sec">Decisioni che non serve prendere</p>'
+              + '<ul class="dw-dec">' + dec.map(d =>
+                  '<li>' + ic('check', 11) + '<span class="dw-dec-t"><strong>' + esc(d[0])
+                  + '</strong> — ' + esc(d[1]) + '</span></li>').join('') + '</ul>'
+              + '<p class="dw-note">Adottare l\'artefatto costa meno che rifare queste scelte in ogni team, e porta tutti allo stesso esito.</p>'
+            : '')
           + '<p class="dw-sec">Artefatti in pagopa/dx</p>'
           + (arts.length
             ? arts.map(artHTML).join('')
@@ -1377,7 +1520,9 @@ html,body{height:100%}
       dwBody.innerHTML =
         '<h3 class="dw-title" id="dwTitle">Sette fasi, ventiquattro casi d\'uso</h3>'
         + '<p class="dw-what">Seleziona una scheda per vedere cosa serve, quali ruoli entrano in gioco e quali artefatti di pagopa/dx la implementano.</p>'
-        + '<div class="dw-meta"><span class="dw-tag">24 casi</span><span class="dw-tag">7 ruoli</span></div>';
+        + '<div class="dw-meta"><span class="dw-tag">24 casi</span><span class="dw-tag">7 ruoli</span></div>'
+        + '<p class="dw-sec">Decisioni che non serve prendere</p>'
+        + '<p class="dw-note">Ogni caso comprime decine di scelte opinionated — identità federata invece di secret, private endpoint invece di esposizione pubblica, version plan invece di numeri a caso. Rifarle da zero in ogni team costa più che adottare l\'artefatto, e porta a esiti diversi. Apri un caso per leggere quali decisioni sono già prese.</p>';
     }
 
     const drawerOpen = () => mapSlide.classList.contains('dw-open');
@@ -1397,7 +1542,7 @@ html,body{height:100%}
     const TOUR = [
       { title:'Che cos\'è questa mappa', text:'Il golden path di DX, dall\'idea al servizio in produzione. Le fasi sono standard di piattaforma, non suggerimenti: ognuna ha un output verificabile.' },
       { title:'Sette fasi, un solo ordine', text:'Da sinistra a destra. L\'altezza delle colonne dice dove il lavoro si concentra: la fase 04 è quella che coinvolge più ruoli.' },
-      { title:'Ogni scheda è un caso d\'uso', text:'Ventiquattro casi, tutti visibili insieme. Selezionane uno: il pannello laterale dice cosa serve, quali ruoli entrano in gioco e quali artefatti di pagopa/dx lo implementano.' },
+      { title:'Ogni scheda è un caso d\'uso', text:'Ventiquattro casi, tutti visibili insieme. Selezionane uno: il pannello laterale dice cosa serve, quali ruoli entrano in gioco, quali decisioni la piattaforma ha già preso e quali artefatti di pagopa/dx le implementano.' },
       { title:'Chi è coinvolto', text:'Le icone in alto a destra sono i sette ruoli. Sviluppatore, reviewer, proprietario della risorsa e operations sono accorpati in «Team di prodotto»: stessa squadra, responsabilità diverse. Seleziona un ruolo per isolare i casi che lo riguardano.' }
     ];
 
