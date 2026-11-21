@@ -385,7 +385,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
             <span class="mono">2026</span>
           </div>
           <div class="cover-main">
-            <h1 class="claim">Delivery Agentica:<br>contratti ed esecuzione guidata.</h1>
+            <h1 class="claim">PagoPA Agentic Delivery Framework:<br>contratti ed esecuzione guidata.</h1>
             <p class="lead" style="max-width:64ch">Il framework per integrare agenti software nello sviluppo: principi, flusso, gate e controllo umano.</p>
             <span class="anno" style="margin-top:-12px;text-transform:none;letter-spacing:.03em">Premessa · Principi · Il flusso · Gate e controllo · Piattaforma · Adozione</span>
           </div>
@@ -400,7 +400,109 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 02 · IL PROBLEMA ============ -->
+      <!-- ============ 02 · PERCHÉ UN FRAMEWORK ============ -->
+      <section class="slide" data-title="Perché un framework" data-section="Premessa" data-slug="valore-framework">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Un metodo, due risultati</h2>
+            <p class="lead">Ridurre il time to market senza abbassare <strong>gli standard di qualità</strong>.</p>
+          </div>
+          <div class="scontent">
+            <div class="cols">
+              <div>
+                <div class="c-head">Ridurre i tempi<span>Eliminare il lavoro a basso valore aggiunto.</span></div>
+                <div class="c-row">
+                  <span class="c-name">Automazione ripetibile</span>
+                  <span class="c-sub">Meno attività manuali e passaggi meccanici lungo il flusso.</span>
+                </div>
+                <div class="c-row">
+                  <span class="c-name">Più tempo per decidere</span>
+                  <span class="c-sub">Le persone si concentrano su intenti, eccezioni e scelte di prodotto.</span>
+                </div>
+              </div>
+              <div>
+                <div class="c-head">Garantire qualità<span>Criteri espliciti in ogni fase.</span></div>
+                <div class="c-row">
+                  <span class="c-name">Contratti e gate</span>
+                  <span class="c-sub">Riducono ambiguità e deviazioni prima che diventino codice.</span>
+                </div>
+                <div class="c-row">
+                  <span class="c-name">Valutazioni e controlli</span>
+                  <span class="c-sub">Rendono l'output verificabile e mantengono il presidio umano.</span>
+                </div>
+              </div>
+            </div>
+            <div class="noteline">
+              <p class="small">La velocità conta quando <strong>la qualità resta misurabile</strong>.</p>
+              <span class="anno">Time to market · Qualità</span>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Perché un framework.</strong> L'obiettivo è ridurre il time to market automatizzando il lavoro ripetitivo e a basso valore aggiunto.</p>
+          <p>La velocità, però, non basta: contratti, gate e valutazioni rendono espliciti i criteri e mantengono alto lo standard del risultato.</p>
+          <p>Perché il guadagno si ripeta tra team, le risposte non possono restare isolate.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 03 · FRAMEWORK CONDIVISO ============ -->
+      <section class="slide" data-title="Framework condiviso" data-section="Premessa" data-slug="framework-condiviso">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Le risposte diventano patrimonio comune</h2>
+            <p class="lead">Ogni team contribuisce a un modello <strong>comune e riusabile</strong>, non a soluzioni isolate.</p>
+          </div>
+          <div class="scontent">
+            <div class="cols">
+              <div>
+                <div class="c-head">Domande da risolvere insieme<span>Interfacce e guardrail condivisi tra i team.</span></div>
+                <div class="c-row">
+                  <span class="c-name">Fonti e contesto</span>
+                  <span class="c-sub">Sorgenti operative di verità, struttura e contesto necessario agli agenti.</span>
+                </div>
+                <div class="c-row">
+                  <span class="c-name">Handoff e readiness</span>
+                  <span class="c-sub">Interfacce, criteri di assegnazione e propagazione automatica delle change request.</span>
+                </div>
+                <div class="c-row">
+                  <span class="c-name">Piattaforma e guardrail</span>
+                  <span class="c-sub">Toolchain, sicurezza, controllo umano, budget di token e tracciabilità.</span>
+                </div>
+                <div class="c-row">
+                  <span class="c-name">Qualità e outcome</span>
+                  <span class="c-sub">Verifiche prima e dopo il deploy; misure per gli obiettivi raggiunti.</span>
+                </div>
+              </div>
+              <div>
+                <div class="c-head">Artefatti da produrre e valutare<span>Le risposte diventano capacità operative.</span></div>
+                <div class="c-row">
+                  <span class="c-name">Custom agent, skill, harness</span>
+                  <span class="c-sub">Componenti modulari, versionati e riusabili nel workflow.</span>
+                </div>
+                <div class="c-row">
+                  <span class="c-name">Documenti azionabili</span>
+                  <span class="c-sub">Comprensibili alle persone, leggibili dagli agenti e allineati al planning.</span>
+                </div>
+                <div class="c-row">
+                  <span class="c-name">Evals e metriche</span>
+                  <span class="c-sub">Prove condivise su qualità, costo dei token e obiettivi nel tempo.</span>
+                </div>
+              </div>
+            </div>
+            <div class="noteline">
+              <p class="small">Il metodo condiviso evita <strong>duplicazioni, obsolescenza e drift</strong>.</p>
+              <span class="anno">Domande · Artefatti · Valutazione</span>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Perché condividere.</strong> Le domande su fonti, contesto, handoff, piattaforma, sicurezza e misurazione ricorrono in ogni team; risolverle separatamente duplica l'effort e produce regole incoerenti.</p>
+          <p>La condivisione non impone un unico processo: definisce interfacce e guardrail comuni, lasciando spazio alle specificità locali. Documenti e planning devono restare allineati e comprensibili alle persone, ma anche azionabili dagli agenti.</p>
+          <p>Le risposte diventano custom agent, skill, harness ed evals versionati, prodotti e valutati nel tempo. Prima di vedere il flusso, guardiamo cosa accade senza questo perimetro.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 04 · IL PROBLEMA ============ -->
       <section class="slide" data-title="Il problema" data-section="Premessa" data-slug="il-problema">
         <div class="sbody">
           <div class="shead">
@@ -455,7 +557,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 03 · PRINCIPI ============ -->
+      <!-- ============ 05 · PRINCIPI ============ -->
       <section class="slide" data-title="I tre pilastri" data-section="Principi" data-slug="principi">
         <div class="sbody">
           <div class="shead">
@@ -490,7 +592,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 04 · SCELTE DI DESIGN ============ -->
+      <!-- ============ 06 · SCELTE DI DESIGN ============ -->
       <section class="slide" data-title="Scelte di design" data-section="Principi" data-slug="scelte-di-design">
         <div class="sbody">
           <div class="shead">
@@ -547,7 +649,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 05 · FLUSSO PANORAMICA ============ -->
+      <!-- ============ 07 · FLUSSO PANORAMICA ============ -->
       <section class="slide" data-title="La catena del valore" data-section="Il flusso" data-slug="flusso-panoramica">
         <div class="sbody">
           <div class="shead">
@@ -599,7 +701,95 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 06 · PRD E DR ============ -->
+      <!-- ============ 08 · SLICE E FEEDBACK ============ -->
+      <section class="slide" data-title="Slice end-to-end" data-section="Il flusso" data-slug="slice-end-to-end">
+        <div class="sbody">
+          <div class="shead">
+            <h2>Slice piccole, feedback continuo</h2>
+            <p class="lead">Un task ampio è possibile, ma preferiamo <strong>slice end-to-end condivise nel team</strong>.</p>
+          </div>
+          <div class="scontent">
+            <div class="fig" style="max-width:1000px">
+              <svg viewBox="0 0 1000 236" aria-label="Un ciclo di slice end-to-end condivise, revisionate e migliorate con il feedback del team">
+                <line x1="80" y1="88" x2="920" y2="88" class="st" pathLength="1" data-draw style="--dd:100ms"/>
+                <circle class="node pop" style="--dd:500ms" cx="120" cy="88" r="8"/>
+                <circle class="node pop" style="--dd:650ms" cx="370" cy="88" r="8"/>
+                <circle class="node-acc pop" style="--dd:800ms" cx="630" cy="88" r="8"/>
+                <circle class="node pop" style="--dd:950ms" cx="880" cy="88" r="8"/>
+
+                <text x="120" y="66" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:550ms">Comportamento</text>
+                <text x="120" y="116" text-anchor="middle" class="lbl pop" style="--dd:600ms" font-size="10.5">condiviso e osservabile</text>
+                <text x="370" y="66" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:700ms">Slice end-to-end</text>
+                <text x="370" y="116" text-anchor="middle" class="lbl pop" style="--dd:750ms" font-size="10.5">codice · test · deploy</text>
+                <text x="630" y="66" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:850ms">Review nel team</text>
+                <text x="630" y="116" text-anchor="middle" class="lbl pop" style="--dd:900ms" font-size="10.5">feedback incrementale</text>
+                <text x="880" y="66" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1000ms">Feedback</text>
+                <text x="880" y="116" text-anchor="middle" class="lbl pop" style="--dd:1050ms" font-size="10.5">requisiti e perimetro</text>
+
+                <path class="st-dim" stroke-dasharray="6 7" pathLength="1" data-draw style="--dd:1150ms" d="M 880 144 Q 500 224 135 144"/>
+                <path class="pop" style="--dd:1700ms" d="M 120 144 L 138 138 L 138 152 Z" fill="var(--fig-dim)"/>
+                <text x="500" y="202" text-anchor="middle" class="lbl pop" style="--dd:1750ms" font-size="11">il feedback condiviso alimenta la prossima slice</text>
+              </svg>
+              <p class="figcap"><span class="anno">La review può aggiornare requisiti e perimetro della slice successiva.</span></p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>La slice è l'unità di collaborazione.</strong> Un agente può affrontare un task ampio, ma non è la modalità di delivery che preferiamo: condividere comportamenti osservabili mantiene il team allineato.</p>
+          <p>Ogni slice attraversa codice, test e deploy. La review incrementale verifica l'esito con le persone e può modificare requisiti o perimetro, invece di rimandare il feedback alla fine.</p>
+          <p>Per rendere sostenibili questi passaggi, la review deve avere tempi concordati e ogni rilascio deve poter essere annullato senza coinvolgere le altre slice.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 09 · REVIEW ENTRO UNA FINESTRA ============ -->
+      <section class="slide" data-title="Review entro una finestra" data-section="Il flusso" data-slug="review-entro-finestra">
+        <div class="sbody">
+          <div class="shead">
+            <h2>La review ha tempi certi</h2>
+            <p class="lead">Ogni slice riceve un esito umano entro una <strong>finestra concordata e misurabile</strong>.</p>
+          </div>
+          <div class="scontent">
+            <div class="fig" style="max-width:1000px">
+              <svg viewBox="0 0 1000 236" aria-label="Ogni slice viene revisionata entro un tempo concordato, poi distribuita e osservata">
+                <line x1="100" y1="72" x2="860" y2="72" class="st" pathLength="1" data-draw style="--dd:100ms"/>
+                <circle class="node pop" style="--dd:500ms" cx="120" cy="72" r="8"/>
+                <circle class="node-acc pop" style="--dd:650ms" cx="360" cy="72" r="8"/>
+                <circle class="node pop" style="--dd:800ms" cx="600" cy="72" r="8"/>
+                <circle class="node pop" style="--dd:950ms" cx="840" cy="72" r="8"/>
+
+                <text x="120" y="51" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:550ms">Slice pronta</text>
+                <text x="120" y="99" text-anchor="middle" class="lbl pop" style="--dd:600ms" font-size="10.5">comportamento + test</text>
+                <text x="360" y="51" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:700ms">Review umana</text>
+                <text x="360" y="99" text-anchor="middle" class="lbl pop" style="--dd:750ms" font-size="10.5">entro SLO concordato</text>
+                <text x="600" y="51" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:850ms">Deploy della slice</text>
+                <text x="600" y="99" text-anchor="middle" class="lbl pop" style="--dd:900ms" font-size="10.5">solo dopo approvazione</text>
+                <text x="840" y="51" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1000ms">Osservazione</text>
+                <text x="840" y="99" text-anchor="middle" class="lbl pop" style="--dd:1050ms" font-size="10.5">esito in esercizio</text>
+
+                <line x1="840" y1="80" x2="840" y2="142" class="st-dim" pathLength="1" data-draw style="--dd:1150ms"/>
+                <line x1="720" y1="142" x2="920" y2="142" class="st-dim" pathLength="1" data-draw style="--dd:1220ms"/>
+                <line x1="720" y1="142" x2="720" y2="166" class="st-dim" pathLength="1" data-draw style="--dd:1290ms"/>
+                <line x1="920" y1="142" x2="920" y2="166" class="st-dim" pathLength="1" data-draw style="--dd:1360ms"/>
+
+                <rect x="620" y="166" width="200" height="52" rx="6" class="pop" style="--dd:1430ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
+                <text x="720" y="188" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1490ms">Confermata</text>
+                <text x="720" y="205" text-anchor="middle" class="lbl pop" style="--dd:1530ms" font-size="10.5">passa alla slice successiva</text>
+                <rect x="850" y="166" width="140" height="52" rx="6" class="pop" style="--dd:1600ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
+                <text x="920" y="188" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1660ms">Regressione</text>
+                <text x="920" y="205" text-anchor="middle" class="lbl pop" style="--dd:1700ms" font-size="10.5">rollback della slice</text>
+              </svg>
+              <p class="figcap"><span class="anno">Il rollback della sola slice riduce il blast radius.</span></p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          <p><strong>Il tempo di review è parte del contratto.</strong> Ogni slice pronta ha un reviewer e un obiettivo di risposta concordato e misurabile, così non resta in una coda indefinita.</p>
+          <p>L'SLO non approva automaticamente: il deploy resta subordinato al giudizio umano e ai gate. La finestra rende la capacità di review visibile e pianificabile.</p>
+          <p>Dopo il deploy si osserva l'esito: se emerge una regressione, si annulla la sola slice e si conserva il resto stabile, limitando il blast radius.</p>
+        </aside>
+      </section>
+
+      <!-- ============ 10 · PRD E DR ============ -->
       <section class="slide" data-title="PRD e Design Review" data-section="Il flusso" data-slug="prd-e-dr">
         <div class="sbody">
           <div class="shead">
@@ -644,7 +834,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 07 · USE CASE E TICKET ============ -->
+      <!-- ============ 11 · USE CASE E TICKET ============ -->
       <section class="slide" data-title="Use Case e Ticket" data-section="Il flusso" data-slug="uc-e-ticket">
         <div class="sbody">
           <div class="shead">
@@ -679,7 +869,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 07 · IMPLEMENTAZIONE ============ -->
+      <!-- ============ 12 · IMPLEMENTAZIONE ============ -->
       <section class="slide" data-title="Esecuzione tecnica" data-section="Il flusso" data-slug="implementazione">
         <div class="sbody">
           <div class="shead">
@@ -714,7 +904,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 09 · RUOLI (POST-FLUSSO) ============ -->
+      <!-- ============ 13 · RUOLI (POST-FLUSSO) ============ -->
       <section class="slide" data-title="Uomo e macchina" data-section="Gate e controllo" data-slug="ruoli">
         <div class="sbody">
           <div class="shead">
@@ -749,7 +939,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 10 · CINQUE GATE ============ -->
+      <!-- ============ 14 · CINQUE GATE ============ -->
       <section class="slide" data-title="I cinque gate" data-section="Gate e controllo" data-slug="cinque-gate">
         <div class="sbody">
           <div class="shead">
@@ -777,7 +967,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 11 · HITL MATRICE ============ -->
+      <!-- ============ 15 · HITL MATRICE ============ -->
       <section class="slide" data-title="Matrice HITL" data-section="Gate e controllo" data-slug="hitl-matrice">
         <div class="sbody">
           <div class="shead">
@@ -806,7 +996,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 12 · TOOLCHAIN E SKILL ============ -->
+      <!-- ============ 16 · TOOLCHAIN E SKILL ============ -->
       <section class="slide" data-title="Toolchain e Skill" data-section="Piattaforma" data-slug="toolchain-skill">
         <div class="sbody">
           <div class="shead">
@@ -841,7 +1031,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 13 · SICUREZZA E PRIVACY ============ -->
+      <!-- ============ 17 · SICUREZZA E PRIVACY ============ -->
       <section class="slide" data-title="Sicurezza e Privacy" data-section="Piattaforma" data-slug="sicurezza-privacy">
         <div class="sbody">
           <div class="shead">
@@ -886,7 +1076,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 14 · TRACCIABILITÀ ============ -->
+      <!-- ============ 18 · TRACCIABILITÀ ============ -->
       <section class="slide" data-title="Tracciabilità" data-section="Piattaforma" data-slug="tracciabilita">
         <div class="sbody">
           <div class="shead">
@@ -948,7 +1138,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 15 · PIANO PILOTA ============ -->
+      <!-- ============ 19 · PIANO PILOTA ============ -->
       <section class="slide" data-title="Piano pilota" data-section="Adozione" data-slug="piano-pilota">
         <div class="sbody">
           <div class="shead">
@@ -983,7 +1173,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 16 · CHIUSURA ============ -->
+      <!-- ============ 20 · CHIUSURA ============ -->
       <section class="slide" data-title="Chiusura" data-section="Adozione" data-slug="chiusura">
         <div class="sbody">
           <div class="divider-main">
