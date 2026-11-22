@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>Agentic Delivery Framework</title>
-<meta name="description" content="Framework per l'integrazione di agenti AI nello sviluppo software: principi, flusso, gate e controllo umano.">
+<meta name="description" content="Framework per l'integrazione di agent AI nello sviluppo software: principi, flusso, gate e controllo umano.">
 <style>
 /* ============================================================
    Standard deck — 16:9
@@ -386,7 +386,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
           <div class="cover-main">
             <h1 class="claim">Agentic Delivery Framework:<br>contratti ed esecuzione guidata.</h1>
-            <p class="lead" style="max-width:64ch">Il framework per integrare agenti software nello sviluppo: principi, flusso, gate e controllo umano.</p>
+            <p class="lead" style="max-width:64ch">Il framework per integrare agent software nello sviluppo: principi, flusso, gate e controllo umano.</p>
             <span class="anno" style="margin-top:-12px;text-transform:none;letter-spacing:.03em">Premessa · Principi · Il flusso · Gate e controllo · Piattaforma · Adozione</span>
           </div>
           <div class="cover-foot" style="justify-content:flex-end">
@@ -595,7 +595,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 </div>
                 <div class="c-row">
                   <span class="c-name">Integrazione nei flussi esistenti</span>
-                  <span class="c-sub">Nessun cambio forzato di toolchain: gli agenti operano su Jira, Confluence, GitHub e CI già adottati dai team.</span>
+                  <span class="c-sub">Nessun cambio forzato di toolchain: gli agent operano su Jira, Confluence, GitHub e CI già adottati dai team.</span>
                 </div>
                 <div class="c-row">
                   <span class="c-name">Transizione verso una delega crescente</span>
@@ -629,7 +629,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <aside class="notes">
           <p><strong>Come nasce il framework.</strong> Non abbiamo voluto imporre un modo di lavorare disruptive. L'approccio è pragmatico: ci innestiamo sugli strumenti che gli sviluppatori conoscono già (Jira, Confluence, GitHub).</p>
           <p>Siamo in una fase transitoria. Oggi l'agente assiste ed esegue compiti circoscritti; man mano che i modelli e l'esperienza maturano, potremo delegare porzioni crescenti del ciclo di delivery.</p>
-          <p>Sul piano tecnico vige il principio del minimalismo (buy over make): i protocolli per agenti e le skill sono ancora in pieno consolidamento. Creare grandi framework proprietari significherebbe accumulare debito tecnico immediato. Scommettiamo invece sull'evoluzione degli harness ufficiali, limitando lo sviluppo ad hoc allo stretto necessario.</p>
+          <p>Sul piano tecnico vige il principio del minimalismo (buy over make): i protocolli per agent e le skill sono ancora in pieno consolidamento. Creare grandi framework proprietari significherebbe accumulare debito tecnico immediato. Scommettiamo invece sull'evoluzione degli harness ufficiali, limitando lo sviluppo ad hoc allo stretto necessario.</p>
         </aside>
       </section>
 
@@ -785,7 +785,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
               </div>
               <div class="p-body">
                 <div class="frow2">
-                  <span class="f-k">PRD</span>
+                  <span class="f-k">Product Requirements Document (PRD)</span>
                   <span class="f-v">Definizione dell'esigenza <em>: Jobs To Be Done (JTBD), vincoli di business e perimetro escluso.</em></span>
                 </div>
                 <div class="frow2">
@@ -807,7 +807,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <aside class="notes">
           <p><strong>La fase di specifica.</strong> Prima di coinvolgere qualunque agente, occorre chiarezza su cosa si costruisce e perché.</p>
           <p>La Design Review accoglie l'architettura complessiva, mentre le decisioni tematiche consentono di sviscerare i singoli trade-off senza bloccare il resto.</p>
-          <p>Questo approccio modulare serve anche agli agenti: context window puliti e privi di rumore superfluo.</p>
+          <p>Questo approccio modulare serve anche agli agent: context window puliti e privi di rumore superfluo.</p>
         </aside>
       </section>
 
@@ -815,8 +815,8 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       <section class="slide" data-title="Use Case e Ticket" data-section="Il flusso" data-slug="uc-e-ticket">
         <div class="sbody">
           <div class="shead">
-            <h2>Contratti atomici per l'agente</h2>
-            <p class="lead">Gli agenti falliscono sull'ambiguità: <strong>gli Use Case traducono la DR in scenari binari e immutabili</strong>.</p>
+            <h2>Contratti autonomi per gli agent</h2>
+            <p class="lead">Gli agent falliscono sull'ambiguità: <strong>gli Use Case traducono la DR in scenari binari e immutabili</strong>.</p>
           </div>
           <div class="scontent">
             <div class="cols">
@@ -857,7 +857,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
             <div class="plan">
               <div class="p-row">
                 <span class="p-n">01</span>
-                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>Spec-first o Infer-and-Ratify</span><em>Nei progetti nuovi si parte da OpenAPI e Data Contract. Nei repository esistenti, l'agente analizza la codebase e propone un ADR locale per ratifica.</em></span>
+                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>Spec-first o Infer-and-Ratify</span><em>Nei progetti nuovi si parte dai contratti. Nei repository esistenti, l'agente analizza la codebase e propone un ADR locale per ratifica.</em></span>
               </div>
               <div class="p-row">
                 <span class="p-n">02</span>
@@ -977,16 +977,15 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       <section class="slide" data-title="Toolchain e Skill" data-section="Piattaforma" data-slug="toolchain-skill">
         <div class="sbody">
           <div class="shead">
-            <h2>Skill, DAG e protocolli</h2>
-            <p class="lead">Niente prompt casuali: gli agenti invocano <strong>skill versionate e orchestrate come grafi aciclici</strong>.</p>
+            <h2>Skill e workflow</h2>
+            <p class="lead">Niente prompt casuali: gli agent invocano <strong>skill versionate e orchestrate</strong>.</p>
           </div>
           <div class="scontent">
             <div class="cols">
               <div>
                 <div class="c-head"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>Architettura delle Skill</span><span>Capacità modulari, testabili e versionate.</span></div>
                 <div class="c-row"><span class="c-name">Skill Registry centrale</span><span class="c-sub">Catalogo interno di compiti certificati (linter, parser OpenAPI, scaffolding)</span></div>
-                <div class="c-row"><span class="c-name">Orchestrazione a DAG</span><span class="c-sub">Flussi di esecuzione composti come grafi diretti aciclici con input e output tipizzati</span></div>
-                <div class="c-row"><span class="c-name">Dead Letter Queue (DLQ)</span><span class="c-sub">Se un'esecuzione stalla o supera i limiti, il contesto confluisce in una coda di audit</span></div>
+                <div class="c-row"><span class="c-name">Orchestrazione</span><span class="c-sub">Flussi di esecuzione con input e output tipizzati</span></div>
               </div>
               <div>
                 <div class="c-head"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>Protocolli e Integrazione</span><span>Confini netti tra ambiente locale e remoto.</span></div>
@@ -1002,7 +1001,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
         </div>
         <aside class="notes">
-          <p><strong>L'infrastruttura tecnologica.</strong> Come interagiscono gli agenti con i nostri sistemi?</p>
+          <p><strong>L'infrastruttura tecnologica.</strong> Come interagiscono gli agent con i nostri sistemi?</p>
           <p>Non usiamo prompt monolitici con istruzioni chilometriche: usiamo Skill modulari, ciascuna specializzata in un compito preciso.</p>
           <p>L'integrazione è standardizzata: MCP per i sistemi esterni di atlassian/github, CLI locali per i tool di sviluppo veri e propri.</p>
         </aside>
@@ -1012,8 +1011,8 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       <section class="slide" data-title="Sicurezza e Privacy" data-section="Piattaforma" data-slug="sicurezza-privacy">
         <div class="sbody">
           <div class="shead">
-            <h2>Zero trust per gli agenti</h2>
-            <p class="lead">Gli agenti non accedono a dati reali e <strong>ogni informazione in transito è filtrata preventivamente</strong>.</p>
+            <h2>Zero trust per gli agent</h2>
+            <p class="lead">Gli agent non accedono a dati reali e <strong>ogni informazione in transito è filtrata preventivamente</strong>.</p>
           </div>
           <div class="scontent">
             <div class="panel" style="max-width:1000px">
@@ -1032,7 +1031,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 </div>
                 <div class="frow2">
                   <span class="f-k">Isolamento Dati</span>
-                  <span class="f-v">Nessun dato di produzione <em>: gli agenti operano esclusivamente su fixture di test, mock o dati sintetici certificati.</em></span>
+                  <span class="f-v">Nessun dato di produzione <em>: gli agent operano esclusivamente su fixture di test, mock o dati sintetici certificati.</em></span>
                 </div>
                 <div class="frow2">
                   <span class="f-k">Security Review Automatizzata</span>
@@ -1048,74 +1047,12 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </div>
         <aside class="notes">
           <p><strong>La sicurezza al centro.</strong> Lavorando su servizi mission-critical, la sicurezza e la privacy non sono opzionali.</p>
-          <p>Il modello adotta un approccio zero trust: gli agenti non hanno credenziali permanenti, non toccano mai dati di produzione e ogni payload è ripulito da filtri PII.</p>
+          <p>Il modello adotta un approccio zero trust: gli agent non hanno credenziali permanenti, non toccano mai dati di produzione e ogni payload è ripulito da filtri PII.</p>
           <p>Anche per i modelli linguistici usati, vigono accordi di non-retention e conformità alle normative europee.</p>
         </aside>
       </section>
 
-      <!-- ============ 18 · TRACCIABILITÀ ============ -->
-      <section class="slide" data-title="Tracciabilità" data-section="Piattaforma" data-slug="tracciabilita">
-        <div class="sbody">
-          <div class="shead">
-            <h2>Propagazione e Change Management</h2>
-            <p class="lead">Ogni riga di codice è legata a una specifica: <strong>se il contratto cambia, l'impatto si propaga in automatico</strong>.</p>
-          </div>
-          <div class="scontent">
-            <div class="fig" style="max-width:1000px">
-              <svg viewBox="0 0 1000 236" aria-label="Matrice di propagazione delle modifiche cross-tool">
-                <!-- Top row: Specifica -->
-                <rect x="100" y="44" width="180" height="48" rx="6" class="pop" style="--dd:200ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
-                <text x="190" y="66" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:260ms">PRD &amp; JTBD</text>
-                <text x="190" y="81" text-anchor="middle" class="lbl pop" style="--dd:300ms" font-size="10.5">Requisiti di prodotto</text>
-
-                <rect x="410" y="44" width="180" height="48" rx="6" class="pop" style="--dd:350ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
-                <text x="500" y="66" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:410ms">Design Review (DR)</text>
-                <text x="500" y="81" text-anchor="middle" class="lbl pop" style="--dd:450ms" font-size="10.5">Decisioni architetturali</text>
-
-                <rect x="720" y="44" width="180" height="48" rx="6" class="pop" style="--dd:500ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
-                <text x="810" y="66" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:560ms">OpenAPI &amp; Schemi</text>
-                <text x="810" y="81" text-anchor="middle" class="lbl pop" style="--dd:600ms" font-size="10.5">Contratti di interfaccia</text>
-
-                <!-- Bottom row: Esecuzione -->
-                <rect x="100" y="146" width="180" height="48" rx="6" class="pop" style="--dd:650ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
-                <text x="190" y="168" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:710ms">Use Case (UC)</text>
-                <text x="190" y="183" text-anchor="middle" class="lbl pop" style="--dd:750ms" font-size="10.5">Scenari di test</text>
-
-                <rect x="410" y="146" width="180" height="48" rx="6" class="pop" style="--dd:800ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
-                <text x="500" y="168" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:860ms">Ticket Jira</text>
-                <text x="500" y="183" text-anchor="middle" class="lbl pop" style="--dd:900ms" font-size="10.5">Task atomico &amp; DoR</text>
-
-                <rect x="720" y="146" width="180" height="48" rx="6" class="pop" style="--dd:950ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
-                <text x="810" y="168" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1010ms">PR GitHub</text>
-                <text x="810" y="183" text-anchor="middle" class="lbl pop" style="--dd:1050ms" font-size="10.5">Diff codice &amp; CI verde</text>
-
-                <!-- Horizontal links -->
-                <line x1="280" y1="68" x2="410" y2="68" class="st" pathLength="1" data-draw style="--dd:400ms"/>
-                <line x1="590" y1="68" x2="720" y2="68" class="st" pathLength="1" data-draw style="--dd:550ms"/>
-                <line x1="280" y1="170" x2="410" y2="170" class="st" pathLength="1" data-draw style="--dd:850ms"/>
-                <line x1="590" y1="170" x2="720" y2="170" class="st" pathLength="1" data-draw style="--dd:1000ms"/>
-
-                <!-- Vertical bi-directional links -->
-                <line x1="190" y1="92" x2="190" y2="146" class="st-dim" stroke-dasharray="4 4" pathLength="1" data-draw style="--dd:1100ms"/>
-                <line x1="500" y1="92" x2="500" y2="146" class="st-dim" stroke-dasharray="4 4" pathLength="1" data-draw style="--dd:1150ms"/>
-                <line x1="810" y1="92" x2="810" y2="146" class="st-dim" stroke-dasharray="4 4" pathLength="1" data-draw style="--dd:1200ms"/>
-
-                <!-- Propagation feedback indicator -->
-                <path class="st-acc" stroke-dasharray="6 6" pathLength="1" data-draw style="--dd:1300ms" d="M 720 180 Q 500 230 190 194"/>
-                <text x="500" y="222" text-anchor="middle" class="lbl pop" fill="var(--accent-ink)" style="--dd:1600ms" font-size="10.5">Artifact Change Detection: disallineamenti rilevati e notificati all'istante</text>
-              </svg>
-              <p class="figcap"><span class="anno">Matrice di propagazione — legami bidirezionali garantiscono che nessuna riga di codice resti orfana della specifica.</span></p>
-            </div>
-          </div>
-        </div>
-        <aside class="notes">
-          <p><strong>Tracciabilità bidirezionale.</strong> Uno dei mali storici dei progetti complessi è il disallineamento tra documentazione e codice.</p>
-          <p>Con il modello di Change Management ogni elemento è correlato con identificatori stabili: dal PRD al commit.</p>
-          <p>Se un contratto OpenAPI o una DR viene modificata, il meccanismo di Artifact Change Detection evidenzia immediatamente quali Use Case e quali test richiedono revisione.</p>
-        </aside>
-      </section>
-
-      <!-- ============ 19 · PIANO PILOTA ============ -->
+      <!-- ============ 18 · PIANO PILOTA ============ -->
       <section class="slide" data-title="Piano pilota" data-section="Adozione" data-slug="piano-pilota">
         <div class="sbody">
           <div class="shead">
@@ -1130,7 +1067,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
               </div>
               <div class="p-row">
                 <span class="p-n">02</span>
-                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>Fase 2 · Misurazione e affinamento</span><em>Monitoraggio KPI: lead time, tasso di rifiuto PR, frequenza di intervento umano e feedback log degli agenti.</em></span>
+                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>Fase 2 · Misurazione e affinamento</span><em>Monitoraggio KPI: lead time, tasso di rifiuto PR, frequenza di intervento umano e feedback log degli agent.</em></span>
               </div>
               <div class="p-row">
                 <span class="p-n">03</span>
@@ -1150,7 +1087,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 20 · CHIUSURA ============ -->
+      <!-- ============ 19 · CHIUSURA ============ -->
       <section class="slide" data-title="Chiusura" data-section="Adozione" data-slug="chiusura">
         <div class="sbody">
           <div class="divider-main">
