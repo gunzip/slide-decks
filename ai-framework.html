@@ -385,7 +385,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
             <span class="mono">2026</span>
           </div>
           <div class="cover-main">
-            <h1 class="claim">PagoPA Agentic Delivery Framework:<br>contratti ed esecuzione guidata.</h1>
+            <h1 class="claim">Agentic Delivery Framework:<br>contratti ed esecuzione guidata.</h1>
             <p class="lead" style="max-width:64ch">Il framework per integrare agenti software nello sviluppo: principi, flusso, gate e controllo umano.</p>
             <span class="anno" style="margin-top:-12px;text-transform:none;letter-spacing:.03em">Premessa · Principi · Il flusso · Gate e controllo · Piattaforma · Adozione</span>
           </div>
@@ -449,56 +449,40 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       <section class="slide" data-title="Framework condiviso" data-section="Premessa" data-slug="framework-condiviso">
         <div class="sbody">
           <div class="shead">
-            <h2>Le risposte diventano patrimonio comune</h2>
-            <p class="lead">Ogni team contribuisce a un modello <strong>comune e riusabile</strong>, non a soluzioni isolate.</p>
+            <h2>Perché condividere un framework</h2>
+            <p class="lead">Ogni team di prodotto contribuisce a un modello comune e riutilizzabile, evitando di duplicare gli sforzi in soluzioni isolate.</p>
           </div>
           <div class="scontent">
             <div class="cols">
               <div>
-                <div class="c-head">Domande da risolvere insieme<span>Interfacce e guardrail condivisi tra i team.</span></div>
                 <div class="c-row">
                   <span class="c-name">Fonti e contesto</span>
-                  <span class="c-sub">Sorgenti operative di verità, struttura e contesto necessario agli agenti.</span>
+                  <span class="c-sub">Dove gli agenti trovano informazioni affidabili? Che cosa devono sapere per lavorare? Come evitiamo duplicati o informazioni obsolete?</span>
                 </div>
                 <div class="c-row">
-                  <span class="c-name">Handoff e readiness</span>
-                  <span class="c-sub">Interfacce, criteri di assegnazione e propagazione automatica delle change request.</span>
-                </div>
-                <div class="c-row">
-                  <span class="c-name">Piattaforma e guardrail</span>
-                  <span class="c-sub">Toolchain, sicurezza, controllo umano, budget di token e tracciabilità.</span>
-                </div>
-                <div class="c-row">
-                  <span class="c-name">Qualità e outcome</span>
-                  <span class="c-sub">Verifiche prima e dopo il deploy; misure per gli obiettivi raggiunti.</span>
+                  <span class="c-name">Unità di Lavoro, pianificazione e parallelismo</span>
+                  <span class="c-sub">Quali sono le caratteristiche di una richiesta pronta per poter esser presa in carico dagli agent?
+                  Quando e come la passiamo agli agent e aggiorniamo il piano?</span>
                 </div>
               </div>
               <div>
-                <div class="c-head">Artefatti da produrre e valutare<span>Le risposte diventano capacità operative.</span></div>
                 <div class="c-row">
-                  <span class="c-name">Custom agent, skill, harness</span>
-                  <span class="c-sub">Componenti modulari, versionati e riusabili nel workflow.</span>
+                  <span class="c-name">Strumenti riutilizzabili ben calibrati</span>
+                  <span class="c-sub">Quali agenti, istruzioni e skill riutilizzabili aiutano a svolgere compiti ricorrenti?
+                  Come verifichiamo che tali strumenti funzionino e teniamo sotto controllo il costo dell'AI?</span>
                 </div>
                 <div class="c-row">
-                  <span class="c-name">Documenti azionabili</span>
-                  <span class="c-sub">Comprensibili alle persone, leggibili dagli agenti e allineati al planning.</span>
-                </div>
-                <div class="c-row">
-                  <span class="c-name">Evals e metriche</span>
-                  <span class="c-sub">Prove condivise su qualità, costo dei token e obiettivi nel tempo.</span>
+                  <span class="c-name">Verifiche e risultati</span>
+                  <span class="c-sub">Come controlliamo che il lavoro sia corretto prima e dopo il rilascio? Ha raggiunto l'obiettivo?</span>
                 </div>
               </div>
-            </div>
-            <div class="noteline">
-              <p class="small">Il metodo condiviso evita <strong>duplicazioni, obsolescenza e drift</strong>.</p>
-              <span class="anno">Domande · Artefatti · Valutazione</span>
             </div>
           </div>
         </div>
         <aside class="notes">
-          <p><strong>Perché condividere.</strong> Le domande su fonti, contesto, handoff, piattaforma, sicurezza e misurazione ricorrono in ogni team; risolverle separatamente duplica l'effort e produce regole incoerenti.</p>
-          <p>La condivisione non impone un unico processo: definisce interfacce e guardrail comuni, lasciando spazio alle specificità locali. Documenti e planning devono restare allineati e comprensibili alle persone, ma anche azionabili dagli agenti.</p>
-          <p>Le risposte diventano custom agent, skill, harness ed evals versionati, prodotti e valutati nel tempo. Prima di vedere il flusso, guardiamo cosa accade senza questo perimetro.</p>
+          <p><strong>Perché condividere.</strong> Ogni team si pone domande simili: dove trovare informazioni affidabili, quando il lavoro è pronto per un agente, come proteggerlo e come verificare il risultato. Dare risposte una volta sola evita di rifare lo stesso lavoro con regole diverse.</p>
+          <p>Non significa imporre lo stesso processo a tutti. Significa condividere strumenti e criteri, e aggiornare documenti e piano quando cambiano i requisiti, così restano chiari alle persone e utili agli agenti.</p>
+          <p>Le risposte diventano agenti specializzati, istruzioni e strumenti riutilizzabili, con prove per verificarli e misure dei costi e dei risultati. Sono risorse comuni da migliorare nel tempo.</p>
         </aside>
       </section>
 
@@ -539,7 +523,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
                   <span class="c-name">Gate deterministici</span>
-                  <span class="c-sub">Compiler, linter, OpenAPI validation e test suite bloccano le deviazioni</span>
+                  <span class="c-sub">Compiler, linter, OpenAPI validation e test suite sono a disposizione degli agent</span>
                 </div>
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
@@ -588,7 +572,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <aside class="notes">
           <p><strong>I principi non negoziabili.</strong> Il primo pilastro è il contratto: niente prompt vaghi, ma documenti tecnici strutturati.</p>
           <p>Il secondo è il determinismo: la verifica non è delegata a un altro modello probabilistico, ma a strumenti certi come compiler, type system e pipeline CI.</p>
-          <p>Il terzo è la responsabilità umana: l'agente è un acceleratore, l'ingegnere è il garante.</p>
+          <p>Il terzo è la responsabilità umana: l'agente è un acceleratore, il software engineer è il garante.</p>
         </aside>
       </section>
 
@@ -686,9 +670,6 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 <text x="880" y="54" text-anchor="middle" class="lbl pop" style="--dd:1200ms" font-size="10.5">Agente &amp; Dev</text>
                 <text x="880" y="126" text-anchor="middle" class="lbl pop" style="--dd:1220ms" font-size="11">TDD &amp; Review</text>
 
-                <path class="st-dim" stroke-dasharray="6 7" pathLength="1" data-draw style="--dd:1300ms" d="M 880 144 Q 500 220 135 144"/>
-                <path class="pop" style="--dd:1850ms" d="M 120 144 L 138 138 L 138 152 Z" fill="var(--fig-dim)"/>
-                <text x="500" y="202" text-anchor="middle" class="lbl pop" style="--dd:1900ms" font-size="11">Change Management: se il requisito o il codice muta, l'impatto risale a monte</text>
               </svg>
               <p class="figcap"><span class="anno">La catena del valore — ogni passaggio produce un contratto formale e testabile per lo stadio successivo.</span></p>
             </div>
@@ -706,7 +687,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <div class="sbody">
           <div class="shead">
             <h2>Slice piccole, feedback continuo</h2>
-            <p class="lead">Un task ampio è possibile, ma preferiamo <strong>slice end-to-end condivise nel team</strong>.</p>
+            <p class="lead">Pur potendo delegare agli agent task complessi, preferiamo lavorare per <strong>slice end-to-end</strong>: attività circoscritte, facili da revisionare e reversibili.</p>
           </div>
           <div class="scontent">
             <div class="fig" style="max-width:1000px">
@@ -746,7 +727,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <div class="sbody">
           <div class="shead">
             <h2>La review ha tempi certi</h2>
-            <p class="lead">Ogni slice riceve un esito umano entro una <strong>finestra concordata e misurabile</strong>.</p>
+            <p class="lead">Ogni slice riceve un esito umano entro una <strong>finestra concordata e misurabile</strong> (<em>sprint</em>).</p>
           </div>
           <div class="scontent">
             <div class="fig" style="max-width:1000px">
@@ -809,15 +790,11 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 </div>
                 <div class="frow2">
                   <span class="f-k">Design Review (DR)</span>
-                  <span class="f-v">Modello architetturale <em>: flussi, modelli dati e interfacce esposte, redatti con template unificato.</em></span>
+                  <span class="f-v">Modello architetturale <em>: entitità di dominio, use case, modelli dati e interfacce.</em></span>
                 </div>
                 <div class="frow2">
-                  <span class="f-k">Decisioni di dettaglio</span>
+                  <span class="f-k">Decisioni di dettaglio (RFC)</span>
                   <span class="f-v">Trade-off tecnici isolati <em>: decisioni specifiche discusse e approvate prima di confluire nella DR madre.</em></span>
-                </div>
-                <div class="frow2">
-                  <span class="f-k">Gate 1: Platform Review</span>
-                  <span class="f-v">Validazione vincolante <em>: nessun codice viene sviluppato prima che Product e Platform abbiano ratificato la DR.</em></span>
                 </div>
               </div>
             </div>
@@ -853,7 +830,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 <div class="c-head"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>Backlog Jira AI-Ready</span><span>La struttura operativa e atomica del lavoro.</span></div>
                 <div class="c-row"><span class="c-name">Immutabilità della Story</span><span class="c-sub">Una volta approvata, la story non cambia in corsa: variazioni richiedono una CR</span></div>
                 <div class="c-row"><span class="c-name">Definition of Ready (DoR)</span><span class="c-sub">L'agente accetta il ticket solo se contratti, dipendenze e schemi sono risolti</span></div>
-                <div class="c-row"><span class="c-name">Shadow Pre-fill</span><span class="c-sub">L'agente suggerisce metadati e stime, l'ingegnere convalida con un clic</span></div>
+                <div class="c-row"><span class="c-name">Shadow Pre-fill (dry run)</span><span class="c-sub">L'agente suggerisce metadati e stime, il software engineer convalida con un clic</span></div>
               </div>
             </div>
             <div class="noteline">
@@ -900,7 +877,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <aside class="notes">
           <p><strong>Come lavora l'agente.</strong> L'agente non produce direttamente una Pull Request: lavora in un ambiente controllato.</p>
           <p>Scrive prima i test ricavati dagli Use Case, poi scrive il codice per farli passare. Se la suite fallisce, l'agente corregge il codice, non abbassa le aspettative del test.</p>
-          <p>L'ingegnere riceve una proposta completa di implementazione e test verificati dalla CI locale.</p>
+          <p>Il software engineer riceve una proposta completa di implementazione e test verificati dalla CI locale.</p>
         </aside>
       </section>
 
@@ -909,12 +886,12 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <div class="sbody">
           <div class="shead">
             <h2>Separazione delle responsabilità</h2>
-            <p class="lead">Non deleghiamo la responsabilità: <strong>l'ingegnere governa il sistema, l'agente accelera la stesura</strong>.</p>
+            <p class="lead">Non deleghiamo la responsabilità: <strong>il software engineer governa il sistema, l'agente accelera la stesura</strong>.</p>
           </div>
           <div class="scontent">
             <div class="cols">
               <div>
-                <div class="c-head"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Ingegnere e Product Manager</span><span>Direzione tecnica, giudizio e responsabilità.</span></div>
+                <div class="c-head"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Engineering e Product Manager</span><span>Direzione tecnica, giudizio e responsabilità.</span></div>
                 <div class="c-row"><span class="c-name">Decisioni architetturali</span><span class="c-sub">Valuta i trade-off tecnici e sceglie i pattern di sistema</span></div>
                 <div class="c-row"><span class="c-name">Definizione del valore</span><span class="c-sub">Stila i PRD, valida i JTBD e approva gli Use Case</span></div>
                 <div class="c-row"><span class="c-name">Validazione e merge</span><span class="c-sub">Ispeziona le Pull Request, verifica i test e autorizza i rilasci</span></div>
@@ -1014,7 +991,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
               <div>
                 <div class="c-head"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>Protocolli e Integrazione</span><span>Confini netti tra ambiente locale e remoto.</span></div>
                 <div class="c-row"><span class="c-name">Model Context Protocol (MCP)</span><span class="c-sub">Interfacce standardizzate verso Jira, Confluence e cataloghi dati di piattaforma</span></div>
-                <div class="c-row"><span class="c-name">CLI native nel workspace</span><span class="c-sub">Compilatori, git e suite di test eseguiti direttamente nell'ambiente dell'ingegnere</span></div>
+                <div class="c-row"><span class="c-name">CLI native nel workspace</span><span class="c-sub">Compilatori, git e suite di test eseguiti direttamente nell'ambiente del software engineer</span></div>
                 <div class="c-row"><span class="c-name">Audit Log immutabile</span><span class="c-sub">Tracciamento delle chiamate di tool, prompt impiegati e token consumati</span></div>
               </div>
             </div>
