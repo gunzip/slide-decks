@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>Agentic Delivery Framework</title>
-<meta name="description" content="Framework per l'integrazione di agent AI nello sviluppo software: principi, flusso, gate e controllo umano.">
+<meta name="description" content="Framework per l'integrazione di agent AI nello sviluppo software: principi, flusso, template e strumenti.">
 <style>
 /* ============================================================
    Standard deck — 16:9
@@ -137,9 +137,14 @@ p{margin:0}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
 .cols .c-head{font-size:17px;font-weight:600;color:var(--ink);padding-bottom:12px;border-bottom:1px solid var(--hair-2)}
 .cols .c-head span{display:block;font-size:14px;font-weight:400;color:var(--muted);margin-top:3px;letter-spacing:0}
+.cols .c-head.lg{font-size:24px;line-height:1.18;letter-spacing:-.02em;padding-bottom:14px}
+.cols .c-head.lg span{font-size:14.5px;margin-top:5px}
 .cols .c-row{display:grid;gap:2px;padding:13px 0;border-bottom:1px solid var(--hair)}
 .cols .c-name{font-size:17px;font-weight:600;color:var(--ink)}
 .cols .c-sub{font-size:14.5px;color:var(--muted);line-height:1.45}
+.cols .c-sub ul{list-style:none;margin:5px 0 0;padding:0;display:grid;gap:3px}
+.cols .c-sub li{position:relative;padding-left:14px}
+.cols .c-sub li::before{content:"";position:absolute;left:1px;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--fig-dim)}
 
 /* ---------- panel (spec sheet, examples) ---------- */
 .panel{border:1px solid var(--hair-2);border-radius:10px;background:#fff;overflow:hidden}
@@ -386,7 +391,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
           <div class="cover-main">
             <h1 class="claim">Agentic Delivery Framework:<br>contratti ed esecuzione guidata.</h1>
-            <p class="lead" style="max-width:64ch">Il framework per integrare agent software nello sviluppo: principi, flusso, gate e controllo umano.</p>
+            <p class="lead" style="max-width:64ch">Il framework per integrare agent software nello sviluppo: principi, flusso, template, strumenti.</p>
             <span class="anno" style="margin-top:-12px;text-transform:none;letter-spacing:.03em">Premessa · Principi · Il flusso · Gate e controllo · Piattaforma · Adozione</span>
           </div>
           <div class="cover-foot" style="justify-content:flex-end">
@@ -405,12 +410,12 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <div class="sbody">
           <div class="shead">
             <h2>Un metodo, due risultati</h2>
-            <p class="lead">Ridurre il time to market senza abbassare <strong>gli standard di qualità</strong>.</p>
+            <p class="lead">Velocità e qualità non sono un trade-off: il metodo le rende <strong>entrambe verificabili</strong>.</p>
           </div>
           <div class="scontent">
             <div class="cols">
               <div>
-                <div class="c-head">Ridurre i tempi<span>Eliminare il lavoro a basso valore aggiunto.</span></div>
+                <div class="c-head lg">Ridurre il time to market<span>Eliminare il lavoro a basso valore aggiunto.</span></div>
                 <div class="c-row">
                   <span class="c-name">Automazione ripetibile</span>
                   <span class="c-sub">Meno attività manuali e passaggi meccanici lungo il flusso.</span>
@@ -421,7 +426,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 </div>
               </div>
               <div>
-                <div class="c-head">Garantire qualità<span>Criteri espliciti in ogni fase.</span></div>
+                <div class="c-head lg">Favorire la qualità<span>Criteri espliciti in ogni fase.</span></div>
                 <div class="c-row">
                   <span class="c-name">Contratti e gate</span>
                   <span class="c-sub">Riducono ambiguità e deviazioni prima che diventino codice.</span>
@@ -457,23 +462,43 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
               <div>
                 <div class="c-row">
                   <span class="c-name">Fonti e contesto</span>
-                  <span class="c-sub">Dove gli agenti trovano informazioni affidabili? Che cosa devono sapere per lavorare? Come evitiamo duplicati o informazioni obsolete?</span>
+                  <div class="c-sub">
+                    <ul>
+                      <li>Dove gli agenti trovano informazioni affidabili?</li>
+                      <li>Che cosa devono sapere per lavorare?</li>
+                      <li>Come evitiamo duplicati o informazioni obsolete?</li>
+                    </ul>
+                  </div>
                 </div>
                 <div class="c-row">
                   <span class="c-name">Unità di Lavoro, pianificazione e parallelismo</span>
-                  <span class="c-sub">Quali sono le caratteristiche di una richiesta pronta per poter esser presa in carico dagli agent?
-                  Quando e come la passiamo agli agent e aggiorniamo il piano?</span>
+                  <div class="c-sub">
+                    <ul>
+                      <li>Quali sono le caratteristiche di una richiesta pronta per poter esser presa in carico dagli agent?</li>
+                      <li>Quando e come la passiamo agli agent e aggiorniamo il piano?</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
               <div>
                 <div class="c-row">
                   <span class="c-name">Strumenti riutilizzabili ben calibrati</span>
-                  <span class="c-sub">Quali agenti, istruzioni e skill riutilizzabili aiutano a svolgere compiti ricorrenti?
-                  Come verifichiamo che tali strumenti funzionino e teniamo sotto controllo il costo dell'AI?</span>
+                  <div class="c-sub">
+                    <ul>
+                      <li>Quali agent, istruzioni e skill riutilizzabili aiutano a svolgere compiti ricorrenti?</li>
+                      <li>Come verifichiamo che tali strumenti funzionino e migliorino nel tempo?</li>
+                      <li>Come teniamo sotto controllo il costo dell'AI?</li>
+                    </ul>
+                  </div>
                 </div>
                 <div class="c-row">
                   <span class="c-name">Verifiche e risultati</span>
-                  <span class="c-sub">Come controlliamo che il lavoro sia corretto prima e dopo il rilascio? Ha raggiunto l'obiettivo?</span>
+                  <div class="c-sub">
+                    <ul>
+                      <li>Come controlliamo che il lavoro sia corretto prima e dopo il rilascio?</li>
+                      <li>Ha raggiunto l'obiettivo?</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -491,68 +516,69 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <div class="sbody">
           <div class="shead">
             <h2>Il punto di partenza</h2>
-            <p class="lead">L'AI genera codice rapidamente, ma <strong>senza vincoli formali accumula debito e allucinazioni</strong>.</p>
+            <p class="lead">L'AI genera codice rapidamente, ma senza una struttura per handoff e pianificazione <strong>il risultato diverge dall'intento originale</strong>.</p>
           </div>
           <div class="scontent">
             <div class="cols signal">
               <div>
-                <div class="c-head">Uso spontaneo non governato<span>Cosa accade lasciando l'agente a briglia sciolta.</span></div>
+                <div class="c-head">Handoff informali, nessun piano<span>Il requisito cambia forma a ogni passaggio tra funzioni.</span></div>
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
-                  <span class="c-name">Prompt informali ed effimeri</span>
-                  <span class="c-sub">I requisiti restano nella chat e si perdono alla chiusura del tab</span>
+                  <span class="c-name">Intento che si perde negli handoff</span>
+                  <span class="c-sub">Design, prodotto ed engineering si passano richieste parziali: ogni passaggio riscrive il requisito.</span>
                 </div>
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
-                  <span class="c-name">Contratti impliciti violati</span>
-                  <span class="c-sub">Il modello inventa campi o rompe la compatibilità OpenAPI</span>
+                  <span class="c-name">Rimbalzi tra funzioni</span>
+                  <span class="c-sub">Il lavoro torna indietro tra design ed engineering; l'agente esegue l'ultimo messaggio, non l'intento.</span>
                 </div>
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
-                  <span class="c-name">Review umana sfibrata</span>
-                  <span class="c-sub">Pull request enormi con centinaia di righe non contestualizzate</span>
+                  <span class="c-name">Codebase che diverge</span>
+                  <span class="c-sub">Rework a catena e review complesse: revisionare è più difficile e la confidenza nella delivery cala.</span>
                 </div>
               </div>
               <div>
-                <div class="c-head">Delivery con il framework<span>Un processo ingegneristico governato e riproducibile.</span></div>
+                <div class="c-head">Handoff e piano condivisi<span>Ogni passaggio lascia un contratto verificabile.</span></div>
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
-                  <span class="c-name">Specifiche e Use Case a monte</span>
-                  <span class="c-sub">Artefatti formalizzati e versionati prima di toccare la tastiera</span>
+                  <span class="c-name">Intento esplicito e condiviso</span>
+                  <span class="c-sub">Prodotto, design ed engineering lavorano sullo stesso artefatto di riferimento.</span>
                 </div>
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
-                  <span class="c-name">Gate deterministici</span>
-                  <span class="c-sub">Compiler, linter, OpenAPI validation e test suite sono a disposizione degli agent</span>
+                  <span class="c-name">Piano delle attività tracciabile</span>
+                  <span class="c-sub">Ogni richiesta all'agente nasce da un task pianificato, non da un messaggio isolato.</span>
                 </div>
                 <div class="c-row">
                   <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
-                  <span class="c-name">Task atomici e immutabili</span>
-                  <span class="c-sub">Diff compatti, circoscritti a un singolo Use Case e facili da verificare</span>
+                  <span class="c-name">Codice aderente al progetto</span>
+                  <span class="c-sub">Meno rework, modifiche circoscritte, test ed evidenze, review più rapide e consapevoli.</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <aside class="notes">
-          <p><strong>Il contesto reale.</strong> Molti sviluppatori oggi usano già assistenti LLM, ma lo fanno a livello di prompt artigianale.</p>
-          <p>Senza una struttura di piattaforma, il guadagno immediato di velocità locale si traduce in costi enormi di manutenzione, vulnerabilità e codice orfano.</p>
-          <p>Il framework introduce un perimetro formale: l'agente riceve contratti e produce artefatti verificabili.</p>
+          <p><strong>Il contesto reale.</strong> Gli assistenti LLM sono già usati, ma con prompt artigianali: nessuno struttura handoff e pianificazione delle attività.</p>
+          <p>Senza quella struttura l'intento si diluisce: prodotto, design ed engineering si passano richieste parziali, il lavoro rimbalza e l'agente esegue l'ultimo messaggio ricevuto.</p>
+          <p>Il codice si allontana dal progetto e richiede rework a catena; i diff diventano ampi e difficili da rivedere, e chi revisiona ha meno confidenza in ciò che rilascia.</p>
+          <p>Il framework ricostruisce la catena: handoff espliciti, un piano condiviso e artefatti verificabili a ogni passaggio.</p>
         </aside>
       </section>
 
       <!-- ============ 05 · PRINCIPI ============ -->
-      <section class="slide" data-title="I tre pilastri" data-section="Principi" data-slug="principi">
+      <section class="slide" data-title="I pilastri" data-section="Principi" data-slug="principi">
         <div class="sbody">
           <div class="shead">
-            <h2>I tre pilastri</h2>
+            <h2>I pilastri</h2>
             <p class="lead">Tre vincoli distinguono un esperimento isolato da un <strong>processo ingegneristico ripetibile</strong>.</p>
           </div>
           <div class="scontent">
             <div class="plan">
               <div class="p-row">
                 <span class="p-n">01</span>
-                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>Contratti prima del codice</span><em>Le specifiche (PRD, DR, OpenAPI, Use Case) sono la sorgente di verità, non i suggerimenti nei prompt.</em></span>
+                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>Contratti prima del codice</span><em>Le specifiche condivise e approvate (PRD, DR, Use Case) sono la sorgente di verità, non i prompt.</em></span>
               </div>
               <div class="p-row">
                 <span class="p-n">02</span>
@@ -564,7 +590,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
               </div>
             </div>
             <div class="noteline">
-              <p class="small">La regola guida: <strong>l'AI non decide l'architettura</strong>, realizza soluzioni dentro specifiche convalidate.</p>
+              <p class="small">La regola guida: <strong>l'AI non decide l'architettura in autonomia</strong>, realizza soluzioni dentro specifiche convalidate.</p>
               <span class="anno">Platform Engineering · Linee guida</span>
             </div>
           </div>
@@ -572,7 +598,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <aside class="notes">
           <p><strong>I principi non negoziabili.</strong> Il primo pilastro è il contratto: niente prompt vaghi, ma documenti tecnici strutturati.</p>
           <p>Il secondo è il determinismo: la verifica non è delegata a un altro modello probabilistico, ma a strumenti certi come compiler, type system e pipeline CI.</p>
-          <p>Il terzo è la responsabilità umana: l'agente è un acceleratore, il software engineer è il garante.</p>
+          <p>Il terzo è la responsabilità umana: l'agente è un acceleratore, le persone sono i garanti.</p>
         </aside>
       </section>
 
@@ -581,7 +607,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <div class="sbody">
           <div class="shead">
             <h2>Pragmatismo e transizione</h2>
-            <p class="lead">Non una rottura a tavolino, ma un ponte realistico: <strong>continuità con i flussi attuali</strong> e <strong>minimo debito proprietario</strong>.</p>
+            <p class="lead">Non una rottura a tavolino, ma un ponte realistico: operiamo in <strong>continuità con i flussi attuali</strong> perimetrando l'investimento.</p>
           </div>
           <div class="scontent">
             <div class="cols">
@@ -638,7 +664,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <div class="sbody">
           <div class="shead">
             <h2>Il ciclo di delivery</h2>
-            <p class="lead">Dall'esigenza di business al codice in esercizio attraverso <strong>cinque stadi tracciabili</strong>.</p>
+            <p class="lead">Dall'esigenza di business al codice in esercizio attraverso <strong>stadi tracciabili</strong>.</p>
           </div>
           <div class="scontent">
             <div class="fig" style="max-width:1000px">
@@ -726,47 +752,48 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       <section class="slide" data-title="Review entro una finestra" data-section="Il flusso" data-slug="review-entro-finestra">
         <div class="sbody">
           <div class="shead">
-            <h2>La review ha tempi certi</h2>
-            <p class="lead">Ogni slice riceve un esito umano entro una <strong>finestra concordata e misurabile</strong> (<em>sprint</em>).</p>
+            <h2>La review ha tempi prevedibili</h2>
+            <p class="lead">Ogni slice riceve un esito umano entro una finestra concordata e misurabile (<em>sprint</em>); il deploy avviene <strong>dietro feature flag</strong>, così il rilascio resta reversibile.</p>
           </div>
           <div class="scontent">
             <div class="fig" style="max-width:1000px">
-              <svg viewBox="0 0 1000 236" aria-label="Ogni slice viene revisionata entro un tempo concordato, poi distribuita e osservata">
-                <line x1="100" y1="72" x2="860" y2="72" class="st" pathLength="1" data-draw style="--dd:100ms"/>
-                <circle class="node pop" style="--dd:500ms" cx="120" cy="72" r="8"/>
-                <circle class="node-acc pop" style="--dd:650ms" cx="360" cy="72" r="8"/>
-                <circle class="node pop" style="--dd:800ms" cx="600" cy="72" r="8"/>
-                <circle class="node pop" style="--dd:950ms" cx="840" cy="72" r="8"/>
+              <svg viewBox="0 0 1000 236" aria-label="Ogni slice viene revisionata entro un tempo concordato, distribuita dietro feature flag e osservata">
+                <line x1="100" y1="64" x2="880" y2="64" class="st" pathLength="1" data-draw style="--dd:100ms"/>
+                <circle class="node pop" style="--dd:500ms" cx="120" cy="64" r="8"/>
+                <circle class="node-acc pop" style="--dd:650ms" cx="380" cy="64" r="8"/>
+                <circle class="node pop" style="--dd:800ms" cx="640" cy="64" r="8"/>
+                <circle class="node pop" style="--dd:950ms" cx="880" cy="64" r="8"/>
 
-                <text x="120" y="51" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:550ms">Slice pronta</text>
-                <text x="120" y="99" text-anchor="middle" class="lbl pop" style="--dd:600ms" font-size="10.5">comportamento + test</text>
-                <text x="360" y="51" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:700ms">Review umana</text>
-                <text x="360" y="99" text-anchor="middle" class="lbl pop" style="--dd:750ms" font-size="10.5">entro SLO concordato</text>
-                <text x="600" y="51" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:850ms">Deploy della slice</text>
-                <text x="600" y="99" text-anchor="middle" class="lbl pop" style="--dd:900ms" font-size="10.5">solo dopo approvazione</text>
-                <text x="840" y="51" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1000ms">Osservazione</text>
-                <text x="840" y="99" text-anchor="middle" class="lbl pop" style="--dd:1050ms" font-size="10.5">esito in esercizio</text>
+                <text x="120" y="43" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:550ms">Slice pronta</text>
+                <text x="120" y="87" text-anchor="middle" class="lbl pop" style="--dd:600ms" font-size="10.5">comportamento + test</text>
+                <text x="380" y="43" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:700ms">Review umana</text>
+                <text x="380" y="87" text-anchor="middle" class="lbl pop" style="--dd:750ms" font-size="10.5">entro SLO concordato</text>
+                <text x="640" y="43" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:850ms">Deploy dietro feature flag</text>
+                <text x="640" y="87" text-anchor="middle" class="lbl pop" style="--dd:900ms" font-size="10.5">in produzione, non rilasciata</text>
+                <text x="880" y="43" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1000ms">Release progressiva</text>
+                <text x="880" y="87" text-anchor="middle" class="lbl pop" style="--dd:1050ms" font-size="10.5">flag accesa per il traffico</text>
 
-                <line x1="840" y1="80" x2="840" y2="142" class="st-dim" pathLength="1" data-draw style="--dd:1150ms"/>
-                <line x1="720" y1="142" x2="920" y2="142" class="st-dim" pathLength="1" data-draw style="--dd:1220ms"/>
-                <line x1="720" y1="142" x2="720" y2="166" class="st-dim" pathLength="1" data-draw style="--dd:1290ms"/>
-                <line x1="920" y1="142" x2="920" y2="166" class="st-dim" pathLength="1" data-draw style="--dd:1360ms"/>
+                <line x1="880" y1="98" x2="880" y2="130" class="st-dim" pathLength="1" data-draw style="--dd:1150ms"/>
+                <line x1="680" y1="130" x2="900" y2="130" class="st-dim" pathLength="1" data-draw style="--dd:1220ms"/>
+                <line x1="680" y1="130" x2="680" y2="156" class="st-dim" pathLength="1" data-draw style="--dd:1290ms"/>
+                <line x1="900" y1="130" x2="900" y2="156" class="st-dim" pathLength="1" data-draw style="--dd:1360ms"/>
 
-                <rect x="620" y="166" width="200" height="52" rx="6" class="pop" style="--dd:1430ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
-                <text x="720" y="188" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1490ms">Confermata</text>
-                <text x="720" y="205" text-anchor="middle" class="lbl pop" style="--dd:1530ms" font-size="10.5">passa alla slice successiva</text>
-                <rect x="850" y="166" width="140" height="52" rx="6" class="pop" style="--dd:1600ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
-                <text x="920" y="188" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1660ms">Regressione</text>
-                <text x="920" y="205" text-anchor="middle" class="lbl pop" style="--dd:1700ms" font-size="10.5">rollback della slice</text>
+                <rect x="595" y="156" width="170" height="56" rx="6" class="pop" style="--dd:1430ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
+                <text x="680" y="178" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1490ms">Confermata</text>
+                <text x="680" y="195" text-anchor="middle" class="lbl pop" style="--dd:1530ms" font-size="10.5">la flag resta accesa</text>
+                <rect x="815" y="156" width="170" height="56" rx="6" class="pop" style="--dd:1600ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
+                <text x="900" y="178" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1660ms">Regressione</text>
+                <text x="900" y="195" text-anchor="middle" class="lbl pop" style="--dd:1700ms" font-size="10.5">flag spenta, zero redeploy</text>
               </svg>
-              <p class="figcap"><span class="anno">Il rollback della sola slice riduce il blast radius.</span></p>
+              <p class="figcap"><span class="anno">Deploy non è release: la feature resta dietro una flag, e spegnerla è il rollback immediato.</span></p>
             </div>
           </div>
         </div>
         <aside class="notes">
           <p><strong>Il tempo di review è parte del contratto.</strong> Ogni slice pronta ha un reviewer e un obiettivo di risposta concordato e misurabile, così non resta in una coda indefinita.</p>
           <p>L'SLO non approva automaticamente: il deploy resta subordinato al giudizio umano e ai gate. La finestra rende la capacità di review visibile e pianificabile.</p>
-          <p>Dopo il deploy si osserva l'esito: se emerge una regressione, si annulla la sola slice e si conserva il resto stabile, limitando il blast radius.</p>
+          <p>Dopo il deploy la feature non è ancora rilasciata: resta dietro una feature flag. Se l'esito in esercizio è negativo si spegne la flag — rollback immediato, senza redeploy né interventi sul resto del servizio; se è positivo si accende gradualmente per il traffico.</p>
+          <p>Sapere che ogni rilascio è reversibile con un interruttore dà ai software engineer la confidenza per muoversi veloci, senza irrigidire il codice.</p>
         </aside>
       </section>
 
@@ -798,10 +825,6 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 </div>
               </div>
             </div>
-            <div class="noteline">
-              <p class="small">Non esiste un documento monolitico: <strong>le DR tematiche isolano il perimetro</strong> e rendono i vincoli valutabili.</p>
-              <span class="anno">DR-01 · Requisitazione e Contratti</span>
-            </div>
           </div>
         </div>
         <aside class="notes">
@@ -811,42 +834,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 11 · USE CASE E TICKET ============ -->
-      <section class="slide" data-title="Use Case e Ticket" data-section="Il flusso" data-slug="uc-e-ticket">
-        <div class="sbody">
-          <div class="shead">
-            <h2>Contratti autonomi per gli agent</h2>
-            <p class="lead">Gli agent falliscono sull'ambiguità: <strong>gli Use Case traducono la DR in scenari binari e immutabili</strong>.</p>
-          </div>
-          <div class="scontent">
-            <div class="cols">
-              <div>
-                <div class="c-head"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>Use Case e Criteri di Accettazione</span><span>Il contratto di comportamento per l'agente.</span></div>
-                <div class="c-row"><span class="c-name">Formato Given / When / Then</span><span class="c-sub">Scenari nominali, casi limite e stati d'errore senza ambiguità verbale</span></div>
-                <div class="c-row"><span class="c-name">Specchio dei test futuri</span><span class="c-sub">Ogni scenario dell'Use Case corrisponde direttamente a un test di accettazione</span></div>
-                <div class="c-row"><span class="c-name">Perimetro chiuso</span><span class="c-sub">Un solo flusso logico verificabile in modo deterministico</span></div>
-              </div>
-              <div>
-                <div class="c-head"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>Backlog Jira AI-Ready</span><span>La struttura operativa e atomica del lavoro.</span></div>
-                <div class="c-row"><span class="c-name">Immutabilità della Story</span><span class="c-sub">Una volta approvata, la story non cambia in corsa: variazioni richiedono una CR</span></div>
-                <div class="c-row"><span class="c-name">Definition of Ready (DoR)</span><span class="c-sub">L'agente accetta il ticket solo se contratti, dipendenze e schemi sono risolti</span></div>
-                <div class="c-row"><span class="c-name">Shadow Pre-fill (dry run)</span><span class="c-sub">L'agente suggerisce metadati e stime, il software engineer convalida con un clic</span></div>
-              </div>
-            </div>
-            <div class="noteline">
-              <p class="small">L'agente non deve interpretare: <strong>la Definition of Ready garantisce l'assenza di presupposti oscuri</strong>.</p>
-              <span class="anno">DR-02 · Backlog AI-ready</span>
-            </div>
-          </div>
-        </div>
-        <aside class="notes">
-          <p><strong>Dal documento al backlog.</strong> La debolezza tipica dei task per AI è la vaghezza: "migliora la gestione errori" o "crea endpoint".</p>
-          <p>Con il nostro framework ogni ticket è generato a partire da Use Case rigorosi in formato Given/When/Then e collegato a contratti OpenAPI definiti.</p>
-          <p>Inoltre la story è immutabile: evita che modifiche non tracciate facciano fallire i test a metà sviluppo.</p>
-        </aside>
-      </section>
-
-      <!-- ============ 12 · IMPLEMENTAZIONE ============ -->
+      <!-- ============ 11 · IMPLEMENTAZIONE ============ -->
       <section class="slide" data-title="Esecuzione tecnica" data-section="Il flusso" data-slug="implementazione">
         <div class="sbody">
           <div class="shead">
@@ -865,7 +853,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
               </div>
               <div class="p-row">
                 <span class="p-n">03</span>
-                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>Verifica locale con linter e CI isomorfa</span><em>L'agente compila, esegue la suite di test e corregge i fallimenti in autonomia prima di sottoporre qualsiasi modifica a review umana.</em></span>
+                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>Verifica locale e remota in ambienti isomorfi</span><em>L'agente compila, esegue la suite di test e corregge i fallimenti in autonomia prima di sottoporre qualsiasi modifica a review umana.</em></span>
               </div>
             </div>
             <div class="noteline">
@@ -877,16 +865,16 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <aside class="notes">
           <p><strong>Come lavora l'agente.</strong> L'agente non produce direttamente una Pull Request: lavora in un ambiente controllato.</p>
           <p>Scrive prima i test ricavati dagli Use Case, poi scrive il codice per farli passare. Se la suite fallisce, l'agente corregge il codice, non abbassa le aspettative del test.</p>
-          <p>Il software engineer riceve una proposta completa di implementazione e test verificati dalla CI locale.</p>
+          <p>I software engineer ricevono una proposta completa di implementazione e test verificati dalla CI locale.</p>
         </aside>
       </section>
 
-      <!-- ============ 13 · RUOLI (POST-FLUSSO) ============ -->
+      <!-- ============ 12 · RUOLI (POST-FLUSSO) ============ -->
       <section class="slide" data-title="Uomo e macchina" data-section="Gate e controllo" data-slug="ruoli">
         <div class="sbody">
           <div class="shead">
             <h2>Separazione delle responsabilità</h2>
-            <p class="lead">Non deleghiamo la responsabilità: <strong>il software engineer governa il sistema, l'agente accelera la stesura</strong>.</p>
+            <p class="lead">Non deleghiamo la responsabilità: <strong>i software engineer governano il sistema, l'agente accelera la stesura</strong>.</p>
           </div>
           <div class="scontent">
             <div class="cols">
@@ -899,7 +887,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
               <div>
                 <div class="c-head"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>Agente software</span><span>Esecuzione guidata su compiti circoscritti e verificabili.</span></div>
                 <div class="c-row"><span class="c-name">Sintesi e pre-fill</span><span class="c-sub">Compila bozze di DR, metadata Jira e matrici di tracciabilità</span></div>
-                <div class="c-row"><span class="c-name">Spec-first generation</span><span class="c-sub">Produce client, modelli dati e stub conformi a schemi OpenAPI</span></div>
+                <div class="c-row"><span class="c-name">Spec-first generation</span><span class="c-sub">Produce client, server, modelli dati e stub conformi alle entità della DR</span></div>
                 <div class="c-row"><span class="c-name">TDD e refactoring</span><span class="c-sub">Scrive test derivati dagli Use Case e itera finché la suite è verde</span></div>
               </div>
             </div>
@@ -916,23 +904,23 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 14 · CINQUE GATE ============ -->
+      <!-- ============ 13 · CINQUE GATE ============ -->
       <section class="slide" data-title="I cinque gate" data-section="Gate e controllo" data-slug="cinque-gate">
         <div class="sbody">
           <div class="shead">
-            <h2>I cinque gate di controllo</h2>
+            <h2>I gate di controllo</h2>
             <p class="lead">Nessun artefatto avanza al livello successivo senza aver <strong>superato un gate deterministico o umano</strong>.</p>
           </div>
           <div class="scontent">
             <div class="wtable" style="max-width:1020px">
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Gate 1 · Requisiti &amp; Architettura</span><span class="w-sub">Verifica completezza PRD, DR e risoluzione dei punti aperti</span></span><span class="w-right stat ok">Umano · Product &amp; Platform</span></div>
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>Gate 2 · Backlog &amp; Ready for Dev</span><span class="w-sub">Verifica DoR su Jira, contratti allegati e Use Case atomici</span></span><span class="w-right stat ok">Automatico + Ingegneria</span></div>
+              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Gate 1 · Requisiti &amp; Architettura</span><span class="w-sub">Verifica completezza PRD, DR e risoluzione dei punti aperti</span></span><span class="w-right stat ok">Umano · Product &amp; Engineering</span></div>
+              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>Gate 2 · Backlog &amp; Ready for Dev</span><span class="w-sub">Verifica DoR su Jira, contratti allegati e Use Case atomici</span></span><span class="w-right stat ok">Automatico + Engineering</span></div>
               <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>Gate 3 · Contract &amp; Security Gate</span><span class="w-sub">Validazione OpenAPI linter, filtri PII e assenza dati sensibili</span></span><span class="w-right stat acc">Automatico deterministico</span></div>
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" x2="6" y1="9" y2="21"/></svg>Gate 4 · Code &amp; Test Verification</span><span class="w-sub">CI verde, copertura test di regressione e review del diff su PR</span></span><span class="w-right stat ok">Umano · Ingegneria &amp; QA</span></div>
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>Gate 5 · Operations &amp; Release</span><span class="w-sub">Checklist di readiness operativa, monitoraggio e piano di rollback</span></span><span class="w-right stat ok">Umano · Ops &amp; Platform</span></div>
+              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" x2="6" y1="9" y2="21"/></svg>Gate 4 · Code &amp; Test Verification</span><span class="w-sub">CI verde, copertura test di regressione e review del diff su PR</span></span><span class="w-right stat ok">Umano · Engineering &amp; QA</span></div>
+              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>Gate 5 · Operations &amp; Release</span><span class="w-sub">Checklist di readiness operativa, monitoraggio e piano di rollback</span></span><span class="w-right stat ok">Umano · Ops &amp; Engineering</span></div>
             </div>
             <div class="noteline">
-              <p class="small">I controlli automatici filtrano le anomalie banali; <strong>gli ingegneri presidiano l'intento e la sicurezza</strong>.</p>
+              <p class="small">I controlli automatici filtrano le anomalie banali; <strong>i software engineer presidiano l'intento e la sicurezza</strong>.</p>
               <span class="anno">Governance · Mappa dei Gate</span>
             </div>
           </div>
@@ -944,36 +932,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 15 · HITL MATRICE ============ -->
-      <section class="slide" data-title="Matrice HITL" data-section="Gate e controllo" data-slug="hitl-matrice">
-        <div class="sbody">
-          <div class="shead">
-            <h2>Dove l'agente si ferma</h2>
-            <p class="lead">L'autonomia è massima nella preparazione, ma <strong>si arresta davanti a modifiche di stato o di codice condiviso</strong>.</p>
-          </div>
-          <div class="scontent">
-            <div class="wtable tight" style="max-width:1020px">
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Definizione di priorità ed esigenze di business</span><span class="w-sub">Decisione sul valore e perimetro del sistema</span></span><span class="w-right stat ok">Umano esclusivo</span></div>
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>Pre-compilazione schede, stub e scenari Use Case</span><span class="w-sub">Proposta di bozze strutturate a partire da linee guida</span></span><span class="w-right stat acc">Agente autonomo</span></div>
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 7 17l-5-5"/><path d="m22 10-7.5 7.5L13 16"/></svg>Validazione DoR e approvazione presa in carico</span><span class="w-sub">Verifica assenza di ambiguità prima del dispatch</span></span><span class="w-right stat ok">Umano obbligatorio</span></div>
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>Scrittura codice e test nel workspace locale</span><span class="w-sub">Ciclo red-green-refactor vincolato ai contratti di schema</span></span><span class="w-right stat acc">Agente controllato</span></div>
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" x2="6" y1="9" y2="21"/></svg>Approvazione Pull Request e merge su main branch</span><span class="w-sub">Verifica del diff, dei test di accettazione e adeguatezza tecnica</span></span><span class="w-right stat ok">Umano esclusivo</span></div>
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Rilascio e deploy in ambiente di produzione</span><span class="w-sub">Pipeline CI/CD tracciata con autorizzazioni di servizio</span></span><span class="w-right stat ok">Pipeline protetta</span></div>
-            </div>
-            <div class="noteline">
-              <p class="small">Nessun agente dispone di <strong>token con privilegi amministrativi o di deploy diretto</strong>.</p>
-              <span class="anno">Policy di accesso &amp; Human-in-the-Loop</span>
-            </div>
-          </div>
-        </div>
-        <aside class="notes">
-          <p><strong>La delimitazione dell'autonomia.</strong> Questa matrice risponde a una domanda chiave di sicurezza e audit: cosa può fare un agente da solo?</p>
-          <p>L'agente può analizzare e preparare: bozze, codice in rami isolati, test.</p>
-          <p>L'agente non può mai: approvare requisiti, bypassare la DoR, mergiare codice su rami principali o rilasciare in produzione.</p>
-        </aside>
-      </section>
-
-      <!-- ============ 16 · TOOLCHAIN E SKILL ============ -->
+      <!-- ============ 14 · TOOLCHAIN E SKILL ============ -->
       <section class="slide" data-title="Toolchain e Skill" data-section="Piattaforma" data-slug="toolchain-skill">
         <div class="sbody">
           <div class="shead">
@@ -1004,7 +963,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 17 · SICUREZZA E PRIVACY ============ -->
+      <!-- ============ 15 · SICUREZZA E PRIVACY ============ -->
       <section class="slide" data-title="Sicurezza e Privacy" data-section="Piattaforma" data-slug="sicurezza-privacy">
         <div class="sbody">
           <div class="shead">
@@ -1049,7 +1008,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 18 · PIANO PILOTA ============ -->
+      <!-- ============ 16 · PIANO PILOTA ============ -->
       <section class="slide" data-title="Piano pilota" data-section="Adozione" data-slug="piano-pilota">
         <div class="sbody">
           <div class="shead">
@@ -1084,7 +1043,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         </aside>
       </section>
 
-      <!-- ============ 19 · CHIUSURA ============ -->
+      <!-- ============ 17 · CHIUSURA ============ -->
       <section class="slide" data-title="Chiusura" data-section="Adozione" data-slug="chiusura">
         <div class="sbody">
           <div class="divider-main">
