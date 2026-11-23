@@ -364,6 +364,10 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
 /* ---------- focus ---------- */
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
+/* ---------- densità locale · slide decisione pilota ---------- */
+.slide[data-slug="piano-pilota"] .shead{margin-bottom:22px}
+.slide[data-slug="piano-pilota"] .plan .p-row{padding:10px 0}
+
 /* ---------- Titillio · SIL Open Font License 1.1 ----------
    Derived from Titillium Pro.
    Embedded as WOFF2 so the deck stays a single offline file.
@@ -462,50 +466,33 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
               <div>
                 <div class="c-row">
                   <span class="c-name">Fonti e contesto</span>
-                  <div class="c-sub">
-                    <ul>
-                      <li>Dove gli agenti trovano informazioni affidabili?</li>
-                      <li>Che cosa devono sapere per lavorare?</li>
-                      <li>Come evitiamo duplicati o informazioni obsolete?</li>
-                    </ul>
-                  </div>
+                  <span class="c-sub">Registry e contesto condiviso: fonti affidabili per persone e agenti, senza duplicati né informazioni obsolete.</span>
                 </div>
                 <div class="c-row">
-                  <span class="c-name">Unità di Lavoro, pianificazione e parallelismo</span>
-                  <div class="c-sub">
-                    <ul>
-                      <li>Quali sono le caratteristiche di una richiesta pronta per poter esser presa in carico dagli agent?</li>
-                      <li>Quando e come la passiamo agli agent e aggiorniamo il piano?</li>
-                    </ul>
-                  </div>
+                  <span class="c-name">Pianificazione e Unità di Lavoro</span>
+                  <span class="c-sub">DoR esplicito e slice atomiche: una richiesta è presa in carico solo quando è delimitata e misurabile.</span>
                 </div>
               </div>
               <div>
                 <div class="c-row">
-                  <span class="c-name">Strumenti riutilizzabili ben calibrati</span>
-                  <div class="c-sub">
-                    <ul>
-                      <li>Quali agent, istruzioni e skill riutilizzabili aiutano a svolgere compiti ricorrenti?</li>
-                      <li>Come verifichiamo che tali strumenti funzionino e migliorino nel tempo?</li>
-                      <li>Come teniamo sotto controllo il costo dell'AI?</li>
-                    </ul>
-                  </div>
+                  <span class="c-name">Strumenti riutilizzabili</span>
+                  <span class="c-sub">Skill registry versionate e verificate: compiti ricorrenti coperti una volta sola, con il costo dell'AI sotto controllo.</span>
                 </div>
                 <div class="c-row">
                   <span class="c-name">Verifiche e risultati</span>
-                  <div class="c-sub">
-                    <ul>
-                      <li>Come controlliamo che il lavoro sia corretto prima e dopo il rilascio?</li>
-                      <li>Ha raggiunto l'obiettivo?</li>
-                    </ul>
-                  </div>
+                  <span class="c-sub">Gate deterministici e KPI per slice: l'esito è verificabile prima e dopo il rilascio, obiettivo compreso.</span>
                 </div>
               </div>
+            </div>
+            <div class="noteline">
+              <p class="small">I quattro domini sono <strong>le sezioni che seguono</strong>: flusso, gate, piattaforma, adozione.</p>
+              <span class="anno">Framework condiviso · Quattro risposte</span>
             </div>
           </div>
         </div>
         <aside class="notes">
           <p><strong>Perché condividere.</strong> Ogni team si pone domande simili: dove trovare informazioni affidabili, quando il lavoro è pronto per un agente, come proteggerlo e come verificare il risultato. Dare risposte una volta sola evita di rifare lo stesso lavoro con regole diverse.</p>
+          <p><strong>Canovaccio delle domande originarie</strong> (raccontate, non proiettate): dove gli agenti trovano informazioni affidabili e come evitiamo duplicati o informazioni obsolete; che cosa devono sapere per lavorare; quando una Unità di Lavoro è pronta per essere presa in carico e come si aggiorna il piano; quali agent, istruzioni e skill riutilizzabili coprono i compiti ricorrenti, come verifichiamo che funzionino e come teniamo sotto controllo il costo dell'AI; come controlliamo che il lavoro sia corretto prima e dopo il rilascio, e se ha raggiunto l'obiettivo.</p>
           <p>Non significa imporre lo stesso processo a tutti. Significa condividere strumenti e criteri, e aggiornare documenti e piano quando cambiano i requisiti, così restano chiari alle persone e utili agli agenti.</p>
           <p>Le risposte diventano agenti specializzati, istruzioni e strumenti riutilizzabili, con prove per verificarli e misure dei costi e dei risultati. Sono risorse comuni da migliorare nel tempo.</p>
         </aside>
@@ -1030,8 +1017,12 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>Fase 3 · Estensione a Platform</span><em>Consolidamento del registry delle skill aziendali, quality gate periodici e apertura progressiva a tutti i team.</em></span>
               </div>
             </div>
-            <div class="noteline">
-              <p class="small">La decisione richiesta a Platform è <strong>l'autorizzazione alla fase pilota</strong>, non l'imposizione universale immediata.</p>
+            <div class="wtable compact" style="max-width:1020px;margin-top:12px">
+              <div class="wrow"><span class="w-name">Perimetro della decisione<span class="w-sub">1-2 servizi con traffico reale · 6-8 settimane · owner dedicato · nessun costo oltre le licenze AI</span></span><span class="w-right stat ok">Da confermare al kickoff</span></div>
+              <div class="wrow"><span class="w-name">GO/NO-GO a soglie<span class="w-sub">Lead time PRD→PR −30% · tasso di rifiuto PR &lt;25% · almeno 8 slice rilasciate dietro flag · zero incident di sicurezza</span></span><span class="w-right stat acc">Decisione su dati</span></div>
+            </div>
+            <div class="noteline" style="margin-top:14px">
+              <h3>Chiediamo l'autorizzazione alla fase pilota: perimetro delimitato, nessun costo dedicato, decisione a soglie.</h3>
               <span class="anno">DR-06 · Rollout e KPI</span>
             </div>
           </div>
@@ -1040,6 +1031,8 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           <p><strong>La roadmap di adozione.</strong> Non proponiamo un cambio repentino per tutta l'azienda da domani.</p>
           <p>La proposta a Platform è di avviare una prima sperimentazione su perimetri ristretti e misurabili, raccogliendo dati oggettivi sui gate e sul tasso di successo.</p>
           <p>I risultati del pilota forniranno le evidenze per ratificare o affinare le decisioni prima dell'adozione su larga scala.</p>
+          <p><strong>Perimetro proposto, da confermare al kickoff</strong> (i nomi di servizi e owner vanno definiti con i team): 1-2 servizi con traffico reale e impatto contenuto, 6-8 settimane, un referente per team più un platform engineer, nessun investimento dedicato oltre le licenze AI esistenti — il consumo di token del pilota diventa la baseline di costo.</p>
+          <p>Le soglie GO/NO-GO su cui Platform deciderà: lead time PRD→PR −30%, tasso di rifiuto PR sotto il 25%, almeno 8 slice rilasciate dietro feature flag, zero incident di sicurezza.</p>
         </aside>
       </section>
 
@@ -1047,13 +1040,16 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       <section class="slide" data-title="Chiusura" data-section="Adozione" data-slug="chiusura">
         <div class="sbody">
           <div class="divider-main">
-            <h2 class="statement" style="max-width:24ch">Domande?</h2>
-            <p class="lead" style="max-width:54ch">Il framework non sostituisce PM, Designer o Software Engineer: <strong>trasforma i requisiti in contratti e l'AI in un esecutore affidabile</strong>.</p>
+            <h2 class="statement" style="max-width:26ch">Chiediamo l'avvio del pilota: 1-2 servizi, 6-8 settimane.</h2>
+            <p class="lead" style="max-width:58ch">Nessun costo dedicato oltre le licenze esistenti. La decisione arriva su dati: <strong>lead time −30% · rifiuto PR sotto il 25% · zero incident di sicurezza</strong>.</p>
+            <p class="small" style="max-width:62ch">Il framework non sostituisce PM, Designer o Software Engineer: trasforma i requisiti in contratti e l'AI in un esecutore affidabile.</p>
+            <span class="mono">Domande?</span>
           </div>
         </div>
         <aside class="notes">
-          <p><strong>Chiusura e sintesi.</strong> Chiudiamo ribadendo la tesi: l'agente è un moltiplicatore dell'intento ingegneristico solo se vincolato da contratti rigorosi.</p>
-          <p>Apriamo ora la discussione con Platform sulle Design Review e sulle priorità di pilotaggio.</p>
+          <p><strong>Chiusura con la richiesta esplicita.</strong> Chiudiamo chiedendo l'avvio del pilota su 1-2 servizi con traffico reale e impatto contenuto per 6-8 settimane: nessun costo dedicato oltre le licenze AI esistenti, e la decisione finale affidata alle soglie concordate, non alle impressioni.</p>
+          <p>La tesi resta: l'agente è un moltiplicatore dell'intento ingegneristico solo se vincolato da contratti rigorosi — il framework non sostituisce le persone, ne amplifica la responsabilità.</p>
+          <p>Apriamo ora la discussione con Platform sulle Design Review, sui nomi dei servizi pilota e sulle priorità di kickoff.</p>
         </aside>
       </section>
 
