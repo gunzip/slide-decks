@@ -364,10 +364,6 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
 /* ---------- focus ---------- */
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
-/* ---------- densità locale · slide decisione pilota ---------- */
-.slide[data-slug="piano-pilota"] .shead{margin-bottom:22px}
-.slide[data-slug="piano-pilota"] .plan .p-row{padding:10px 0}
-
 /* ---------- Titillio · SIL Open Font License 1.1 ----------
    Derived from Titillium Pro.
    Embedded as WOFF2 so the deck stays a single offline file.
@@ -394,8 +390,8 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
             <span class="mono">2026</span>
           </div>
           <div class="cover-main">
-            <h1 class="claim">Agentic Delivery Framework:<br>contratti ed esecuzione guidata.</h1>
-            <p class="lead" style="max-width:64ch">Il framework per integrare agent software nello sviluppo: principi, flusso, template, strumenti.</p>
+            <h1 class="claim">Agentic Delivery Framework</h1>
+            <p class="lead" style="max-width:64ch">Velocità e qualità non sono un trade-off.</strong></p>
             <span class="anno" style="margin-top:-12px;text-transform:none;letter-spacing:.03em">Premessa · Principi · Il flusso · Gate e controllo · Piattaforma · Adozione</span>
           </div>
           <div class="cover-foot" style="justify-content:flex-end">
@@ -403,8 +399,8 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
         </div>
         <aside class="notes">
-          <p><strong>La tesi.</strong> L'adozione dell'AI nello sviluppo non può essere un esercizio di chat spontanee o codice generato senza contesto.</p>
-          <p>Oggi presentiamo l'architettura dell'Agentic Delivery Framework a Platform per concordare i vincoli, il flusso e autorizzare il percorso di pilotaggio incrementale.</p>
+          <p><strong>La tesi.</strong> Velocità e qualità non sono un trade-off. Diventano entrambe verificabili quando requisiti, contratti e controlli entrano nello stesso flusso.</p>
+          <p>Il framework mostra come passare da un'intenzione di prodotto a codice verificato, mantenendo persone e agenti dentro responsabilità chiare.</p>
           <p>Promemoria: frecce per navigare, <strong>P</strong> per il relatore, O per l'indice, ? per i tasti.</p>
         </aside>
       </section>
@@ -502,55 +498,40 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       <section class="slide" data-title="Il problema" data-section="Premessa" data-slug="il-problema">
         <div class="sbody">
           <div class="shead">
-            <h2>Il punto di partenza</h2>
-            <p class="lead">L'AI genera codice rapidamente, ma senza una struttura per handoff e pianificazione <strong>il risultato diverge dall'intento originale</strong>.</p>
+            <h2>Dal handoff alla divergenza</h2>
+            <p class="lead">Senza un riferimento condiviso, ogni passaggio allontana l'output dall'intento: <strong>il problema non è la velocità, è la deriva</strong>.</p>
           </div>
           <div class="scontent">
-            <div class="cols signal">
-              <div>
-                <div class="c-head">Handoff informali, nessun piano<span>Il requisito cambia forma a ogni passaggio tra funzioni.</span></div>
-                <div class="c-row">
-                  <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
-                  <span class="c-name">Intento che si perde negli handoff</span>
-                  <span class="c-sub">Design, prodotto ed engineering si passano richieste parziali: ogni passaggio riscrive il requisito.</span>
-                </div>
-                <div class="c-row">
-                  <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
-                  <span class="c-name">Rimbalzi tra funzioni</span>
-                  <span class="c-sub">Il lavoro torna indietro tra design ed engineering; l'agente esegue l'ultimo messaggio, non l'intento.</span>
-                </div>
-                <div class="c-row">
-                  <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
-                  <span class="c-name">Codebase che diverge</span>
-                  <span class="c-sub">Rework a catena e review complesse: revisionare è più difficile e la confidenza nella delivery cala.</span>
-                </div>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--hair-2);border-bottom:1px solid var(--hair-2)">
+              <div style="padding:24px 28px 24px 0">
+                <span class="mono">01</span>
+                <h3 style="font-size:24px;margin-top:12px">Handoff informali</h3>
+                <p class="small" style="margin-top:14px">Richieste spezzate tra Product, Design e Engineering.</p>
+                <p class="small" style="margin-top:12px"><strong>L'ultimo messaggio diventa la fonte implicita.</strong></p>
               </div>
-              <div>
-                <div class="c-head">Handoff e piano condivisi<span>Ogni passaggio lascia un contratto verificabile.</span></div>
-                <div class="c-row">
-                  <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
-                  <span class="c-name">Intento esplicito e condiviso</span>
-                  <span class="c-sub">Prodotto, design ed engineering lavorano sullo stesso artefatto di riferimento.</span>
-                </div>
-                <div class="c-row">
-                  <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
-                  <span class="c-name">Piano delle attività tracciabile</span>
-                  <span class="c-sub">Ogni richiesta all'agente nasce da un task pianificato, non da un messaggio isolato.</span>
-                </div>
-                <div class="c-row">
-                  <span class="c-mark" aria-hidden="true"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
-                  <span class="c-name">Codice aderente al progetto</span>
-                  <span class="c-sub">Meno rework, modifiche circoscritte, test ed evidenze, review più rapide e consapevoli.</span>
-                </div>
+              <div style="padding:24px 28px;border-left:1px solid var(--hair)">
+                <span class="mono">02</span>
+                <h3 style="font-size:24px;margin-top:12px">Intento che si perde</h3>
+                <p class="small" style="margin-top:14px">Il requisito viene riscritto e reinterpretato.</p>
+                <p class="small" style="margin-top:12px"><strong>L'agente ottimizza la frase, non il contesto.</strong></p>
               </div>
+              <div style="padding:24px 0 24px 28px;border-left:1px solid var(--hair)">
+                <span class="mono">03</span>
+                <h3 style="font-size:24px;margin-top:12px">Codice che diverge</h3>
+                <p class="small" style="margin-top:14px">Rework, diff ampi e review sempre più costose.</p>
+                <p class="small" style="margin-top:12px"><strong>La confidenza nella delivery cala.</strong></p>
+              </div>
+            </div>
+            <div class="noteline">
+              <p class="small">La risposta non è chiedere prompt migliori: è introdurre <strong>contratti verificabili a ogni passaggio</strong>.</p>
+              <span class="anno">Handoff → intento → codice</span>
             </div>
           </div>
         </div>
         <aside class="notes">
-          <p><strong>Il contesto reale.</strong> Gli assistenti LLM sono già usati, ma con prompt artigianali: nessuno struttura handoff e pianificazione delle attività.</p>
-          <p>Senza quella struttura l'intento si diluisce: prodotto, design ed engineering si passano richieste parziali, il lavoro rimbalza e l'agente esegue l'ultimo messaggio ricevuto.</p>
-          <p>Il codice si allontana dal progetto e richiede rework a catena; i diff diventano ampi e difficili da rivedere, e chi revisiona ha meno confidenza in ciò che rilascia.</p>
-          <p>Il framework ricostruisce la catena: handoff espliciti, un piano condiviso e artefatti verificabili a ogni passaggio.</p>
+          <p><strong>La sequenza del problema.</strong> Gli handoff informali trasformano il requisito in una catena di messaggi. Ogni funzione lo interpreta e lo riscrive; quando arriva all'agente, l'ultima frase pesa più dell'intento originario.</p>
+          <p>Il risultato può essere codice ben scritto ma sbagliato rispetto al sistema. Produciamo rework, diff più ampi e review difficili.</p>
+          <p>La soluzione è un contratto verificabile a ogni passaggio: non più prompt isolati, ma un filo tracciabile dal requisito al test.</p>
         </aside>
       </section>
 
@@ -558,34 +539,33 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       <section class="slide" data-title="I pilastri" data-section="Principi" data-slug="principi">
         <div class="sbody">
           <div class="shead">
-            <h2>I pilastri</h2>
-            <p class="lead">Tre vincoli distinguono un esperimento isolato da un <strong>processo ingegneristico ripetibile</strong>.</p>
+            <h2>Tre pilastri. Zero ambiguità.</h2>
+            <p class="lead">Ogni accelerazione è ammessa solo dentro confini espliciti: <strong>specifiche, controlli e responsabilità</strong>.</p>
           </div>
           <div class="scontent">
             <div class="plan">
               <div class="p-row">
                 <span class="p-n">01</span>
-                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>Contratti prima del codice</span><em>Le specifiche condivise e approvate (PRD, DR, Use Case) sono la sorgente di verità, non i prompt.</em></span>
+                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>Contratti verificabili</span><em>PRD, DR e Use Case sono la sorgente di verità — non il prompt.</em></span>
               </div>
               <div class="p-row">
                 <span class="p-n">02</span>
-                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>Determinismo dove conta</span><em>Linter, compiler, contratti di schema e test automatici validano l'output: l'AI opera dentro binari rigidi.</em></span>
+                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>Gate deterministici</span><em>Linter, compiler, schemi, test e CI filtrano l'output prima della review.</em></span>
               </div>
               <div class="p-row">
                 <span class="p-n">03</span>
-                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Human-in-the-Loop strutturato</span><em>L'agente propone, compila bozze ed esegue; l'essere umano ha la titolarità delle decisioni e dei gate.</em></span>
+                <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Responsabilità umana</span><em>Product ed Engineering decidono architettura, eccezioni e rilascio.</em></span>
               </div>
             </div>
             <div class="noteline">
-              <p class="small">La regola guida: <strong>l'AI non decide l'architettura in autonomia</strong>, realizza soluzioni dentro specifiche convalidate.</p>
+              <p class="small"><strong>L'AI non decide l'architettura.</strong> Realizza soluzioni dentro specifiche validate.</p>
               <span class="anno">Platform Engineering · Linee guida</span>
             </div>
           </div>
         </div>
         <aside class="notes">
-          <p><strong>I principi non negoziabili.</strong> Il primo pilastro è il contratto: niente prompt vaghi, ma documenti tecnici strutturati.</p>
-          <p>Il secondo è il determinismo: la verifica non è delegata a un altro modello probabilistico, ma a strumenti certi come compiler, type system e pipeline CI.</p>
-          <p>Il terzo è la responsabilità umana: l'agente è un acceleratore, le persone sono i garanti.</p>
+          <p><strong>I principi non negoziabili.</strong> Il contratto definisce il problema e le condizioni di accettazione. Il gate deterministico trasforma quelle condizioni in prove ripetibili.</p>
+          <p>La responsabilità, infine, resta alle persone: l'agente esegue dentro i confini approvati, non seleziona l'architettura né autorizza il rilascio.</p>
         </aside>
       </section>
 
@@ -651,37 +631,36 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <div class="sbody">
           <div class="shead">
             <h2>Il ciclo di delivery</h2>
-            <p class="lead">Dall'esigenza di business al codice in esercizio attraverso <strong>stadi tracciabili</strong>.</p>
+            <p class="lead">Ogni stage consegna al successivo un input più affidabile, <strong>senza riscrivere l'intento</strong>.</p>
           </div>
           <div class="scontent">
             <div class="fig" style="max-width:1000px">
               <svg viewBox="0 0 1000 236" aria-label="La catena del valore: dal PRD all'implementazione">
                 <line x1="80" y1="96" x2="920" y2="96" class="st" pathLength="1" data-draw style="--dd:100ms"/>
+                <path class="st pop" style="--dd:430ms" d="M 298 96 L 284 88 L 284 104 Z" fill="var(--ink)"/>
+                <path class="st pop" style="--dd:580ms" d="M 488 96 L 474 88 L 474 104 Z" fill="var(--ink)"/>
+                <path class="st pop" style="--dd:730ms" d="M 678 96 L 664 88 L 664 104 Z" fill="var(--ink)"/>
+                <path class="st pop" style="--dd:880ms" d="M 868 96 L 854 88 L 854 104 Z" fill="var(--ink)"/>
                 <circle class="node pop" style="--dd:500ms" cx="120" cy="96" r="8"/>
                 <circle class="node pop" style="--dd:650ms" cx="310" cy="96" r="8"/>
                 <circle class="node pop" style="--dd:800ms" cx="500" cy="96" r="8"/>
                 <circle class="node pop" style="--dd:950ms" cx="690" cy="96" r="8"/>
                 <circle class="node-acc pop" style="--dd:1100ms" cx="880" cy="96" r="8"/>
 
-                <text x="120" y="74" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:550ms">PRD</text>
-                <text x="120" y="54" text-anchor="middle" class="lbl pop" style="--dd:600ms" font-size="12.5">Product Manager</text>
-                <text x="120" y="126" text-anchor="middle" class="lbl pop" style="--dd:620ms" font-size="12.5">Esigenze &amp; JTBD</text>
+                <text x="120" y="72" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:550ms">PRD</text>
+                <text x="120" y="128" text-anchor="middle" class="lbl pop" style="--dd:620ms" font-size="12.5">Problema + confini</text>
 
-                <text x="310" y="74" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:700ms">DR</text>
-                <text x="310" y="54" text-anchor="middle" class="lbl pop" style="--dd:750ms" font-size="12.5">Design Review</text>
-                <text x="310" y="126" text-anchor="middle" class="lbl pop" style="--dd:770ms" font-size="12.5">Contratti &amp; Schemi</text>
+                <text x="310" y="72" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:700ms">Design Review</text>
+                <text x="310" y="128" text-anchor="middle" class="lbl pop" style="--dd:770ms" font-size="12.5">Contratti + scelte</text>
 
-                <text x="500" y="74" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:850ms">Use Case</text>
-                <text x="500" y="54" text-anchor="middle" class="lbl pop" style="--dd:900ms" font-size="12.5">Product &amp; Tech</text>
-                <text x="500" y="126" text-anchor="middle" class="lbl pop" style="--dd:920ms" font-size="12.5">Criteri binari</text>
+                <text x="500" y="72" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:850ms">Use Case</text>
+                <text x="500" y="128" text-anchor="middle" class="lbl pop" style="--dd:920ms" font-size="12.5">Comportamenti binari</text>
 
-                <text x="690" y="74" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1000ms">Ticket Jira</text>
-                <text x="690" y="54" text-anchor="middle" class="lbl pop" style="--dd:1050ms" font-size="12.5">DoR &amp; Pre-fill</text>
-                <text x="690" y="126" text-anchor="middle" class="lbl pop" style="--dd:1070ms" font-size="12.5">Task atomici</text>
+                <text x="690" y="72" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1000ms">Ticket</text>
+                <text x="690" y="128" text-anchor="middle" class="lbl pop" style="--dd:1070ms" font-size="12.5">Slice + DoR</text>
 
-                <text x="880" y="74" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1150ms">Codice &amp; CI</text>
-                <text x="880" y="54" text-anchor="middle" class="lbl pop" style="--dd:1200ms" font-size="12.5">Agente &amp; Dev</text>
-                <text x="880" y="126" text-anchor="middle" class="lbl pop" style="--dd:1220ms" font-size="12.5">TDD &amp; Review</text>
+                <text x="880" y="72" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1150ms">Codice</text>
+                <text x="880" y="128" text-anchor="middle" class="lbl pop" style="--dd:1220ms" font-size="12.5">Test + review</text>
 
               </svg>
               <p class="figcap"><span class="anno">La catena del valore — ogni passaggio produce un contratto formale e testabile per lo stadio successivo.</span></p>
@@ -689,8 +668,8 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
         </div>
         <aside class="notes">
-          <p><strong>La catena a colpo d'occhio.</strong> Questo è il flusso centrale del framework: dal PRD alla Design Review, agli Use Case, ai ticket Jira, fino all'implementazione.</p>
-          <p>Ogni freccia rappresenta una transizione regolata da un contratto e da un gate.</p>
+          <p><strong>La catena a colpo d'occhio.</strong> Il PRD delimita il problema; la Design Review fissa contratti e decisioni; gli Use Case li trasformano in criteri binari; il ticket rende il lavoro atomico; il codice nasce da test e review.</p>
+          <p>Ogni freccia conserva lo stesso intento e aggiunge precisione. Nessuno stage ricomincia dal prompt.</p>
         </aside>
       </section>
 
@@ -825,11 +804,11 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       <section class="slide" data-title="Dal contratto al test" data-section="Il flusso" data-slug="esempio-contratto">
         <div class="sbody">
           <div class="shead">
-            <h2>Dal contratto al test: un esempio pratico</h2>
-            <p class="lead">Un requisito ambiguo genera codice imprevedibile; <strong>un Use Case binario diventa direttamente la specifica del test</strong>.</p>
+            <h2>UC-04: dal contratto alle asserzioni</h2>
+            <p class="lead">La specifica non è documentazione a valle: <strong>è il primo input del Test-Driven Development</strong>.</p>
           </div>
           <div class="scontent">
-            <div class="cols">
+            <div class="cols" style="grid-template-columns:minmax(0,1fr) 54px minmax(0,1fr);gap:18px;align-items:center">
               <div class="snippet">
                 <div class="s-bar">
                   <span class="s-title">Use Case · UC-04 Limite rimborso</span>
@@ -837,18 +816,22 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 </div>
                 <pre><span class="k">id:</span> <span class="v">UC-04</span>
 <span class="k">attore:</span> <span class="v">Operatore Rimborsi</span>
-<span class="k">precondizione:</span> <span class="v">Ordine in stato SETTLED</span>
-<span class="k">regola:</span> <span class="v">Importo &lt;= 500.00 EUR → approvazione automatica</span>
-<span class="k">eccezione:</span> <span class="v">Importo &gt; 500.00 EUR → stato PENDING_APPROVAL</span>
-<span class="k">invariante:</span> <span class="v">Nessun evento di accredito emesso se in attesa</span></pre>
+<span class="k">pre:</span> <span class="v">ordine SETTLED</span>
+<span class="k">se:</span> <span class="v">importo &lt;= 500 EUR → AUTO_APPROVED</span>
+<span class="k">se:</span> <span class="v">importo &gt; 500 EUR → PENDING_APPROVAL</span>
+<span class="k">mai:</span> <span class="v">RefundCredited se in attesa</span></pre>
+              </div>
+              <div aria-hidden="true" style="display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--accent)">
+                <svg class="icon" style="width:28px;height:28px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                <span class="mono" style="letter-spacing:.08em">Prima</span>
               </div>
               <div class="snippet">
                 <div class="s-bar">
                   <span class="s-title">Test generato (TDD Red → Green)</span>
                   <span class="stat ok">Gate deterministico</span>
                 </div>
-                <pre><span class="k">test</span>(<span class="v">"UC-04: rimborso sopra soglia resta in PENDING_APPROVAL"</span>, <span class="k">async</span> () =&gt; {
-  <span class="k">const</span> order = settledOrder({ amount: <span class="v">500.01</span>, currency: <span class="v">"EUR"</span> });
+                <pre><span class="k">test</span>(<span class="v">"UC-04 &gt; 500: pending"</span>, <span class="k">async</span> () =&gt; {
+  <span class="k">const</span> order = settledOrder({ amount: <span class="v">500.01</span> });
   <span class="k">const</span> res = <span class="k">await</span> refundService.request(order.id);
 
   expect(res.status).toBe(<span class="v">"PENDING_APPROVAL"</span>);
@@ -857,14 +840,14 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
               </div>
             </div>
             <div class="noteline">
-              <p class="small">L'agente traduce il contratto in <strong>asserzioni verificabili</strong> prima di scrivere la logica applicativa.</p>
+              <p class="small">L'agente traduce il contratto in asserzioni <strong>prima</strong> di scrivere la logica.</p>
               <span class="anno">Esempio · Tracciabilità UC → Test</span>
             </div>
           </div>
         </div>
         <aside class="notes">
-          <p><strong>Rendere tangibile il concetto di contratto.</strong> Qui vediamo come una regola della Design Review non resti prosa discorsiva, ma venga strutturata con precondizioni, soglie e invarianti.</p>
-          <p>Nel passaggio successivo l'agente usa esattamente questo blocco per generare il test prima dell'implementazione. Il reviewer umano non deve indovinare l'intento: verifica che le asserzioni riflettano UC-04.</p>
+          <p><strong>Il contratto diventa il test.</strong> UC-04 definisce una soglia, uno stato atteso e un'invariante osservabile. Non resta una descrizione: stabilisce già quali asserzioni devono essere vere.</p>
+          <p>La freccia conta perché la sequenza è deliberata: l'agente genera il test rosso prima di scrivere la logica. Il reviewer controlla la tracciabilità tra UC-04 e il test, non interpreta un diff a posteriori.</p>
         </aside>
       </section>
 
@@ -942,16 +925,35 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       <section class="slide" data-title="I cinque gate" data-section="Gate e controllo" data-slug="cinque-gate">
         <div class="sbody">
           <div class="shead">
-            <h2>I gate di controllo</h2>
-            <p class="lead">Nessun artefatto avanza al livello successivo senza aver <strong>superato un gate deterministico o umano</strong>.</p>
+            <h2>Cinque gate, un criterio di avanzamento</h2>
+            <p class="lead">Ogni artefatto ha un controllo esplicito e un titolare della decisione: <strong>nessun passaggio avviene per fiducia implicita</strong>.</p>
           </div>
           <div class="scontent">
             <div class="wtable" style="max-width:1020px">
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Gate 1 · Requisiti &amp; Architettura</span><span class="w-sub">Verifica completezza PRD, DR e risoluzione dei punti aperti</span></span><span class="w-right stat ok">Umano · Product &amp; Engineering</span></div>
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>Gate 2 · Backlog &amp; Ready for Dev</span><span class="w-sub">Verifica DoR su Jira, contratti allegati e Use Case atomici</span></span><span class="w-right stat ok">Automatico + Engineering</span></div>
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>Gate 3 · Contract &amp; Security Gate</span><span class="w-sub">Validazione OpenAPI linter, filtri PII e assenza dati sensibili</span></span><span class="w-right stat acc">Automatico deterministico</span></div>
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" x2="6" y1="9" y2="21"/></svg>Gate 4 · Code &amp; Test Verification</span><span class="w-sub">CI verde, copertura test di regressione e review del diff su PR</span></span><span class="w-right stat ok">Umano · Engineering &amp; QA</span></div>
-              <div class="wrow"><span class="w-name"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>Gate 5 · Operations &amp; Release</span><span class="w-sub">Checklist di readiness operativa, monitoraggio e piano di rollback</span></span><span class="w-right stat ok">Umano · Ops &amp; Engineering</span></div>
+              <div class="wrow" style="grid-template-columns:280px minmax(0,1fr);padding:8px 0">
+                <span class="mono">Gate</span>
+                <span class="mono" style="justify-self:start;text-align:left">Tipo di controllo + chi decide</span>
+              </div>
+              <div class="wrow" style="grid-template-columns:280px minmax(0,1fr);padding:10px 0">
+                <span class="w-name">01 · Requisiti e architettura</span>
+                <span class="w-name" style="justify-self:stretch;font-size:16px">Umano<span class="w-sub">Chi decide: Product + Engineering · Completezza PRD, DR e punti aperti.</span></span>
+              </div>
+              <div class="wrow" style="grid-template-columns:280px minmax(0,1fr);padding:10px 0">
+                <span class="w-name">02 · Ready for Dev</span>
+                <span class="w-name" style="justify-self:stretch;font-size:16px">Ibrido<span class="w-sub">Chi decide: automazione + Engineering · DoR, contratti allegati e Use Case atomici.</span></span>
+              </div>
+              <div class="wrow" style="grid-template-columns:280px minmax(0,1fr);padding:10px 0">
+                <span class="w-name">03 · Contract &amp; Security</span>
+                <span class="w-name" style="justify-self:stretch;font-size:16px">Automatico deterministico<span class="w-sub">Chi decide: CI + regole Platform · OpenAPI linter, filtro PII e dati sensibili.</span></span>
+              </div>
+              <div class="wrow" style="grid-template-columns:280px minmax(0,1fr);padding:10px 0">
+                <span class="w-name">04 · Code &amp; Test</span>
+                <span class="w-name" style="justify-self:stretch;font-size:16px">Ibrido<span class="w-sub">Chi decide: Engineering + QA · CI verde, regressione e review del diff.</span></span>
+              </div>
+              <div class="wrow" style="grid-template-columns:280px minmax(0,1fr);padding:10px 0">
+                <span class="w-name">05 · Operations &amp; Release</span>
+                <span class="w-name" style="justify-self:stretch;font-size:16px">Umano<span class="w-sub">Chi decide: Ops + Engineering · Readiness, monitoraggio e rollback.</span></span>
+              </div>
             </div>
             <div class="noteline">
               <p class="small">I controlli automatici filtrano le anomalie banali; <strong>i software engineer presidiano l'intento e la sicurezza</strong>.</p>
@@ -960,9 +962,8 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
         </div>
         <aside class="notes">
-          <p><strong>I gate nel dettaglio.</strong> Questa tabella elenca i cinque punti di controllo rigido attraverso cui deve passare ogni iniziativa.</p>
-          <p>Notiamo la suddivisione: i gate 2 e 3 hanno forti componenti automatiche per sgravare le persone dal controllo di sintassi o compatibilità di schema.</p>
-          <p>I gate 1, 4 e 5 sono saldamente in mano umana: garantiscono valore di prodotto, qualità architetturale e stabilità operativa.</p>
+          <p><strong>Ogni gate risponde a due domande.</strong> Che tipo di controllo serve e chi ha l'autorità di decidere. Questa separazione evita gate vaghi e approvazioni implicite.</p>
+          <p>L'automazione filtra ciò che è misurabile: formati, schemi, test e sicurezza di base. Le persone decidono su intento, architettura, qualità del diff e rischio operativo.</p>
         </aside>
       </section>
 
@@ -1046,58 +1047,47 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       <section class="slide" data-title="Piano pilota" data-section="Adozione" data-slug="piano-pilota">
         <div class="sbody">
           <div class="shead">
-            <h2>Adozione incrementale e soglie GO / NO-GO</h2>
-            <p class="lead">Validazione progressiva su <strong>1-2 servizi reali per 6-8 settimane</strong>, valutata su metriche oggettive.</p>
+            <h2>Un pilota breve, con un verdetto chiaro</h2>
+            <p class="lead">1-2 servizi reali · 6-8 settimane · <strong>GO solo se tutte le soglie sono rispettate</strong>.</p>
           </div>
           <div class="scontent">
-            <div class="cols">
-              <div class="plan">
-                <div class="p-row">
-                  <span class="p-n">01</span>
-                  <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>Fase 1 · Pilota controllato</span><em>Template PRD/DR/UC e backlog AI-ready su 1-2 servizi per calibrare i gate.</em></span>
-                </div>
-                <div class="p-row">
-                  <span class="p-n">02</span>
-                  <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>Fase 2 · Misurazione KPI</span><em>Raccolta evidenze su tempi, qualità delle PR, consumo token e interventi umani.</em></span>
-                </div>
-                <div class="p-row">
-                  <span class="p-n">03</span>
-                  <span class="p-t"><span class="icon-label"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>Fase 3 · Estensione a Platform</span><em>Consolidamento dello Skill Registry e apertura progressiva agli altri team.</em></span>
-                </div>
+            <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--hair-2);border-bottom:1px solid var(--hair-2)">
+              <div style="padding:22px 24px 22px 0">
+                <span class="mono">Velocità</span>
+                <div style="font-size:44px;line-height:1.1;font-weight:600;letter-spacing:-.03em;margin:10px 0;color:var(--accent-ink)">−30%</div>
+                <span class="small">Lead time<br>PRD → PR</span>
               </div>
-              <div class="panel">
-                <div class="p-bar">
-                  <span class="p-title">Criteri di successo del pilota</span>
-                  <span class="stat acc">Soglie GO / NO-GO</span>
-                </div>
-                <div class="p-body">
-                  <div class="frow2" style="grid-template-columns:130px minmax(0,1fr)">
-                    <span class="f-k">Velocità</span>
-                    <span class="f-v">Lead time PRD → PR −30%</span>
-                  </div>
-                  <div class="frow2" style="grid-template-columns:130px minmax(0,1fr)">
-                    <span class="f-k">Qualità</span>
-                    <span class="f-v">Rifiuto PR &lt; 25% <em>(almeno 8 slice dietro flag)</em></span>
-                  </div>
-                  <div class="frow2" style="grid-template-columns:130px minmax(0,1fr)">
-                    <span class="f-k">Sicurezza</span>
-                    <span class="f-v">Zero incident <em>e zero leak PII</em></span>
-                  </div>
-                  <div class="frow2" style="grid-template-columns:130px minmax(0,1fr)">
-                    <span class="f-k">Budget</span>
-                    <span class="f-v">Solo licenze esistenti <em>(baseline token)</em></span>
-                  </div>
-                </div>
+              <div style="padding:22px 24px;border-left:1px solid var(--hair)">
+                <span class="mono">Qualità</span>
+                <div style="font-size:44px;line-height:1.1;font-weight:600;letter-spacing:-.03em;margin:10px 0;color:var(--ink)">&lt;25%</div>
+                <span class="small">Rifiuto PR<br>su almeno 8 slice</span>
               </div>
+              <div style="padding:22px 24px;border-left:1px solid var(--hair)">
+                <span class="mono">Sicurezza</span>
+                <div style="font-size:44px;line-height:1.1;font-weight:600;letter-spacing:-.03em;margin:10px 0;color:var(--ink)">0</div>
+                <span class="small">Incident<br>e leak PII</span>
+              </div>
+              <div style="padding:22px 0 22px 24px;border-left:1px solid var(--hair)">
+                <span class="mono">Budget</span>
+                <div style="font-size:44px;line-height:1.1;font-weight:600;letter-spacing:-.03em;margin:10px 0;color:var(--ink)">0 €</div>
+                <span class="small">Costi aggiuntivi<br>oltre le licenze</span>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:28px">
+              <p class="small"><span class="mono">01 · Abilita</span><br>PRD, DR, Use Case e backlog AI-ready.</p>
+              <p class="small"><span class="mono">02 · Misura</span><br>Tempi, qualità delle PR, token e interventi umani.</p>
+              <p class="small"><span class="mono">03 · Decide</span><br>Estendere, correggere o fermare su evidenze.</p>
+            </div>
+            <div class="noteline">
+              <p class="small">Il pilota è reversibile: <strong>prima il dato, poi l'estensione a Platform</strong>.</p>
+              <span class="anno">Soglie GO / NO-GO</span>
             </div>
           </div>
         </div>
         <aside class="notes">
-          <p><strong>La roadmap di adozione.</strong> Non proponiamo un cambio repentino per tutta l'azienda da domani.</p>
-          <p>La proposta a Platform è di avviare una prima sperimentazione su perimetri ristretti e misurabili, raccogliendo dati oggettivi sui gate e sul tasso di successo.</p>
-          <p>I risultati del pilota forniranno le evidenze per ratificare o affinare le decisioni prima dell'adozione su larga scala.</p>
-          <p><strong>Perimetro proposto, da confermare al kickoff</strong> (i nomi di servizi e owner vanno definiti con i team): 1-2 servizi con traffico reale e impatto contenuto, 6-8 settimane, un referente per team più un platform engineer, nessun investimento dedicato oltre le licenze AI esistenti — il consumo di token del pilota diventa la baseline di costo.</p>
-          <p>Le soglie GO/NO-GO su cui Platform deciderà: lead time PRD→PR −30%, tasso di rifiuto PR sotto il 25%, almeno 8 slice rilasciate dietro feature flag, zero incident di sicurezza.</p>
+          <p><strong>Il pilota deve produrre una decisione.</strong> Il perimetro è ristretto: 1-2 servizi con traffico reale e impatto contenuto, 6-8 settimane, almeno 8 slice dietro feature flag.</p>
+          <p>Misuriamo quattro risultati oggettivi: lead time PRD→PR in riduzione del 30%, rifiuto PR sotto il 25%, zero incident e zero costi aggiuntivi oltre le licenze esistenti.</p>
+          <p>Se le quattro soglie non reggono insieme, non procediamo per inerzia: correggiamo il framework o chiudiamo il pilota. Solo dopo i dati consideriamo l'estensione a Platform.</p>
         </aside>
       </section>
 
@@ -1105,15 +1095,15 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
       <section class="slide" data-title="Chiusura" data-section="Adozione" data-slug="chiusura">
         <div class="sbody">
           <div class="divider-main">
-            <h2 class="statement" style="max-width:26ch">Prossimi passi: pilota su 1-2 servizi per 6-8 settimane.</h2>
-            <p class="lead" style="max-width:58ch">Nessun costo dedicato oltre le licenze esistenti. La decisione arriva su dati: <strong>lead time −30% · rifiuto PR sotto il 25% · zero incident di sicurezza</strong>.</p>
-            <p class="small" style="max-width:62ch">Il framework non sostituisce PM, Designer o Software Engineer: trasforma i requisiti in contratti e l'AI in un esecutore affidabile.</p>
+            <h2 class="statement" style="max-width:none">Il framework non sostituisce nessuno.<br>Trasforma i requisiti in contratti e l'AI in un esecutore affidabile.</h2>
+            <p class="lead" style="max-width:62ch">Prossimo passo: pilota su <strong>1-2 servizi per 6-8 settimane</strong>, con soglie GO / NO-GO misurabili.</p>
+            <p class="small" style="max-width:62ch">Decisione su dati · licenze esistenti · zero costi aggiuntivi.</p>
             <span class="mono">Domande?</span>
           </div>
         </div>
         <aside class="notes">
-          <p><strong>Chiusura con la richiesta esplicita.</strong> Chiudiamo chiedendo l'avvio del pilota su 1-2 servizi con traffico reale e impatto contenuto per 6-8 settimane: nessun costo dedicato oltre le licenze AI esistenti, e la decisione finale affidata alle soglie concordate, non alle impressioni.</p>
-          <p>La tesi resta: l'agente è un moltiplicatore dell'intento ingegneristico solo se vincolato da contratti rigorosi — il framework non sostituisce le persone, ne amplifica la responsabilità.</p>
+          <p><strong>Chiusura con la richiesta esplicita.</strong> Il framework non sostituisce nessuno: trasforma i requisiti in contratti e l'AI in un esecutore affidabile.</p>
+          <p>Chiediamo di avviare un pilota su 1-2 servizi per 6-8 settimane, senza costi aggiuntivi oltre le licenze esistenti. La decisione finale sarà sui quattro KPI concordati, non sulle impressioni.</p>
           <p>Apriamo ora la discussione con Platform sulle Design Review, sui nomi dei servizi pilota e sulle priorità di kickoff.</p>
         </aside>
       </section>
