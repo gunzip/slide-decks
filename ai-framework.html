@@ -831,45 +831,52 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <div class="sbody">
           <div class="shead">
             <h2>La review ha tempi prevedibili</h2>
-            <p class="lead">Ogni slice riceve un esito umano entro una finestra concordata e misurabile (<em>sprint</em>); il deploy avviene <strong>dietro feature flag</strong>, così il rilascio resta reversibile.</p>
+            <p class="lead">La review ha una finestra concordata e misurabile (<em>sprint</em>); tutto il resto è una catena automatica — <strong>test su ambienti effimeri, deploy dietro feature flag</strong> — che si ripete e si disfa.</p>
           </div>
           <div class="scontent">
             <div class="fig" style="max-width:1000px">
-              <svg viewBox="0 0 1000 236" aria-label="Ogni slice viene revisionata entro un tempo concordato, distribuita dietro feature flag e osservata">
-                <line x1="100" y1="64" x2="880" y2="64" class="st" pathLength="1" data-draw style="--dd:100ms"/>
-                <circle class="node pop" style="--dd:500ms" cx="120" cy="64" r="8"/>
-                <circle class="node-acc pop" style="--dd:650ms" cx="380" cy="64" r="8"/>
-                <circle class="node pop" style="--dd:800ms" cx="640" cy="64" r="8"/>
-                <circle class="node pop" style="--dd:950ms" cx="880" cy="64" r="8"/>
+              <svg viewBox="0 0 1000 236" aria-label="Ogni slice passa dai test automatici su un ambiente effimero, poi dalla review entro una finestra concordata, poi dal deploy dietro feature flag fino alla release progressiva">
+                <line x1="90" y1="64" x2="825" y2="64" class="st" pathLength="1" data-draw style="--dd:100ms"/>
+                <circle class="node pop" style="--dd:500ms" cx="110" cy="64" r="8"/>
+                <circle class="node pop" style="--dd:620ms" cx="250" cy="64" r="8"/>
+                <circle class="node-acc pop" style="--dd:740ms" cx="450" cy="64" r="8"/>
+                <circle class="node pop" style="--dd:860ms" cx="650" cy="64" r="8"/>
+                <circle class="node pop" style="--dd:980ms" cx="825" cy="64" r="8"/>
 
-                <text x="120" y="43" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:550ms">Slice pronta</text>
-                <text x="120" y="87" text-anchor="middle" class="lbl pop" style="--dd:600ms" font-size="12.5">comportamento + test</text>
-                <text x="380" y="43" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:700ms">Review umana</text>
-                <text x="380" y="87" text-anchor="middle" class="lbl pop" style="--dd:750ms" font-size="12.5">entro SLO concordato</text>
-                <text x="640" y="43" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:850ms">Deploy dietro feature flag</text>
-                <text x="640" y="87" text-anchor="middle" class="lbl pop" style="--dd:900ms" font-size="12.5">in produzione, non rilasciata</text>
-                <text x="880" y="43" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1000ms">Release progressiva</text>
-                <text x="880" y="87" text-anchor="middle" class="lbl pop" style="--dd:1050ms" font-size="12.5">flag accesa per il traffico</text>
+                <text x="110" y="43" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:550ms">Slice pronta</text>
+                <text x="110" y="87" text-anchor="middle" class="lbl pop" style="--dd:600ms" font-size="12.5">comportamento + test</text>
+                <text x="250" y="43" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:670ms">Test automatici</text>
+                <text x="250" y="87" text-anchor="middle" class="lbl pop" style="--dd:720ms" font-size="12.5">ambiente effimero</text>
+                <text x="450" y="43" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:790ms">Review umana</text>
+                <text x="450" y="87" text-anchor="middle" class="lbl pop" style="--dd:840ms" font-size="12.5">entro la finestra</text>
+                <text x="650" y="43" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:910ms">Deploy dietro flag</text>
+                <text x="650" y="87" text-anchor="middle" class="lbl pop" style="--dd:960ms" font-size="12.5">non ancora rilasciata</text>
+                <text x="825" y="43" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1030ms">Release progressiva</text>
+                <text x="825" y="87" text-anchor="middle" class="lbl pop" style="--dd:1080ms" font-size="12.5">flag accesa sul traffico</text>
 
-                <line x1="880" y1="98" x2="880" y2="130" class="st-dim" pathLength="1" data-draw style="--dd:1150ms"/>
-                <line x1="680" y1="130" x2="900" y2="130" class="st-dim" pathLength="1" data-draw style="--dd:1220ms"/>
-                <line x1="680" y1="130" x2="680" y2="156" class="st-dim" pathLength="1" data-draw style="--dd:1290ms"/>
-                <line x1="900" y1="130" x2="900" y2="156" class="st-dim" pathLength="1" data-draw style="--dd:1360ms"/>
+                <text x="90" y="152" class="lbl pop" style="--dd:1150ms" font-size="13.5">L'ambiente effimero nasce per la slice, gira i test, si distrugge.</text>
+                <text x="90" y="176" class="lbl pop" style="--dd:1210ms" font-size="13.5">Ripeterlo costa poco, e non lascia niente dietro.</text>
 
-                <rect x="595" y="156" width="170" height="56" rx="6" class="pop" style="--dd:1430ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
-                <text x="680" y="178" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1490ms">Confermata</text>
-                <text x="680" y="195" text-anchor="middle" class="lbl pop" style="--dd:1530ms" font-size="12.5">la flag resta accesa</text>
-                <rect x="815" y="156" width="170" height="56" rx="6" class="pop" style="--dd:1600ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
-                <text x="900" y="178" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1660ms">Regressione</text>
-                <text x="900" y="195" text-anchor="middle" class="lbl pop" style="--dd:1700ms" font-size="12.5">flag spenta, zero redeploy</text>
+                <line x1="825" y1="98" x2="825" y2="130" class="st-dim" pathLength="1" data-draw style="--dd:1290ms"/>
+                <line x1="735" y1="130" x2="915" y2="130" class="st-dim" pathLength="1" data-draw style="--dd:1360ms"/>
+                <line x1="735" y1="130" x2="735" y2="156" class="st-dim" pathLength="1" data-draw style="--dd:1430ms"/>
+                <line x1="915" y1="130" x2="915" y2="156" class="st-dim" pathLength="1" data-draw style="--dd:1500ms"/>
+
+                <rect x="655" y="156" width="160" height="56" rx="6" class="pop" style="--dd:1570ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
+                <text x="735" y="178" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1630ms">Confermata</text>
+                <text x="735" y="195" text-anchor="middle" class="lbl pop" style="--dd:1670ms" font-size="12.5">la flag resta accesa</text>
+                <rect x="835" y="156" width="160" height="56" rx="6" class="pop" style="--dd:1740ms" fill="var(--tint)" stroke="var(--hair-2)" stroke-width="1.5"/>
+                <text x="915" y="178" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1800ms">Regressione</text>
+                <text x="915" y="195" text-anchor="middle" class="lbl pop" style="--dd:1840ms" font-size="12.5">spenta senza redeploy</text>
               </svg>
-              <p class="figcap"><span class="anno">Deploy non è release: la feature resta dietro una flag, e spegnerla è il rollback immediato.</span></p>
+              <p class="figcap"><span class="anno">Ambiente effimero e flag: prima e dopo la produzione, ogni passo si disfa.</span></p>
             </div>
           </div>
         </div>
         <aside class="notes">
           <p><strong>Il tempo di review è parte del contratto.</strong> Ogni slice pronta ha un reviewer e un obiettivo di risposta concordato e misurabile, così non resta in una coda indefinita.</p>
           <p>L'SLO non approva automaticamente: il deploy resta subordinato al giudizio umano e ai gate. La finestra rende la capacità di review visibile e pianificabile.</p>
+          <p>Prima della review c'è la catena automatica: test e build girano su un ambiente effimero, creato per la slice e distrutto subito dopo. Ripeterla non costa niente e non sporca gli ambienti condivisi, quindi si può rilanciare a ogni push invece di rimandarla.</p>
           <p>Dopo il deploy la feature non è ancora rilasciata: resta dietro una feature flag. Se l'esito in esercizio è negativo si spegne la flag — rollback immediato, senza redeploy né interventi sul resto del servizio; se è positivo si accende gradualmente per il traffico.</p>
           <p>Sapere che ogni rilascio è reversibile con un interruttore dà ai software engineer la confidenza per muoversi veloci, senza irrigidire il codice.</p>
         </aside>
