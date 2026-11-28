@@ -734,7 +734,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
           <div class="scontent">
             <div class="fig" style="max-width:1000px">
-              <svg viewBox="0 0 1000 312" aria-label="Due livelli di pianificazione sullo stesso ticket: il team assegna ownership in Jira, l'agente apre task figlie accanto al codice per tracciare l'avanzamento della sessione">
+              <svg viewBox="0 0 1000 312" aria-label="Due livelli di pianificazione sullo stesso ticket: il team assegna ownership in Jira, l'agente apre task figli accanto al codice per tracciare l'avanzamento della sessione">
                 <rect x="340" y="4" width="320" height="38" rx="8" class="pop" style="--dd:80ms" fill="none" stroke="var(--hair-2)" stroke-width="1.5"/>
                 <text x="500" y="29" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:160ms">Ticket approvato</text>
 
@@ -760,13 +760,13 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 <path class="st-thin" pathLength="1" data-draw style="--dd:1280ms" d="M 836 230 L 836 240"/>
 
                 <rect x="550" y="240" width="108" height="30" rx="7" class="pop" style="--dd:1300ms" fill="none" stroke="var(--hair-2)" stroke-width="1.5"/>
-                <text x="604" y="259" text-anchor="middle" class="lbl pop" style="--dd:1340ms" font-size="11.5">task chiusa</text>
+                <text x="604" y="259" text-anchor="middle" class="lbl pop" style="--dd:1340ms" font-size="11.5">task chiuso</text>
 
                 <rect x="666" y="240" width="108" height="30" rx="7" class="pop" style="--dd:1380ms" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
                 <text x="720" y="259" text-anchor="middle" class="lbl pop" style="--dd:1420ms" font-size="11.5">task in corso</text>
 
                 <rect x="782" y="240" width="108" height="30" rx="7" class="pop" style="--dd:1460ms" fill="none" stroke="var(--hair-2)" stroke-width="1.5"/>
-                <text x="836" y="259" text-anchor="middle" class="lbl pop" style="--dd:1500ms" font-size="11.5">task aperta</text>
+                <text x="836" y="259" text-anchor="middle" class="lbl pop" style="--dd:1500ms" font-size="11.5">task aperto</text>
 
                 <text x="500" y="300" text-anchor="middle" class="lbl pop" style="--dd:1560ms" font-size="13.5">Lo stesso lavoro, due letture: il team assegna, l'agente traccia.</text>
               </svg>
@@ -777,7 +777,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <aside class="notes">
           <p><strong>Perché serve uno stato.</strong> Una sessione individuale lavora senza interlocutori e dura più di un turno: deve sapere cosa ha già chiuso, cosa resta aperto e qual è il prossimo passo. Senza questo stato l'agente riparte da capo o ripete lavoro.</p>
           <p>Non sono due pianificazioni alternative, sono due livelli. Il team decide chi se ne occupa, in Jira, con priorità e capacità; l'agente decide i passi successivi dentro il ticket approvato. Mescolare i livelli riempie Jira di dettaglio che nessuno pianifica.</p>
-          <p>Per questo lo stato operativo vive accanto al codice: un file nel repository, le task figlie che la sessione apre e chiude, l'issue tracker del repository. Il vincolo non è lo strumento, è la vicinanza: deve cambiare quando cambia il codice e sparire quando la slice è chiusa.</p>
+          <p>Per questo lo stato operativo vive accanto al codice: un file nel repository, i task figli che la sessione apre e chiude, l'issue tracker del repository. Il vincolo non è lo strumento, è la vicinanza: deve cambiare quando cambia il codice e sparire quando la slice è chiusa.</p>
         </aside>
       </section>
 
@@ -822,7 +822,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           <p><strong>La slice è l'unità di collaborazione.</strong> Un agente può affrontare un task ampio, ma non è la modalità di delivery che preferiamo: condividere comportamenti osservabili mantiene il team allineato.</p>
           <p>Ogni slice attraversa codice, test e deploy. La review incrementale verifica l'esito con le persone e può modificare requisiti o perimetro, invece di rimandare il feedback alla fine.</p>
           <p>Per rendere sostenibili questi passaggi, la review deve avere tempi concordati e ogni rilascio deve poter essere annullato senza coinvolgere le altre slice.</p>
-          <p>La slice è anche l'unità di tracciamento della sessione: le task del ticket si chiudono una slice alla volta, e quando l'ultima voce è chiusa la slice è pronta da revisionare.</p>
+          <p>La slice è anche l'unità di tracciamento della sessione: i task del ticket si chiudono una slice alla volta, e quando l'ultima voce è chiusa la slice è pronta da revisionare.</p>
         </aside>
       </section>
 
