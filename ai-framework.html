@@ -734,7 +734,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
           </div>
           <div class="scontent">
             <div class="fig" style="max-width:1000px">
-              <svg viewBox="0 0 1000 282" aria-label="Due livelli di pianificazione sullo stesso ticket: il team assegna ownership in Jira, l'agente traccia l'avanzamento della sessione accanto al codice">
+              <svg viewBox="0 0 1000 312" aria-label="Due livelli di pianificazione sullo stesso ticket: il team assegna ownership in Jira, l'agente apre task figlie accanto al codice per tracciare l'avanzamento della sessione">
                 <rect x="340" y="4" width="320" height="38" rx="8" class="pop" style="--dd:80ms" fill="none" stroke="var(--hair-2)" stroke-width="1.5"/>
                 <text x="500" y="29" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:160ms">Ticket approvato</text>
 
@@ -751,9 +751,24 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
                 <rect x="520" y="96" width="400" height="120" rx="10" class="pop" style="--dd:520ms" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
                 <text x="720" y="124" text-anchor="middle" class="lbl pop" style="--dd:940ms" letter-spacing=".13em" font-size="10.5">DETTAGLIO · AGENTE</text>
                 <text x="720" y="158" text-anchor="middle" class="lbl lbl-ink pop" style="--dd:1000ms" font-size="16">A che punto è la sessione</text>
-                <text x="720" y="186" text-anchor="middle" class="lbl pop" style="--dd:1060ms" font-size="12.5">accanto al codice · task aperte</text>
+                <text x="720" y="186" text-anchor="middle" class="lbl pop" style="--dd:1060ms" font-size="12.5">accanto al codice</text>
 
-                <text x="500" y="252" text-anchor="middle" class="lbl pop" style="--dd:1200ms" font-size="13.5">Lo stesso lavoro, due letture: il team assegna, l'agente traccia.</text>
+                <path class="st-thin" pathLength="1" data-draw style="--dd:1120ms" d="M 720 216 L 720 230"/>
+                <path class="st-thin" pathLength="1" data-draw style="--dd:1160ms" d="M 604 230 L 836 230"/>
+                <path class="st-thin" pathLength="1" data-draw style="--dd:1200ms" d="M 604 230 L 604 240"/>
+                <path class="st-thin" pathLength="1" data-draw style="--dd:1240ms" d="M 720 230 L 720 240"/>
+                <path class="st-thin" pathLength="1" data-draw style="--dd:1280ms" d="M 836 230 L 836 240"/>
+
+                <rect x="550" y="240" width="108" height="30" rx="7" class="pop" style="--dd:1300ms" fill="none" stroke="var(--hair-2)" stroke-width="1.5"/>
+                <text x="604" y="259" text-anchor="middle" class="lbl pop" style="--dd:1340ms" font-size="11.5">task chiusa</text>
+
+                <rect x="666" y="240" width="108" height="30" rx="7" class="pop" style="--dd:1380ms" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+                <text x="720" y="259" text-anchor="middle" class="lbl pop" style="--dd:1420ms" font-size="11.5">task in corso</text>
+
+                <rect x="782" y="240" width="108" height="30" rx="7" class="pop" style="--dd:1460ms" fill="none" stroke="var(--hair-2)" stroke-width="1.5"/>
+                <text x="836" y="259" text-anchor="middle" class="lbl pop" style="--dd:1500ms" font-size="11.5">task aperta</text>
+
+                <text x="500" y="300" text-anchor="middle" class="lbl pop" style="--dd:1560ms" font-size="13.5">Lo stesso lavoro, due letture: il team assegna, l'agente traccia.</text>
               </svg>
               <p class="figcap"><span class="anno">Il dettaglio resta accanto al codice: non deve vivere per forza in Jira.</span></p>
             </div>
@@ -762,7 +777,7 @@ body.nd-open .notes-drawer{transform:translate(-50%,0);visibility:visible;transi
         <aside class="notes">
           <p><strong>Perché serve uno stato.</strong> Una sessione individuale lavora senza interlocutori e dura più di un turno: deve sapere cosa ha già chiuso, cosa resta aperto e qual è il prossimo passo. Senza questo stato l'agente riparte da capo o ripete lavoro.</p>
           <p>Non sono due pianificazioni alternative, sono due livelli. Il team decide chi se ne occupa, in Jira, con priorità e capacità; l'agente decide i passi successivi dentro il ticket approvato. Mescolare i livelli riempie Jira di dettaglio che nessuno pianifica.</p>
-          <p>Per questo lo stato operativo vive accanto al codice: un file nel repository, la lista di task della sessione, l'issue tracker del repository. Il vincolo non è lo strumento, è la vicinanza: deve cambiare quando cambia il codice e sparire quando la slice è chiusa.</p>
+          <p>Per questo lo stato operativo vive accanto al codice: un file nel repository, le task figlie che la sessione apre e chiude, l'issue tracker del repository. Il vincolo non è lo strumento, è la vicinanza: deve cambiare quando cambia il codice e sparire quando la slice è chiusa.</p>
         </aside>
       </section>
 
